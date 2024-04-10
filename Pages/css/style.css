@@ -1,0 +1,64 @@
+body{
+    margin: 0;
+    padding: 0;
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+   
+    
+}
+
+
+.nav-global-css{
+    background-color: #194376;
+    height:60px;
+}
+.ul-menu{
+    margin-top: 10px;
+    color: white;
+    
+}
+.a-menu{
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: 500;
+    /* color: var(--bs-nav-link-color); */
+    text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    color: rgb(255, 255, 255);
+    text-transform:uppercase ;
+   
+}
+
+.icon-menu{
+    display: flex;
+    justify-content: center; /* Centraliza no eixo horizontal */
+    align-items: center; /* Centraliza no eixo vertical */
+    height: 10vh;
+    margin-top: 20px;
+}
+.logo img {
+    max-width: 100%;
+    height: auto;
+    float: left; /* Faz o logo flutuar à esquerda */
+    margin-right: 10px;
+    ;
+    
+  }
+
+.col h2{
+    font-weight: 700;
+    color:#194376;
+    
+}
+.div-footer{
+    margin-right:00px;
+}
+footer{
+    background-color: #54ADFF;
+}
