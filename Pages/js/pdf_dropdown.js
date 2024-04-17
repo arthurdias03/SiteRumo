@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
   $(".pdfDropdown").each(function() {
     var dropdown = $(this);
@@ -9,11 +8,14 @@ $(document).ready(function(){
       success: function (data) {
         var pdfFiles = [];
         $(data).find("a[href$='.pdf']").each(function () {
-          pdfFiles.push($(this).attr("href"));
+          var pdfFileName = $(this).attr("href").split('/').pop(); // Extrai o nome do arquivo
+          pdfFiles.push({ name: pdfFileName, path: $(this).attr("href") });
         });
-        pdfFiles.sort();
+        pdfFiles.sort(function(a, b) {
+          return a.name.localeCompare(b.name); // Ordena os arquivos pelo nome
+        });
         pdfFiles.forEach(function(pdfFile) {
-          dropdown.append('<option value="' + pdfFile + '">' + pdfFile + '</option>');
+          dropdown.append('<option value="' + pdfFile.path + '">' + pdfFile.name + ' </option>');
         });
       }
     });
@@ -31,3 +33,4 @@ $(document).ready(function(){
     }
   });
 });
+

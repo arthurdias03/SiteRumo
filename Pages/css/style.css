@@ -6,6 +6,10 @@ body{
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
+
+    display: flex;
+      flex-direction: column;
+      min-height: 100vh;
    
     
 }
@@ -59,7 +63,12 @@ body{
 .div-footer{
     margin-right:00px;
 }
-footer{
+
+.footer {
     background-color: #54ADFF;
-}
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
 /*@media*/
