@@ -71,4 +71,37 @@ body{
     bottom: 0;
     width: 100%;
   }
+  .nav-list li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.nav-list li:last-child {
+    margin-right: 0;
+}
+
+.nav-list li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+/* Media query para telas menores que 997px */
+
 /*@media*/
+
+@media screen and (max-width: 1050px) {
+    .respons-foot {
+        margin-bottom: 40%; /* Altera a cor de fundo para verde em telas menores */
+    }
+}
+@media screen and (max-width: 997px) {
+    .navbar-brand {
+        text-align: center; 
+        display: block;
+        margin: 10px 0;/* Centraliza os itens */
+    }
+
+   
+}
+

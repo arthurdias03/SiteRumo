@@ -10,76 +10,60 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body class="test">
     <!--Menu--> <!-- CRIAR MENU SANDUICHE-->
-    <header class="navbar navbar-expand-lg nav-global-css">
+   <!-- <header class="navbar navbar-expand-lg nav-global-css">-->
   <!--
  <a class="navbar-brand" href="#">Logo</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   -->
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="#">
+        <img src="/Pages/Img/icones/Logo_rumoPNG.png" alt="Bootstrap" width="45" height="40" style="object-fit: contain;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-
-        <ul class="nav me-auto mb-2 mb-lg-0 justify-content-center " style="margin-left: 31%;" >
-          <li class="nav-item ul-menu">
-            <a class=" a-menu " aria-current="page" href="/Pages/Home.html">home</a>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class=" a-menu nav-link active" aria-current="page" href="/Pages/Home.html">Home</a>
           </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" href="/Pages/Sobre.html">Sobre</a>
+          <li class="nav-item">
+            <a class=" a-menu nav-link active" href="/Pages/Sobre.html">Sobre</a>
           </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" href="/Pages/Equipe.html">Equipe</a>
+          <li class="nav-item">
+            <a class=" a-menu nav-link active" href="/Pages/Equipe.html">Equipe </a>
           </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Publicações.html">Publicações</a>
+          <li class="nav-item">
+            <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Publicações.html">Publicações</a>
           </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Aplicativos.html">Aplicativos</a>
+          <li class="nav-item">
+            <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Aplicativos.html">Aplicativos</a>
           </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Materiais.html">Materiais</a>
+          <li class="nav-item">
+            <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Materiais.html">Materiais</a>
           </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Contato.html">Contato</a>
+          <li class="nav-item">
+            <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Contato.html">Contato</a>
           </li>
+         
+          </li>
+          
         </ul>
-       
-    
+        
       </div>
     </div>
-
-
+  </nav>
   <!--
-    <ul class="nav justify-content-center " >
-      <li class="nav-item ul-menu">
-        <a class=" a-menu " aria-current="page" href="/Pages/Home.html">home</a>
-      </li>
-      <li class="nav-item ul-menu">
-        <a class=" a-menu" href="#">Sobre</a>
-      </li>
-      <li class="nav-item ul-menu">
-        <a class=" a-menu" href="#">Equipe</a>
-      </li>
-      <li class="nav-item ul-menu">
-        <a class=" a-menu" aria-disabled="true" href="#">Publicações</a>
-      </li>
-      <li class="nav-item ul-menu">
-        <a class=" a-menu" aria-disabled="true" href="#">Aplicativos</a>
-      </li>
-      <li class="nav-item ul-menu">
-        <a class=" a-menu" aria-disabled="true" href="#">Materiais</a>
-      </li>
-      <li class="nav-item ul-menu">
-        <a class=" a-menu" aria-disabled="true" href="#">Contato</a>
-      </li>
-    </ul>
-    -->
-  </header>
+  
+
+  
+ </header>-->
 
 <!--logo site-->
   <div class="icon-menu">
@@ -111,7 +95,7 @@
     
  
 
-  <div class="container-fluid text-center">
+  <main class="container-fluid text-center ">
     <div class="row ">
       <div class="col-md-2 col-sm-2">
         
@@ -119,7 +103,7 @@
       <div class="col-md-4 col-sm-4">
         <video src="" height="400" width="100%" style="background-color: black;"></video>
       </div>
-      <div class="col-md-4 col-sm-4">
+      <div class="col-md-4 col-sm-4 respons-foot" >
         <p style="text-align: justify; width: 100%;">
           O projeto Rumo à Educação Matemática Inclusiva reúne pesquisadores, professores e alunos no desenvolvimento de cenários inclusivos para aprendizagem matemática. Nosso compromisso é construir culturas educacionais nas quais cada aprendiz é reconhecido e respeitado em sua individualidade. <br>
 
@@ -139,7 +123,7 @@
       </div>
       
     </div>
-  </div>
+  </main>
 
   
   
@@ -148,10 +132,17 @@
 
     
 
-  <footer class="footer">
-  <div class="container text-center">
-    <span class="text-muted">© 2024 Nome da sua Empresa</span>
-  </div>
+  <footer class="footer bg-body-tertiary fixed-bottom" >
+    
+    
+    <div class=" navbar container-fluid">
+      <a class="navbar-brand" href="/Pages/Home.html"><img src="/Pages/Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+      <div class="d-flex" >
+        <a class="navbar-brand" ><img src="/Pages/Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+        <a class="navbar-brand" ><img src="/Pages/Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+        <a class="navbar-brand" ><img src="/Pages/Img/icones/banner_capes-1024x871.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;object-fit:contain ;"></a>
+      </div>
+    </div>
 </footer>
 
 <!--
