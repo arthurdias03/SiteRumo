@@ -11,6 +11,7 @@ body{
       flex-direction: column;
       min-height: 100vh;
    
+      
     
 }
 
@@ -34,10 +35,11 @@ body{
     background: 0 0;
     border: 0;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
-    color: rgb(0, 0, 0);
     text-transform:uppercase ;
+    transition: transform 0.4s ease;
    
 }
+
 
 .icon-menu{
     display: flex;
@@ -84,6 +86,19 @@ body{
     color: white;
     text-decoration: none;
     padding: 10px 20px;
+}
+
+.bg-body-blue{
+    background-color: #194376;
+    
+}
+
+.card-hover{
+    transition: transform 0.4s ease;
+}
+
+.card-hover:hover{
+    transform: scale(0.8); /* Diminui o tamanho para 80% */
 }
 
 /* Media query para telas menores que 997px */
