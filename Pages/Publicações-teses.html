@@ -9,53 +9,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
   </head>
   <body>
     <!--Menu--> <!-- CRIAR MENU SANDUICHE-->
-    <header class="navbar navbar-expand-lg nav-global-css">
-  <!--
- <a class="navbar-brand" href="#">Logo</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  -->
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-
-        <ul class="nav me-auto mb-2 mb-lg-0 justify-content-center " style="margin-left: 31%;" >
-          <li class="nav-item ul-menu">
-            <a class=" a-menu " aria-current="page" href="/Pages/Home.html">home</a>
-          </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" href="/Pages/Sobre.html">Sobre</a>
-          </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" href="/Pages/Equipe.html">Equipe</a>
-          </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Publicações.html">Publicações</a>
-          </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Aplicativos.html">Aplicativos</a>
-          </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Materiais.html">Materiais</a>
-          </li>
-          <li class="nav-item ul-menu">
-            <a class=" a-menu" aria-disabled="true" href="/Pages/Contato.html">Contato</a>
-          </li>
-        </ul>
-       
-    
-      </div>
-    </div>
-
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-body-blue" aria-label="Tenth navbar example">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
   
-  </header>
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class=" a-menu nav-link active" aria-current="page" href="/Pages/Home.html" style="color: white;font-weight: 600;margin-left: 15px;">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class=" a-menu nav-link active " href="/Pages/Sobre.html" style="color: white;font-weight: 600;margin-left: 15px;">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a class=" a-menu nav-link active" href="/Pages/Equipe.html" style="color: white;font-weight: 600;margin-left: 15px;">Equipe </a>
+            </li>
+            <li class="nav-item">
+              <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Publicações.html" style="color: white;font-weight: 600;margin-left: 15px;">Publicações</a>
+            </li>
+            <li class="nav-item">
+              <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Aplicativos.html" style="color: white;font-weight: 600;margin-left: 15px;">Aplicativos</a>
+            </li>
+            <li class="nav-item">
+              <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Materiais.html" style="color: white;font-weight: 600;margin-left: 15px;">Materiais</a>
+            </li>
+            <li class="nav-item">
+              <a class=" a-menu nav-link active" aria-disabled="true" href="/Pages/Contato.html" style="color: white;font-weight: 600;margin-left: 15px;">Contato</a>
+            </li>
+           
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
 <!--logo site-->
   <div class="icon-menu">
@@ -78,7 +70,7 @@
        
       </div>
       <div class="col">
-        <h3 style="text-transform: uppercase;">teses <i class="bi bi-download"></i></h3>
+        <h3 style="text-transform: uppercase;">teses <i class="bi bi-cloud-arrow-down-fill ml-2"></i></h3>
       </div>
     </div>
     </div>
@@ -95,7 +87,7 @@
           <div class="col-md-12" style="text-align: center;padding-bottom:40px;">
             <div class="container">
               <div class="form-group">
-                 <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2020" data-folder="PDFs/Teses/2020">
+                 <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2020" data-folder="PDFs/Teses/2020" style="border: 1px solid #194376;color: #194376;font-weight: 700;">
                   <option selected >2020</option>
                 
                 </select>
@@ -107,7 +99,7 @@
             <div class="col-md-12" style="text-align: center;padding-bottom:40px;">
               <div class="container">
                 <div class="form-group">
-                   <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2021" data-folder="PDFs/Teses/2021">
+                   <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2021" data-folder="PDFs/Teses/2021" style="border: 1px solid #194376;color: #194376;font-weight: 700;">
                     <option selected disabled>2021</option>
                   
                   </select>
@@ -119,7 +111,7 @@
               <div class="col-md-12" style="text-align: center;padding-bottom:40px;">
                 <div class="container">
                   <div class="form-group">
-                     <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2022" data-folder="PDFs/Teses/2022">
+                     <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2022" data-folder="PDFs/Teses/2022" style="border: 1px solid #194376;color: #194376;font-weight: 700;">
                       <option selected disabled>2022</option>
                     
                     </select>
@@ -133,7 +125,7 @@
                 <div class="col-md-12" style="text-align: center;padding-bottom:40px;">
                   <div class="container">
                     <div class="form-group">
-                       <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2023" data-folder="PDFs/Teses/2023">
+                       <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2023" data-folder="PDFs/Teses/2023" style="border: 1px solid #194376;color: #194376;font-weight: 700;">
                         <option selected disabled>2023 <i class="bi bi-download"></i></option>
                       
                       </select>
@@ -145,7 +137,7 @@
                   <div class="col-md-12" style="text-align: center;padding-bottom:40px;">
                     <div class="container">
                       <div class="form-group">
-                        <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2024" data-folder="PDFs/Teses/2024">
+                        <select class="form-control pdfDropdown form-select-lg mb-3" id="pdfDropdown2024" data-folder="PDFs/Teses/2024" style="border: 1px solid #194376;color: #194376;font-weight: 700;">
                           <option selected disabled>2024</option>
                         
                         </select>
@@ -175,23 +167,16 @@
 
   
 
-  <footer class="navbar  fixed-bottom">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/Pages/Home.html"><img src="/Pages/Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-      <div class="d-flex" >
-        <div class="col-md-4">
-        <a class="navbar-brand" ><img src="/Pages/Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-      </div>
-
-      <div class="col-md-4">
-        <a class="navbar-brand" ><img src="/Pages/Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-      </div>
-      <div class="col-md-4">
-        <a class="navbar-brand" ><img src="/Pages/Img/icones/banner_capes-1024x871.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;object-fit:contain ;"></a>
-      </div>
-      </div>
-    </div>
-  </footer>
+      <footer class="navbar  fixed-bottom bg-footer">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/Pages/Home.html"><img src="/Pages/Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+          <div class="d-flex" >
+            <a class="navbar-brand" ><img src="/Pages/Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+            <a class="navbar-brand" ><img src="/Pages/Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+            <a class="navbar-brand" ><img src="/Pages/Img/icones/banner_capes-1024x871.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;object-fit:contain ;"></a>
+          </div>
+        </div>
+      </footer>
 
   
   
