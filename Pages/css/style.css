@@ -121,6 +121,8 @@ body{
     .respons-foot {
         margin-bottom: 40%; /* Altera a cor de fundo para verde em telas menores */
     }
+   
+
 }
 @media screen and (max-width: 997px) {
     .navbar-brand {
