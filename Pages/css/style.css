@@ -29,19 +29,24 @@ body{
     color: white;
     
 }
-.a-menu{
+
+.nav-link2{
+    text-transform: uppercase;
     display: block;
     padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
     font-size: var(--bs-nav-link-font-size);
-    font-weight: 500;
-    /* color: var(--bs-nav-link-color); */
+    font-weight: 600;
+    color: white;
     text-decoration: none;
     background: 0 0;
     border: 0;
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
-    text-transform:uppercase ;
-    transition: transform 0.4s ease;
+    margin-left: 15px;
+    margin-right: 15px;
    
+}
+.nav-link2:hover{
+    color: rgb(66, 198, 238);
 }
 
 
@@ -107,6 +112,7 @@ body{
 .bg-footer{
     background-color: #54ADFF;
 }
+
 /* Media query para telas menores que 997px */
 
 /*@media*/
