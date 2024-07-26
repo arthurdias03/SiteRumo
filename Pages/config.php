@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "seu_usuario";
-$password = "sua_senha";
-$dbname = "seu_site";
+$username = "root";
+$password = "";
+$dbname = "rumo_pub";
 
 // Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -11,4 +11,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+else
+    echo "Conectado ao banco de dados!";
 ?>

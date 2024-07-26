@@ -45,5 +45,4 @@ Colocar animação hover menu✔
 Ver footer cobrindo texto✔
 
 
-exemplo pra fazer o upload funcionar, criar 3 paginas de uploads iguais que vão levar o que a pessoa quer fazer TESES, DISSERTACOES
-OU ARTIGOS
+CRIAR NOVOS VALORES NA TABELA DE ARQUIVOS: AUTOR, PERIODOS E ANUAIS
