@@ -1,0 +1,136 @@
+body{
+    margin: 0;
+    padding: 0;
+
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+
+    display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+   background-color: aquamarine;
+      
+    
+}
+.select-pub{
+    border: 1px solid #194376;
+    color: #194376;
+    font-weight: 700;
+}
+
+.nav-global-css{
+    background-color: #194376;
+    height:60px;
+}
+.ul-menu{
+    margin-top: 10px;
+    color: white;
+    
+}
+
+.nav-link2{
+    text-transform: uppercase;
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    margin-left: 15px;
+    margin-right: 15px;
+   
+}
+.nav-link2:hover{
+    color: rgb(66, 198, 238);
+}
+
+
+.icon-menu{
+    display: flex;
+    justify-content: center; /* Centraliza no eixo horizontal */
+    align-items: center; /* Centraliza no eixo vertical */
+    height: 10vh;
+    margin-top: 20px;
+}
+.logo img {
+    max-width: 100%;
+    height: auto;
+    float: left; /* Faz o logo flutuar à esquerda */
+    margin-right: 10px;
+    ;
+    
+  }
+
+.col h2{
+    font-weight: 700;
+    color:#194376;
+    
+}
+.div-footer{
+    margin-right:00px;
+}
+
+.footer {
+    background-color: #54ADFF;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  .nav-list li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.nav-list li:last-child {
+    margin-right: 0;
+}
+
+.nav-list li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.bg-body-blue{
+    background-color: #194376;
+    
+}
+
+.card-hover{
+    transition: transform 0.4s ease;
+}
+
+.card-hover:hover{
+    transform: scale(0.8); /* Diminui o tamanho para 80% */
+}
+.bg-footer{
+    background-color: #54ADFF;
+}
+
+/* Media query para telas menores que 997px */
+
+/*@media*/
+
+@media screen and (max-width: 1050px) {
+    .respons-foot {
+        margin-bottom: 40%; /* Altera a cor de fundo para verde em telas menores */
+    }
+   
+
+}
+@media screen and (max-width: 997px) {
+    .navbar-brand {
+        text-align: center; 
+        display: block;
+        margin: 10px 0;/* Centraliza os itens */
+    }
+
+   
+}
+

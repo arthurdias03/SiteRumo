@@ -1,0 +1,28 @@
+CREATE DATABASE seu_site;
+USE seu_site;
+
+CREATE TABLE arquivos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_arquivo VARCHAR(255) NOT NULL,
+    descricao TEXT NOT NULL,
+    caminho_arquivo VARCHAR(255) NOT NULL,
+    data_upload TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+
+atualiza banco
+
+USE seu_site;
+
+ALTER TABLE arquivos ADD categoria VARCHAR(50) NOT NULL;
+ALTER TABLE arquivos ADD ano INT NOT NULL;
+
+
+atualizar banco com valor AUTOR
+
+USE seu_site;
+
+ALTER TABLE arquivos ADD autor VARCHAR(255) NOT NULL;
