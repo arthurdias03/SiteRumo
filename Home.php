@@ -31,7 +31,7 @@
               <a class=" nav-link2" href="Equipe.php">Equipe </a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="Pages/Publicações.php">Publicações</a>
+              <a class=" nav-link2" aria-disabled="true" href="publicacoesteste.php">Publicações</a>
             </li>
             <li class="nav-item">
               <a class=" nav-link2" aria-disabled="true" href="Aplicativos.php">Aplicativos</a>

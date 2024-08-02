@@ -21,27 +21,25 @@
         <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class=" nav-link2" aria-current="page" href="Home.html" >Home</a>
+              <a class=" nav-link2" aria-current="page" href="Home.php" >Home</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2 " href="Sobre.html">Sobre</a>
+              <a class=" nav-link2 " href="Sobre.php">Sobre</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" href="Equipe.html">Equipe </a>
+              <a class=" nav-link2" href="Equipe.php">Equipe </a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="Publicações.html">Publicações</a>
+              <a class=" nav-link2" aria-disabled="true" href="publicacoesteste.php">Publicações</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="Aplicativos.html">Aplicativos</a>
+              <a class=" nav-link2" aria-disabled="true" href="Aplicativos.php">Aplicativos</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="Materiais.html">Materiais</a>
+              <a class=" nav-link2" aria-disabled="true" href="Materiais.php">Materiais</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="Contato.html">Contato</a>
-            </li>
-           
+              <a class=" nav-link2" aria-disabled="true" href="Contato.php">Contato</a>
             </li>
           </ul>
         </div>
