@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Site Rumo</title>
-    <link rel="stylesheet" href="/Pages/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,25 +21,25 @@
         <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class=" nav-link2" aria-current="page" href="/Pages/Home.html" >Home</a>
+              <a class=" nav-link2" aria-current="page" href="Home.html" >Home</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2 " href="/Pages/Sobre.html">Sobre</a>
+              <a class=" nav-link2 " href="Sobre.html">Sobre</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" href="/Pages/Equipe.html">Equipe </a>
+              <a class=" nav-link2" href="Equipe.html">Equipe </a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Publicações.html">Publicações</a>
+              <a class=" nav-link2" aria-disabled="true" href="Publicações.html">Publicações</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Aplicativos.html">Aplicativos</a>
+              <a class=" nav-link2" aria-disabled="true" href="Aplicativos.html">Aplicativos</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Materiais.html">Materiais</a>
+              <a class=" nav-link2" aria-disabled="true" href="Materiais.html">Materiais</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Contato.html">Contato</a>
+              <a class=" nav-link2" aria-disabled="true" href="Contato.html">Contato</a>
             </li>
            
             </li>
@@ -53,7 +53,7 @@
   <div class="row align-items-center">
     <div class="col-auto">
       <div class="logo">
-        <img src="/Pages/Img/icones/Logo_rumoPNG.png" alt="Logo" width="100" height="100" class="d-inline-block align-text-top">
+        <img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="100" height="100" class="d-inline-block align-text-top">
           
         </div> 
     </div>
@@ -92,7 +92,7 @@
           <button type="submit" class="btn btn-primary  " style="width: 100%;"><strong>Enviar</strong> </button>
 
           <input type="hidden" name="accessKey" value="31aebb65-e62b-4cc2-8734-2537a63b1f14">
-          <input type="hidden" name="redirectTo" value="http://127.0.0.1:5500/Pages/Contato.html">
+          <input type="hidden" name="redirectTo" value="http://127.0.0.1:5500Contato.html">
          
 
 
@@ -120,11 +120,11 @@
 
     <footer class="navbar  fixed-bottom bg-footer">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/Pages/Home.html"><img src="/Pages/Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+        <a class="navbar-brand" href="Home.html"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
         <div class="d-flex" >
-          <a class="navbar-brand" ><img src="/Pages/Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-          <a class="navbar-brand" ><img src="/Pages/Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-          <a class="navbar-brand" ><img src="/Pages/Img/icones/banner_capes-1024x871.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;object-fit:contain ;"></a>
+          <a class="navbar-brand" ><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+          <a class="navbar-brand" ><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+          <a class="navbar-brand" ><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;object-fit:contain ;"></a>
         </div>
       </div>
     </footer>

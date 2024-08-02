@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Site Rumo</title>
-    <link rel="stylesheet" href="Pages/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,25 +21,25 @@
         <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class=" nav-link2" aria-current="page" href="/Pages/Home.html" >Home</a>
+              <a class=" nav-link2" aria-current="page" href="Home.html" >Home</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2 " href="/Pages/Sobre.html">Sobre</a>
+              <a class=" nav-link2 " href="Sobre.html">Sobre</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" href="/Pages/Equipe.html">Equipe </a>
+              <a class=" nav-link2" href="Equipe.html">Equipe </a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Publicações.html">Publicações</a>
+              <a class=" nav-link2" aria-disabled="true" href="Publicações.html">Publicações</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Aplicativos.html">Aplicativos</a>
+              <a class=" nav-link2" aria-disabled="true" href="Aplicativos.html">Aplicativos</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Materiais.html">Materiais</a>
+              <a class=" nav-link2" aria-disabled="true" href="Materiais.html">Materiais</a>
             </li>
             <li class="nav-item">
-              <a class=" nav-link2" aria-disabled="true" href="/Pages/Contato.html">Contato</a>
+              <a class=" nav-link2" aria-disabled="true" href="Contato.html">Contato</a>
             </li>
            
             </li>
@@ -85,7 +85,7 @@
       
       <div class="col-md-4">
         <div class="card" style="width: 18rem;">
-          <img src="/Pages/Img/images.jpg" class="card-img-top" alt="...">
+          <img src="Img/images.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Homotetia</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -101,7 +101,7 @@
       
       <div class="col-md-4">
         <div class="card" style="width: 18rem;">
-          <img src="/Pages/Img/images.jpg" class="card-img-top" alt="...">
+          <img src="Img/images.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Homotetia</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -117,7 +117,7 @@
 
       <div class="col-md-4">
         <div class="card" style="width: 18rem;">
-          <img src="/Pages/Img/images.jpg" class="card-img-top" alt="...">
+          <img src="Img/images.jpg" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Homotetia</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -145,8 +145,8 @@
             <div class="card-body">
               <h3>Homotetia </h3>
               <p class="card-text" style="text-align: justify;">Esta ferramenta foi planejada para que aprendizes cegos pudessem realizar tarefas relacionadas ao estudo de homotetia.</p>
-              <a onclick="downloadExe()"  href="/Pages/Materiais/homotetia.pdf" class="btn btn-primary">Descrição</a>
-              <a onclick="downloadExe()"  href="/Pages/Materiais/homotetia-atividade.pdf" class="btn btn-primary">Atividade</a>
+              <a onclick="downloadExe()"  href="Materiais/homotetia.pdf" class="btn btn-primary">Descrição</a>
+              <a onclick="downloadExe()"  href="Materiais/homotetia-atividade.pdf" class="btn btn-primary">Atividade</a>
             </div>
           </div>
         </div>
@@ -154,11 +154,11 @@
       <div class="col-3">
         <div class="p-3">
           <div class="card" style="width: 100%;">
-            <img src="/Pages/Img/imgs_old//materiais_didáticos_2.png" class="card-img-top" alt="..." style="object-fit: contain;">
+            <img src="Img/imgs_old//materiais_didáticos_2.png" class="card-img-top" alt="..." style="object-fit: contain;">
             <div class="card-body">
               <h3>Matrizmat </h3>
               <p class="card-text" style="text-align: justify;">A ferramenta foi planejada para oferecer diferentes estímulos sensoriais para aprendizes de classes inclusivas, a fim de facilitar o acesso ao conceito matemático de matrizes.</p>
-              <a onclick="downloadExe()"  href="/Pages/Materiais/matrixmat-descricao.pdf" class="btn btn-primary">Descrição</a>
+              <a onclick="downloadExe()"  href="Materiais/matrixmat-descricao.pdf" class="btn btn-primary">Descrição</a>
               <a onclick="downloadExe()" href="" class="btn btn-primary">Atividade</a>
             </div>
           </div>
@@ -179,16 +179,16 @@
 
   <footer class="navbar  fixed-bottom bg-footer">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/Pages/Home.html"><img src="/Pages/Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+      <a class="navbar-brand" href="Home.html"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
       <div class="d-flex" >
-        <a class="navbar-brand" ><img src="/Pages/Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-        <a class="navbar-brand" ><img src="/Pages/Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-        <a class="navbar-brand" ><img src="/Pages/Img/icones/banner_capes-1024x871.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;object-fit:contain ;"></a>
+        <a class="navbar-brand" ><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+        <a class="navbar-brand" ><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+        <a class="navbar-brand" ><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;object-fit:contain ;"></a>
       </div>
     </div>
   </footer>
 
-    <script src="/Pages/js/baixar_materiais.js"></script>
+    <script src="js/baixar_materiais.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
