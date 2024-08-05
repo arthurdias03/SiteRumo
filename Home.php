@@ -42,6 +42,9 @@
             <li class="nav-item">
               <a class=" nav-link2" aria-disabled="true" href="Contato.php">Contato</a>
             </li>
+            <li class="nav-item">
+              <a class=" nav-link2" aria-disabled="true" href="login.php">Admin</a>
+            </li>
           </ul>
         </div>
       </div>

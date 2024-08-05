@@ -112,7 +112,9 @@ body{
 .bg-footer{
     background-color: #54ADFF;
 }
-
+.respons-foot-pub{
+    margin-bottom: 20%;
+}
 /* Media query para telas menores que 997px */
 
 /*@media*/
