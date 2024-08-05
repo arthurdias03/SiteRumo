@@ -54,6 +54,9 @@ include 'config.php';
                     <li class="nav-item">
                         <a class=" nav-link2" aria-disabled="true" href="login.php">Admin</a>
                     </li>
+                    <li class="nav-item">
+                        <a class=" nav-link2" aria-disabled="true" href="deletepubs.php">DELETe</a>
+                    </li>
                 </ul>
             </div>
         </div>
