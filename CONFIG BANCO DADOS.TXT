@@ -26,3 +26,4 @@ atualizar banco com valor AUTOR
 USE seu_site;
 
 ALTER TABLE arquivos ADD autor VARCHAR(255) NOT NULL;
+ALTER TABLE arquivos ADD COLUMN periodo ENUM('periodico', 'anuais') NOT NULL DEFAULT 'periodico';
