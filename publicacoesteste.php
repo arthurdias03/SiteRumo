@@ -126,7 +126,7 @@ include 'config.php';
                 <tr>
                     <th>ID</th>
                     <th>Nome do Arquivo</th>
-                    <th>Descrição</th>
+                    <th>Ata de arquivo</th>
                     <th>Categoria</th>
                     <th>Ano</th>
                     <th>Autor</th>
