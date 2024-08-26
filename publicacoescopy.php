@@ -116,7 +116,7 @@ include 'config.php';
                     </select>
                 </div>
                 <div class="col-md-3">
-                  <br>
+                    <br>
                     <button type="submit" class="btn btn-primary">Filtrar</button>
                 </div>
             </div>
@@ -164,17 +164,28 @@ include 'config.php';
             
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['nome_arquivo'] . "</td>";
-                    echo "<td>" . $row['descricao'] . "</td>";
-                    echo "<td>" . $row['categoria'] . "</td>";
-                    echo "<td>" . $row['ano'] . "</td>";
-                    echo "<td>" . $row['autor'] . "</td>"; 
-                    echo "<td>" . $row['periodo'] . "</td>"; 
-                    echo "<td>" . $row['data_upload'] . "</td>";
-                    echo "<td><a href='" . $row['caminho_arquivo'] . "' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a></td>";
-                    echo "</tr>";
+                   echo "<div class='row' style='margin-bottom: -40px;'>";
+                   echo "<div class='col-12 mb-5 mt-3'>";
+                   echo "<h5 class='font-weight-bold mb-1'>".$row['nome_arquivo']." </h5>";
+                   echo "<div class='d-flex align-items-center border-bottom pb-3'>";
+                   echo "<img class='img-fluid' src='img/usuario.png' style='width: 60px; height: 60px;margin-right:20px;' >";
+                   echo "</a>";
+                   echo  "<div class='d-flex flex-column pl-3'>";
+                   echo "<br>";
+                   echo "<p class='text-dark mb-2' href='' style='text-decoration:none;'> Descrição: ".$row['descricao']."</p>";
+                   echo "<p class='text-dark mb-2' href='' style='text-decoration:none;'>Categoria: " .$row['categoria']."</p>";
+                   echo "<p class='text-dark mb-2' href='' style='text-decoration:none;'>Ano: " .$row['ano']."</p>";
+                   echo "<p class='text-dark mb-2' href='' style='text-decoration:none;'>Período: " .$row['periodo']."</p>";
+                   echo "<p class='text-dark mb-2' href='' style='text-decoration:none;'>Data Upload: " .$row['data_upload']."</p>";
+                   echo  "<div class='d-flex'>";
+                   echo "<small class='mr-3'><i class='fa fa-user text-primary'>Autor: </i>".$row['autor']."</small>";
+                   echo "</div>";
+                   echo "<br>";
+                   echo "<a href='" . $row['caminho_arquivo'] . "'  target='_blank' class='btn btn-primary btn-sm' style='max-width:150px;'>Visualizar</a>";
+                   echo "</div>";
+                   echo "</div>";
+                   echo "</div>";
+                   echo "</div>";
                 }
             } else {
                 echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
@@ -182,6 +193,71 @@ include 'config.php';
             ?>
             </tbody>
         </table>
+
+        <?php
+        if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+        
+                   echo "<div class='row' style='margin-bottom: -40px;'>";
+                   echo "<div class='col-12 mb-5 mt-3'>";
+                   echo "<h5 class='font-weight-bold mb-1'>".$row['nome_arquivo']." @item.Titulo</h5>";
+                   echo "<div class='d-flex align-items-center border-bottom pb-3'>";
+                   echo "<img class='img-fluid' src='img/download.png' style='width: 60px; height: 60px;' >";
+                   echo "</a>";
+                   echo  "<div class='d-flex flex-column pl-3'>";
+                   echo "<a class='text-dark mb-2' href=''>".$row['descricao']."Texto Resumo</a>";
+                   echo "<a class='text-dark mb-2' href=''>Categoria:" .$row['categoria']."Texto Resumo</a>";
+                   echo "<a class='text-dark mb-2' href=''>Ano:" .$row['ano']."Texto Resumo</a>";
+                   echo "<a class='text-dark mb-2' href=''>Período:" .$row['periodo']."Texto Resumo</a>";
+                   echo "<a class='text-dark mb-2' href=''>Data Upload:" .$row['data_upload']."Texto Resumo</a>";
+                   echo  "<div class='d-flex'>";
+                   echo "<small class='mr-3'><i class='fa fa-user text-primary'></i>".$row['autor']."</small>";
+                   echo "</div>";
+                   echo "<br>";
+                   echo "<a href=''" . $row['caminho_arquivo'] . "'' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a>";
+                   echo "</div>";
+                   echo "</div>";
+                   echo "</div>";
+                   echo "</div>";
+
+                    
+                    echo "<td>" . $row['autor'] . "</td>"; 
+                    echo "<td>" . $row['periodo'] . "</td>"; 
+                    echo "<td>" . $row['data_upload'] . "</td>";
+                    echo "<td></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
+            }
+            ?>
+
+
+
+
+        <div class="row" style="margin-bottom: -40px;">
+            <div class="col-12 mb-5 mt-3">
+                <h5 class="font-weight-bold mb-1">$row['nome_arquivo'] @item.Titulo</h5>
+                <div class='d-flex align-items-center border-bottom pb-3'>
+                    <!--<a href="~/pdf/@item.Titulo" target="_blank">-->
+                    <img class='img-fluid' src='img/download.png' style='width: 60px; height: 60px;'>
+                    </a>
+                    <div class='d-flex flex-column pl-3'>
+                        <a class='text-dark mb-2' href=''>$row['descricao'] Texto Resumo</a>
+                        <div class="d-flex">
+                            <small class='mr-3'><i class='fa fa-user text-primary'></i>$row['autor']</small>
+                        </div>
+                        <br>
+                        <a href='' . $row[' caminho_arquivo'] . '' target='_blank'
+                            class='btn btn-primary btn-sm'>Visualizar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <div class="row" style="margin-bottom: -40px;">
             <div class="col-12 mb-5 mt-3">
                 <h5 class="font-weight-bold mb-1">$row['nome_arquivo'] @item.Titulo</h5>
@@ -195,28 +271,31 @@ include 'config.php';
                             <small class="mr-3"><i class="fa fa-user text-primary"></i>$row['autor']</small>
                         </div>
                         <br>
-                        <a href='" . $row['caminho_arquivo'] . "' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a>
+                        <a href='" . $row[' caminho_arquivo'] . "' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <footer class="navbar fixed-bottom bg-footer">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
-                    height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-            <div class="d-flex">
-                <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70"
-                        height="50" class="d-inline-block align-text-top"
-                        style="margin-left: 15px; object-fit: contain;"></a>
-            </div>
-        </div>
-    </footer>
+    <footer class=" navbar fixed-bottom bg-footer">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png"
+                                        alt="Logo" width="70" height="50" class="d-inline-block align-text-top"
+                                        style="margin-left: 15px;"></a>
+                                <div class="d-flex">
+                                    <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90"
+                                            height="50" class="d-inline-block align-text-top"
+                                            style="margin-left: 15px;"></a>
+                                    <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo"
+                                            width="90" height="40" class="d-inline-block align-text-top"
+                                            style="margin-left: 15px;"></a>
+                                    <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo"
+                                            width="70" height="50" class="d-inline-block align-text-top"
+                                            style="margin-left: 15px; object-fit: contain;"></a>
+                                </div>
+                            </div>
+                            </footer>
 </body>
 
 </html>
