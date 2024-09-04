@@ -6,6 +6,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header('Location: login.php');
     exit;
 }
+
+// Inicializa variável de filtro
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+// Monta a query SQL com o filtro de busca
+$sql = "SELECT * FROM arquivos";
+if ($search) {
+    $search = $conn->real_escape_string($search); // Escapa a string para segurança
+    $sql .= " WHERE nome_arquivo LIKE '%$search%' 
+              OR descricao LIKE '%$search%' 
+              OR categoria LIKE '%$search%' 
+              OR ano LIKE '%$search%' 
+              OR autor LIKE '%$search%' 
+              OR periodo LIKE '%$search%'";
+}
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -61,9 +77,20 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
         </div>
     </nav>
+
     <div class="container mt-5" style="margin-bottom:20%">
         <h2>Excluir Publicações</h2>
         <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
+
+        <!-- Formulário de filtro -->
+        <form method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="search" placeholder="Pesquisar arquivos" value="<?php echo htmlspecialchars($search); ?>">
+                <button class="btn btn-primary" type="submit">Pesquisar</button>
+            </div>
+        </form>
+
+        <!-- Tabela para exibir arquivos -->
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -78,25 +105,22 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </thead>
             <tbody>
                 <?php
-            $sql = "SELECT * FROM arquivos";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                            <td><a href='{$row['caminho_arquivo']}' target='_blank'>{$row['nome_arquivo']}</a></td>
-                            <td>{$row['descricao']}</td>
-                            <td>{$row['categoria']}</td>
-                            <td>{$row['ano']}</td>
-                            <td>{$row['autor']}</td>
-                            <td>{$row['periodo']}</td>
-                            <td><a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Tem certeza que deseja excluir este arquivo?');\">Excluir</a></td>
-                          </tr>";
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                                <td><a href='{$row['caminho_arquivo']}' target='_blank'>{$row['nome_arquivo']}</a></td>
+                                <td>{$row['descricao']}</td>
+                                <td>{$row['categoria']}</td>
+                                <td>{$row['ano']}</td>
+                                <td>{$row['autor']}</td>
+                                <td>{$row['periodo']}</td>
+                                <td><a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Tem certeza que deseja excluir este arquivo?');\">Excluir</a></td>
+                              </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='7' class='text-center'>Nenhum arquivo encontrado</td></tr>";
                 }
-            } else {
-                echo "<tr><td colspan='7' class='text-center'>Nenhum arquivo encontrado</td></tr>";
-            }
-            ?>
+                ?>
             </tbody>
         </table>
     </div>

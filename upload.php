@@ -7,6 +7,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 }
 
 include 'config.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +20,38 @@ include 'config.php';
     <title>Upload de Arquivo PDF</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function toggleFields() {
+            var linkField = document.getElementById("link");
+            var fileField = document.getElementById("arquivo");
+
+            if (linkField.value !== "") {
+                fileField.disabled = true;
+                fileField.value = ""; // Limpa o campo de arquivo se estiver desabilitado
+            } else {
+                fileField.disabled = false;
+            }
+
+            if (fileField.files.length > 0) {
+                linkField.disabled = true;
+                linkField.value = ""; // Limpa o campo de link se o arquivo estiver selecionado
+            } else {
+                linkField.disabled = false;
+            }
+        }
+
+        function togglePeriodo() {
+            var categoria = document.getElementById("categoria").value;
+            var periodo = document.getElementById("periodo");
+
+            if (categoria === "Artigos") {
+                periodo.disabled = false;
+            } else {
+                periodo.disabled = true;
+                periodo.value = ""; // Limpa o campo quando desabilitado
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -79,18 +113,20 @@ include 'config.php';
 
 
     <div class="container mt-5" style="margin-bottom:20%">
-    <h2>Upload de Arquivo PDF</h2>
+    <h2>Upload de Arquivo PDF ou Link</h2>
     <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
     <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $descricao = $_POST['descricao'];
-        $categoria = $_POST['categoria'];
-        $ano = $_POST['ano'];
-        $autor = isset($_POST['novo_autor']) && !empty($_POST['novo_autor']) ? $_POST['novo_autor'] : $_POST['autor'];
-        $periodo = $_POST['periodo'];
-        $arquivo = $_FILES['arquivo'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $descricao = $_POST['descricao'];
+            $categoria = $_POST['categoria'];
+            $ano = $_POST['ano'];
+            $autor = isset($_POST['novo_autor']) && !empty($_POST['novo_autor']) ? $_POST['novo_autor'] : $_POST['autor'];
+            $periodo = $_POST['periodo'];
+            $link = $_POST['link'];
+            $arquivo = $_FILES['arquivo'];
 
-        if ($arquivo['type'] == 'application/pdf' && $arquivo['size'] > 0) {
+        // Validar se link ou arquivo foram fornecidos
+        if (!empty($link) || ($arquivo['type'] == 'application/pdf' && $arquivo['size'] > 0)) {
             $nomeArquivo = basename($arquivo['name']);
             $caminhoArquivo = 'uploads/' . $categoria . '/' . $ano . '/' . $nomeArquivo;
 
@@ -102,7 +138,16 @@ include 'config.php';
                 mkdir('uploads/' . $categoria . '/' . $ano, 0777, true);
             }
 
-            if (move_uploaded_file($arquivo['tmp_name'], $caminhoArquivo)) {
+            if (!empty($link)) {
+                // Se o link for fornecido, salve o link em vez do caminho do arquivo
+                $sql = "INSERT INTO arquivos (nome_arquivo, descricao, caminho_arquivo, categoria, ano, autor, periodo, link) 
+                        VALUES ('$link', '$descricao', '$link', '$categoria', '$ano', '$autor', '$periodo', '$link')";
+                if ($conn->query($sql) === TRUE) {
+                    echo '<div class="alert alert-success">Link enviado com sucesso!</div>';
+                } else {
+                    echo '<div class="alert alert-danger">Erro ao salvar no banco de dados: ' . $conn->error . '</div>';
+                }
+            } else if (move_uploaded_file($arquivo['tmp_name'], $caminhoArquivo)) {
                 $sql = "INSERT INTO arquivos (nome_arquivo, descricao, caminho_arquivo, categoria, ano, autor, periodo) 
                         VALUES ('$nomeArquivo', '$descricao', '$caminhoArquivo', '$categoria', '$ano', '$autor', '$periodo')";
                 if ($conn->query($sql) === TRUE) {
@@ -114,7 +159,7 @@ include 'config.php';
                 echo '<div class="alert alert-danger">Erro ao mover o arquivo.</div>';
             }
         } else {
-            echo '<div class="alert alert-danger">Por favor, envie um arquivo PDF válido.</div>';
+            echo '<div class="alert alert-danger">Por favor, envie um arquivo PDF válido ou insira um link.</div>';
         }
     }
 
@@ -134,7 +179,7 @@ include 'config.php';
         </div>
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoria</label>
-            <select class="form-control" id="categoria" name="categoria" required>
+            <select class="form-control" id="categoria" name="categoria" onchange="togglePeriodo()" required>
                 <option value="">Selecione uma categoria</option>
                 <option value="Teses">Teses</option>
                 <option value="Dissertacoes">Dissertações</option>
@@ -161,14 +206,19 @@ include 'config.php';
         </div>
         <div class="mb-3">
             <label for="periodo" class="form-label">Período</label>
-            <select class="form-control" id="periodo" name="periodo" required>
-                <option value="periodico">Periódico</option>
-                <option value="anuais">Anuais</option>
+            <select class="form-control" id="periodo" name="periodo" disabled>
+                <option value="">Selecione o período</option>
+                <option value="periódico">Periódico</option>
+                <option value="anais">Anais</option>
             </select>
         </div>
         <div class="mb-3">
+            <label for="link" class="form-label">Link</label>
+            <input class="form-control" type="url" id="link" name="link" placeholder="http://example.com" oninput="toggleFields()">
+        </div>
+        <div class="mb-3">
             <label for="arquivo" class="form-label">Arquivo PDF</label>
-            <input class="form-control" type="file" id="arquivo" name="arquivo" accept="application/pdf" required>
+            <input class="form-control" type="file" id="arquivo" name="arquivo" accept="application/pdf" oninput="toggleFields()">
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
@@ -200,6 +250,8 @@ include 'config.php';
         }
     });
     </script>
+
+
 </body>
 
 </html>

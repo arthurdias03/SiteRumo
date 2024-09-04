@@ -195,42 +195,66 @@ include 'config.php';
         </table>
 
         <?php
-        if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-        
-                   echo "<div class='row' style='margin-bottom: -40px;'>";
-                   echo "<div class='col-12 mb-5 mt-3'>";
-                   echo "<h5 class='font-weight-bold mb-1'>".$row['nome_arquivo']." @item.Titulo</h5>";
-                   echo "<div class='d-flex align-items-center border-bottom pb-3'>";
-                   echo "<img class='img-fluid' src='img/download.png' style='width: 60px; height: 60px;' >";
-                   echo "</a>";
-                   echo  "<div class='d-flex flex-column pl-3'>";
-                   echo "<a class='text-dark mb-2' href=''>".$row['descricao']."Texto Resumo</a>";
-                   echo "<a class='text-dark mb-2' href=''>Categoria:" .$row['categoria']."Texto Resumo</a>";
-                   echo "<a class='text-dark mb-2' href=''>Ano:" .$row['ano']."Texto Resumo</a>";
-                   echo "<a class='text-dark mb-2' href=''>Período:" .$row['periodo']."Texto Resumo</a>";
-                   echo "<a class='text-dark mb-2' href=''>Data Upload:" .$row['data_upload']."Texto Resumo</a>";
-                   echo  "<div class='d-flex'>";
-                   echo "<small class='mr-3'><i class='fa fa-user text-primary'></i>".$row['autor']."</small>";
-                   echo "</div>";
-                   echo "<br>";
-                   echo "<a href=''" . $row['caminho_arquivo'] . "'' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a>";
-                   echo "</div>";
-                   echo "</div>";
-                   echo "</div>";
-                   echo "</div>";
+                $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
+                $ano = isset($_GET['ano']) ? $_GET['ano'] : '';
+                $autor = isset($_GET['autor']) ? $_GET['autor'] : '';
+                $periodo = isset($_GET['periodo']) ? $_GET['periodo'] : '';
+                $sql = "SELECT * FROM arquivos WHERE 1=1";
 
-                    
-                    echo "<td>" . $row['autor'] . "</td>"; 
-                    echo "<td>" . $row['periodo'] . "</td>"; 
-                    echo "<td>" . $row['data_upload'] . "</td>";
-                    echo "<td></td>";
-                    echo "</tr>";
+                if ($categoria != '') {
+                    $sql .= " AND categoria = '$categoria'";
                 }
-            } else {
-                echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
-            }
-            ?>
+
+                if ($ano != '') {
+                    $sql .= " AND ano = '$ano'";
+                }
+
+                if ($autor != '') {
+                    $sql .= " AND autor = '$autor'";
+                }
+
+                if ($periodo != '') {
+                    $sql .= " AND periodo = '$periodo'";
+                }
+
+                $sql .= " ORDER BY data_upload DESC";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<div class='row' style='margin-bottom: -40px;'>";
+                        echo "<div class='col-12 mb-5 mt-3'>";
+                        echo "<h5 class='font-weight-bold mb-1'>" . htmlspecialchars($row['nome_arquivo']) . "</h5>";
+                        echo "<div class='d-flex align-items-center border-bottom pb-3'>";
+                        echo "<img class='img-fluid' src='img/usuario.png' style='width: 60px; height: 60px;margin-right:20px;'>";
+                        echo "<div class='d-flex flex-column pl-3'>";
+                        echo "<br>";
+                        echo "<p class='text-dark mb-2'>Descrição: " . htmlspecialchars($row['descricao']) . "</p>";
+                        echo "<p class='text-dark mb-2'>Categoria: " . htmlspecialchars($row['categoria']) . "</p>";
+                        echo "<p class='text-dark mb-2'>Ano: " . htmlspecialchars($row['ano']) . "</p>";
+                        echo "<p class='text-dark mb-2'>Período: " . htmlspecialchars($row['periodo']) . "</p>";
+                        echo "<p class='text-dark mb-2'>Data Upload: " . htmlspecialchars($row['data_upload']) . "</p>";
+                        echo "<div class='d-flex'>";
+                        echo "<small class='mr-3'><i class='fa fa-user text-primary'></i> Autor: " . htmlspecialchars($row['autor']) . "</small>";
+                        echo "</div>";
+                        echo "<br>";
+
+                        // Verifica se o link está preenchido
+                        if (!empty($row['link'])) {
+                            echo "<a href='" . htmlspecialchars($row['link']) . "' target='_blank' class='btn btn-primary btn-sm' style='max-width:150px;'>Visualizar</a>";
+                        } else {
+                            echo "<a href='" . htmlspecialchars($row['caminho_arquivo']) . "' target='_blank' class='btn btn-primary btn-sm' style='max-width:150px;'>Visualizar</a>";
+                        }
+
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
+                }
+                ?>
 
 
 

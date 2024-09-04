@@ -27,3 +27,14 @@ USE seu_site;
 
 ALTER TABLE arquivos ADD autor VARCHAR(255) NOT NULL;
 ALTER TABLE arquivos ADD COLUMN periodo ENUM('periodico', 'anuais') NOT NULL DEFAULT 'periodico';
+
+
+
+atualizar valores campo periodo
+
+ALTER TABLE arquivos MODIFY COLUMN periodo ENUM('periodico', 'anais') NOT NULL;
+
+
+criar novo campo 'link'
+
+ALTER TABLE arquivos ADD COLUMN link VARCHAR(255) AFTER caminho_arquivo;
