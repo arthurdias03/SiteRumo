@@ -38,6 +38,9 @@ ALTER TABLE arquivos MODIFY COLUMN periodo ENUM('periodico', 'anais') NOT NULL;
 criar novo campo 'link'
 
 ALTER TABLE arquivos ADD COLUMN link VARCHAR(255) AFTER caminho_arquivo;
+<<<<<<< HEAD
 
 criar novo campo 'titulo'
 ALTER TABLE arquivos ADD COLUMN titulo TEXT;
+=======
+>>>>>>> 209a2d666c637239a2813d1168dfe7ca9f1307d2
