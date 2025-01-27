@@ -118,7 +118,7 @@ include 'config.php';
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $titulo = $_POST['titulo']; // Novo campo título
-            $descricao = $_POST['descricao'];
+            $descricao = $_POST['descricao']; 
             $categoria = $_POST['categoria'];
             $ano = $_POST['ano'];
             $autor = isset($_POST['novo_autor']) && !empty($_POST['novo_autor']) ? $_POST['novo_autor'] : $_POST['autor'];

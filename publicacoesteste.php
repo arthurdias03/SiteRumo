@@ -164,7 +164,7 @@ include 'config.php';
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>";
+                    echo "<td>" . $row['id'] . "</td>"; 
                     echo "<td>" . $row['titulo'] . "</td>";
                     echo "<td>" . $row['descricao'] . "</td>";
                     echo "<td>" . $row['categoria'] . "</td>";
