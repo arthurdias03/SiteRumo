@@ -44,7 +44,7 @@ include 'config.php';
             var periodo = document.getElementById("periodo");
 
             if (categoria === "Artigos") {
-                periodo.disabled = false;
+                periodo.disabled = false; 
             } else {
                 periodo.disabled = true;
                 periodo.value = ""; // Limpa o campo quando desabilitado

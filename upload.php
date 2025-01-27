@@ -21,7 +21,7 @@ include 'config.php';
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script>
-        function toggleFields() {
+        function toggleFields() { 
             var linkField = document.getElementById("link");
             var fileField = document.getElementById("arquivo");
 

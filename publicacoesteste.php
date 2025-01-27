@@ -161,7 +161,7 @@ include 'config.php';
             $sql .= " ORDER BY data_upload DESC";
             $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
+            if ($result->num_rows > 0) { 
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row['id'] . "</td>"; 
