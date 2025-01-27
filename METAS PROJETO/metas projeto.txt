@@ -1,0 +1,67 @@
+DESENVOLVIMENTO SITE RUMO
+
+Visualização pelo celular, footer deixar centralizado logo rumo e patrocinios em baixo✔
+
+Ajustar esteticamente os menus e colocar nas outras paginas e tbm em questao do footer.✔❌
+
+Colocar pagina download publicacoes✔
+
+Arrumar estetica pagina publicações✔
+
+Colocar download nos aplicativos e materiais pasta(hoje)✔
+
+Arrumar menu sanduiche✔
+
+Responsividade em questão dos grids das paginas ✔
+
+Criar pagina de upload de pdfs❌
+
+Criar pagina de download de pdfs✔
+
+Criar script que ordena e coloca os pdfs na pagina de publicações por ordem exata (JS)✔ 
+
+Colocar resumo abnt nos arquivos pdfs em publicações, criar uma pagina para adicionar esses resumos.✔
+
+Colocar video por youtube embed na home e sobre✔
+
+Deixar nome do PDF esteticamente mais ao usuario✔
+
+Arrumar footer tampando texto em resolução menor✔
+
+Colocar animações hover em paginas✔
+
+Arrumar pagina contato✔
+
+Arrumar publicações questao pdf nao aparecendo✔
+
+Tratar nomes dos pdfs em BR
+
+Arrumar botao deixa centralizado contato ✔
+
+Arrumar codigo de api de email quando subir projeto(ultimo)
+
+Colocar animação hover menu✔
+
+Ver footer cobrindo texto✔
+
+
+CRIAR NOVOS VALORES NA TABELA DE ARQUIVOS: AUTOR✔, PERIODOS E ANUAIS ✔
+
+COLOCAR PAGINAS HTML EM PHP PARA FUNCIONAR PERFEITAMENTE✔
+
+CRIAR PAGINA DE LOGIN PARA ACESSAR PAGINA A COLOCAR ARQUIVOS✔
+
+ARRUMAR PAGINAS ESTETICA E FUNCIONALMENTE DO SITE (LOGIN, UPLOAD,PUBLICACOESTESTE) ✔
+
+COLOCAR ABA ADMIN NO MENU PARA CONSEGUIR COLOCAR ARQUIVOS ✔
+
+MUDAR SENHA DE LOGIN ✔
+
+mudar estetica pagina publicacoes testes 
+
+CRIAR NOVOS VALORES NA TABELA DE ARQUIVOS:  PERIODOS E ANUAIS ✔
+
+
+CRIAR UMA PAGINA PARA DELETAR ARQUIVOS ✔
+
+colocar campo titulo ao subir arquivos ✔
