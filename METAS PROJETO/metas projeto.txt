@@ -65,3 +65,7 @@ CRIAR NOVOS VALORES NA TABELA DE ARQUIVOS:  PERIODOS E ANUAIS ✔
 CRIAR UMA PAGINA PARA DELETAR ARQUIVOS ✔
 
 colocar campo titulo ao subir arquivos ✔
+
+Colocar multiplaescolha na pagina de publicacoes ✔
+
+Criar pagina para editar registros

@@ -11,6 +11,12 @@ include 'config.php';
     <title>Publicações</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        select[multiple] {
+            height: 60px;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,125 +71,117 @@ include 'config.php';
             <div class="col">
                 <h2>Rumo á Educação Matemática Inclusiva</h2>
             </div>
+                
+            
         </div>
+        
     </div>
 
 
 
 
+    
 
-
-    <div class="container mt-5" style="margin-bottom: 20%;">
-        <h2>Publicações</h2>
-        <form method="get" class="mb-3">
-            <div class="row">
-                <div class="col-md-3">
-                    <select class="form-control" name="categoria">
-                        <option value="">Todas as categorias</option>
+    <div class="container-fluid mt-4">
+        <h2 class="text-center">Publicações</h2> <br>
+        <div class="row">
+            <div class="col-md-2">
+                <form method="get" class="mb-3">
+                    <label><strong>Categorias</strong></label><br>
+                    <select name="categoria[]" multiple class="form-control">
                         <option value="Teses">Teses</option>
                         <option value="Dissertacoes">Dissertações</option>
                         <option value="Artigos">Artigos</option>
                     </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" name="ano">
-                        <option value="">Todos os anos</option>
+                    <br>
+                    <label><strong>Anos</strong></label><br>
+                    <select name="ano[]" multiple class="form-control">
                         <?php
-                    for ($year = date("Y"); $year >= 2000; $year--) {
-                        echo "<option value='$year'>$year</option>";
-                    }
-                    ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" name="autor">
-                        <option value="">Todos os autores</option>
-                        <?php
-                    $autoresResult = $conn->query("SELECT DISTINCT autor FROM arquivos");
-                    if ($autoresResult->num_rows > 0) {
-                        while ($row = $autoresResult->fetch_assoc()) {
-                            echo "<option value='{$row['autor']}'>{$row['autor']}</option>";
+                        for ($year = date("Y"); $year >= 2000; $year--) {
+                            echo "<option value='$year'>$year</option>";
                         }
-                    }
-                    ?>
+                        ?>
                     </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" name="periodo">
-                        <option value="">Todos os períodos</option>
+                    <br>
+                    <label><strong>Autores</strong></label><br>
+                    <select name="autor[]" multiple class="form-control">
+                        <?php
+                        $autoresResult = $conn->query("SELECT DISTINCT autor FROM arquivos");
+                        if ($autoresResult->num_rows > 0) {
+                            while ($row = $autoresResult->fetch_assoc()) {
+                                echo "<option value='{$row['autor']}'>{$row['autor']}</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                    <br>
+                    <label><strong>Períodos</strong></label><br>
+                    <select name="periodo[]" multiple class="form-control">
                         <option value="periodico">Periódico</option>
                         <option value="anuais">Anuais</option>
                     </select>
-                </div>
-                <div class="col-md-3">
-                  <br>
+                    <br>
                     <button type="submit" class="btn btn-primary">Filtrar</button>
-                </div>
+                </form>
             </div>
-        </form>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Ata de arquivo</th>
-                    <th>Categoria</th>
-                    <th>Ano</th>
-                    <th>Autor</th>
-                    <th>Data de Upload</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-            $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
-            $ano = isset($_GET['ano']) ? $_GET['ano'] : '';
-            $autor = isset($_GET['autor']) ? $_GET['autor'] : '';
-            $periodo = isset($_GET['periodo']) ? $_GET['periodo'] : '';
-            $sql = "SELECT * FROM arquivos WHERE 1=1";
-
-            if ($categoria != '') {
-                $sql .= " AND categoria = '$categoria'";
-            }
-
-            if ($ano != '') {
-                $sql .= " AND ano = '$ano'";
-            }
-
-            if ($autor != '') {
-                $sql .= " AND autor = '$autor'";
-            }
-
-            if ($periodo != '') {
-              $sql .= " AND periodo = '$periodo'";
-          }
-
-            $sql .= " ORDER BY data_upload DESC";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) { 
-                while($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['id'] . "</td>"; 
-                    echo "<td>" . $row['titulo'] . "</td>";
-                    echo "<td>" . $row['descricao'] . "</td>";
-                    echo "<td>" . $row['categoria'] . "</td>";
-                    echo "<td>" . $row['ano'] . "</td>";
-                    echo "<td>" . $row['autor'] . "</td>"; 
-                    echo "<td>" . $row['periodo'] . "</td>"; 
-                    echo "<td>" . $row['data_upload'] . "</td>";
-                    echo "<td><a href='" . $row['caminho_arquivo'] . "' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a></td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
-            }
-            ?>
-            </tbody>
-        </table>
-
-
+            <div class="col-md-10">
+                <table class="table table-striped w-100">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Ata de arquivo</th>
+                            <th>Categoria</th>
+                            <th>Ano</th>
+                            <th>Autor</th>
+                            <th>Data de Upload</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                    $sql = "SELECT * FROM arquivos WHERE 1=1";
+                    if (!empty($_GET['categoria'])) {
+                        $categorias = implode("','", $_GET['categoria']);
+                        $sql .= " AND categoria IN ('$categorias')";
+                    }
+                    if (!empty($_GET['ano'])) {
+                        $anos = implode("','", $_GET['ano']);
+                        $sql .= " AND ano IN ('$anos')";
+                    }
+                    if (!empty($_GET['autor'])) {
+                        $autores = implode("','", $_GET['autor']);
+                        $sql .= " AND autor IN ('$autores')";
+                    }
+                    if (!empty($_GET['periodo'])) {
+                        $periodos = implode("','", $_GET['periodo']);
+                        $sql .= " AND periodo IN ('$periodos')";
+                    }
+                    $sql .= " ORDER BY data_upload DESC";
+                    $result = $conn->query($sql);
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>{$row['id']}</td>";
+                            echo "<td>{$row['titulo']}</td>";
+                            echo "<td>{$row['descricao']}</td>";
+                            echo "<td>{$row['categoria']}</td>";
+                            echo "<td>{$row['ano']}</td>";
+                            echo "<td>{$row['autor']}</td>";
+                            echo "<td>{$row['data_upload']}</td>";
+                            echo "<td><a href='{$row['caminho_arquivo']}' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a></td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+    
     <footer class="navbar fixed-bottom bg-footer">
         <div class="container-fluid">
             <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
