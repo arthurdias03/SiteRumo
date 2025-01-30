@@ -68,4 +68,6 @@ colocar campo titulo ao subir arquivos ✔
 
 Colocar multiplaescolha na pagina de publicacoes ✔
 
-Criar pagina para editar registros
+modificar pagina deletepub para  tambem editar registros ✔
+
+Colocar pesquisar tambem por titulo e tambem editar titulo e link na pagina delete pub 
