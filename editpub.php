@@ -1,3 +1,4 @@
+
 <?php
 include 'config.php';
 session_start();
@@ -20,7 +21,6 @@ if ($search) {
 }
 $result = $conn->query($sql);
 
-// Atualiza os dados no banco de dados
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $id = intval($_POST['edit_id']);
     $nome_arquivo = $conn->real_escape_string($_POST['nome_arquivo']);
@@ -33,14 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $updateSql = "UPDATE arquivos SET nome_arquivo='$nome_arquivo', descricao='$descricao', categoria='$categoria', ano='$ano', autor='$autor', periodo='$periodo' WHERE id='$id'";
 
     if ($conn->query($updateSql) === TRUE) {
-        echo "<p class='alert alert-success'>Registro atualizado com sucesso!</p>";
+        echo "<script>alert('Registro atualizado com sucesso!'); window.location.href='deletepubs.php';</script>";
+        exit;
     } else {
         echo "<p class='alert alert-danger'>Erro ao atualizar registro: " . $conn->error . "</p>";
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,17 +84,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                         <a class=" nav-link2" aria-disabled="true" href="login.php">Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="deletepubs.php">DELETe</a>
+                        <a class=" nav-link2" aria-disabled="true" href="editpub.php">Editar</a>
                     </li>
+                    <li class="nav-item">
+                        <a class=" nav-link2" aria-disabled="true" href="deletepub.php">deletar</a>
+                    </li>
+                  
                 </ul>
             </div>
         </div>
     </nav>
 
-
     <div class="container mt-5">
         <h2>Gerenciar Publicações</h2>
-        <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
         <form method="get" class="mb-4">
             <div class="input-group">
                 <input type="text" class="form-control" name="search" placeholder="Pesquisar arquivos" value="<?php echo htmlspecialchars($search); ?>">
@@ -124,7 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                                 <td>{$row['autor']}</td>
                                 <td>{$row['periodo']}</td>
                                 <td>
-                                    <a href='deletepubs.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Tem certeza que deseja excluir este arquivo?');\">Excluir</a>
                                     <button class='btn btn-warning btn-sm' onclick=\"editRecord({$row['id']}, '{$row['nome_arquivo']}', '{$row['descricao']}', '{$row['categoria']}', '{$row['ano']}', '{$row['autor']}', '{$row['periodo']}')\">Editar</button>
                                 </td>
                               </tr>";
@@ -137,7 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
         </table>
     </div>
 
-    <!-- Modal de Edição -->
     <div class="modal" id="editModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -170,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Período</label>
-                            <input type="text" class="form-control" name="periodo" id="edit_periodo" >
+                            <input type="text" class="form-control" name="periodo" id="edit_periodo">
                         </div>
                         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </form>
@@ -178,7 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
             </div>
         </div>
     </div>
-
     <footer class="navbar fixed-bottom bg-footer">
         <div class="container-fluid">
             <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
@@ -194,7 +194,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
             </div>
         </div>
     </footer>
-
     <script>
         function editRecord(id, nome, descricao, categoria, ano, autor, periodo) {
             document.getElementById('edit_id').value = id;
@@ -204,11 +203,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
             document.getElementById('edit_ano').value = ano;
             document.getElementById('edit_autor').value = autor;
             document.getElementById('edit_periodo').value = periodo;
-            new bootstrap.Modal(document.getElementById('editModal')).show();
+
+            var modalElement = document.getElementById('editModal');
+            var modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+            modalInstance.show();
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>

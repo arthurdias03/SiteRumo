@@ -71,3 +71,14 @@ Colocar multiplaescolha na pagina de publicacoes ✔
 modificar pagina deletepub para  tambem editar registros ✔
 
 Colocar pesquisar tambem por titulo e tambem editar titulo e link na pagina delete pub 
+
+link ja da para editar esta como nome arquivo? nao muda não, precisa colocar o campo link em vez do campo nome arquivo
+
+só da pra editar uma vez? resolvido ✔
+
+arrumar o excluir de arquivos ✔
+
+nomes ao editar e colocar exatamente o mesmo existente não cria duplicação. ✔
+
+ao editar colocar opções unicas nos autores, categorias e periodos 
+colocar link e titulo ao editar e tbm nos campos devisualizacao

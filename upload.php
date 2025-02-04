@@ -89,11 +89,12 @@ include 'config.php';
                         <a class=" nav-link2" aria-disabled="true" href="login.php">Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="deletepubs.php">DELETAR</a>
+                        <a class=" nav-link2" aria-disabled="true" href="editpub.php">Editar</a>
                     </li>
                     <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="editarpub.php">EDITAR</a>
+                        <a class=" nav-link2" aria-disabled="true" href="deletepub.php">deletar</a>
                     </li>
+                  
                 </ul>
             </div>
         </div>
