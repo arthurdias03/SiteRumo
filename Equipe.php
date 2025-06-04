@@ -81,13 +81,32 @@
         <h3 class=" text-center mb-5" style="text-transform: uppercase;">Nossa Equipe</h3>
         <div class="row align-items-center">
           <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
-            <img class="position-relative rounded-circle shadow mx-auto card-hover" src=""
-              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;background-color: #194376;border-radius: 5px;"
+            <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/foto1.jfif"
+              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
               alt="">
             <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
-              <h4 class="font-weight-medium mt-5">Alberto Mota Barbosa Júnior</h4>
+              <h4 class="font-weight-medium mt-5">Roberta Caetano Fleira</h4>
     
-              <a class="btn btn-primary" href="http://lattes.cnpq.br/5566318997390414" target="_blank" role="button"
+              <a class="btn btn-primary" href="http://lattes.cnpq.br/3052067471176140" target="_blank" role="button"
+                style="width: 150px;height:50px;margin-top: 10px;">
+    
+                <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                    width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+    
+              </a>
+    
+    
+            </div>
+          </div>
+
+          <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+            <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/foto 2.jfif"
+              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+              alt="">
+            <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+              <h4 class="font-weight-medium mt-5">Célia Regina Roncato</h4>
+    
+              <a class="btn btn-primary" href="http://lattes.cnpq.br/7645512199834626" target="_blank" role="button"
                 style="width: 150px;height:50px;margin-top: 10px;">
     
                 <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
@@ -100,13 +119,13 @@
           </div>
     
           <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
-            <img class="position-relative rounded-circle shadow mx-auto card-hover" src=""
-              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;background-color: #194376;border-radius: 5px;"
+            <img class="position-relative rounded-circle shadow mx-auto card-hover" src="Img/equipe rumo/foto 3.jfif"
+              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
               alt="">
             <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
-              <h4 class="font-weight-medium mt-5">Alberto Mota Barbosa Júnior</h4>
+              <h4 class="font-weight-medium mt-5">Talita Araújo Salgado Alvarez Faustino</h4>
     
-              <a class="btn btn-primary" href="http://lattes.cnpq.br/5566318997390414" target="_blank" role="button"
+              <a class="btn btn-primary" href="http://lattes.cnpq.br/6387873764746310" target="_blank" role="button"
                 style="width: 150px;height:50px;margin-top: 10px;">
     
                 <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
@@ -117,7 +136,67 @@
     
             </div>
           </div>
+          
+          
+          <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+            <img class="position-relative rounded-circle shadow mx-auto card-hover" src="Img/equipe rumo/foto 4.jfif"
+              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+              alt="">
+            <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+              <h4 class="font-weight-medium mt-5">Siobhan Victoria Healy</h4>
     
+              <a class="btn btn-primary" href="http://lattes.cnpq.br/8731431789517806" target="_blank" role="button"
+                style="width: 150px;height:50px;margin-top: 10px;">
+    
+                <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                    width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+    
+              </a>
+    
+    
+            </div>
+          </div>
+
+
+          <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+            <img class="position-relative rounded-circle shadow mx-auto card-hover" src="Img/equipe rumo/foto 5.png"
+              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+              alt="">
+            <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+              <h4 class="font-weight-medium mt-5">Solange Hassan Ahmad Ali Fernandes</h4>
+    
+              <a class="btn btn-primary" href="http://lattes.cnpq.br/9597455795635724" target="_blank" role="button"
+                style="width: 150px;height:50px;margin-top: 10px;">
+    
+                <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                    width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+    
+              </a>
+    
+    
+            </div>
+          </div>
+
+          <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+            <img class="position-relative rounded-circle shadow mx-auto card-hover" src="Img/equipe rumo/foto 6.jpg"
+              style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+              alt="">
+            <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+              <h4 class="font-weight-medium mt-5">Roseli Rosalino Dias Da Silva Angelino</h4>
+    
+              <a class="btn btn-primary" href="http://lattes.cnpq.br/5346323918637330" target="_blank" role="button"
+                style="width: 150px;height:50px;margin-top: 10px;">
+    
+                <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                    width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+    
+              </a>
+    
+    
+            </div>
+          </div>
+
+
           <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
             <img class="position-relative rounded-circle shadow mx-auto card-hover" src=""
               style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;background-color: #194376;border-radius: 5px;"
