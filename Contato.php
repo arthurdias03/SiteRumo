@@ -9,6 +9,61 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+
+        :root {
+            --primary-color: #2846a7ff;
+            --secondary-color: #17a2b8;
+            --accent-color: #fd7e14;
+            --success-color: #20c997;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --gradient-primary: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            --gradient-secondary: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --gradient-accent: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-medium: 0 8px 30px rgba(0,0,0,0.15);
+            --shadow-heavy: 0 15px 50px rgba(0,0,0,0.2);
+        }
+        .section-title {
+              text-align: center;
+              margin-top: 5rem;
+              margin-bottom: 7rem;
+          }
+
+        .section-title h2 {
+              font-size: 2.5rem;
+              font-weight: 700;
+              color: var(--primary-color);
+              margin-bottom: 1rem;
+              position: relative;
+          }
+        .section-title h2::after {
+              content: '';
+              position: absolute;
+              bottom: -10px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 80px;
+              height: 4px;
+              background: var(--gradient-accent);
+              border-radius: 2px;
+          }
+
+          .section-title p {
+              font-size: 1.1rem;
+              
+              max-width: 600px;
+              margin: 0 auto;
+          }
+        .select-pub{
+      border: 1px solid #194376;
+      color: #194376;
+      font-weight: 700;
+          }   
+  </style>
   </head>
   <body>
     <!--Menu--> <!-- CRIAR MENU SANDUICHE-->
@@ -70,7 +125,11 @@
        
       </div>
       <div class="col">
-        <h3 style="text-transform: uppercase;">Contato</h3>
+         <div class="section-title scroll-animate">
+                <h2>Contato</h2>
+                
+            </div>
+        
 
       </div>
 
