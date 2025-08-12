@@ -572,6 +572,9 @@ $stmt->close();
                     <li class="nav-item">
                         <a class=" nav-link2" aria-disabled="true" href="deletepub.php">deletar</a>
                     </li>
+                    <li class="nav-item">
+                          <a href="logout.php" class="btn-danger " style="text-decoration: none; margin-left:2rem;">Logout</a>
+                    </li>
                   
                 </ul>
             </div>
@@ -580,7 +583,9 @@ $stmt->close();
 
     <!--logo site-->
     <div class="icon-menu">
+         
         <div class="row align-items-center">
+          
             <div class="col-auto">
                 <div class="logo">
                     <img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="100" height="100"
@@ -588,6 +593,7 @@ $stmt->close();
                 </div>
             </div>
             <div class="col">
+                
                 <h2>Rumo á Educação Matemática Inclusiva</h2>
             </div>
         </div>

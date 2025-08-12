@@ -65,9 +65,9 @@ include 'config.php';
               margin: 0 auto;
           }
         .select-pub{
-      border: 1px solid #194376;
-      color: #194376;
-      font-weight: 700;
+            border: 1px solid #194376;
+            color: #194376;
+            font-weight: 700;
           }   
     
     
@@ -121,29 +121,16 @@ include 'config.php';
             }
         }
 
-        .navbar {
-            box-shadow: var(--shadow);
-            background: linear-gradient(135deg, var(--primary-color), #2d5aadff) !important;
+        
+
+        .navbar{
+            padding: 1rem;
+
         }
 
-        .nav-link2 {
-            color: white !important;
-            font-weight: 500;
-            padding: 0.75rem 1rem !important;
-            border-radius: 0.375rem;
-            transition: all 0.3s ease;
-        }
+        
 
-        .nav-link2:hover {
-            background-color: rgba(255,255,255,0.1);
-            transform: translateY(-1px);
-        }
-
-        .nav-link2[aria-current="page"] {
-            background-color: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
+       
         .header-section {
             background: linear-gradient(135deg, var(--secondary-color), #e9ecef);
             padding: 2rem 0;
@@ -567,43 +554,41 @@ include 'config.php';
 <body>
     <!--Menu-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-body-blue" aria-label="Tenth navbar example">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08"
-                aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class=" nav-link2" aria-current="page" href="Home.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class=" nav-link2 " href="Sobre.php">Sobre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class=" nav-link2" href="Equipe.php">Equipe </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="publicacoesteste.php">Publicações</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="Aplicativos.php">Aplicativos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="Materiais.php">Materiais</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="Contato.php">Contato</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="login.php">Admin</a>
-                    </li>
-                </ul>
-            </div>
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class=" nav-link2" aria-current="page" href="Home.php" >Home</a>
+            </li>
+            <li class="nav-item">
+              <a class=" nav-link2 " href="Sobre.php">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a class=" nav-link2" href="Equipe.php">Equipe </a>
+            </li>
+            <li class="nav-item">
+              <a class=" nav-link2" aria-disabled="true" href="publicacoesteste.php">Publicações</a>
+            </li>
+            <li class="nav-item">
+              <a class=" nav-link2" aria-disabled="true" href="Aplicativos.php">Aplicativos</a>
+            </li>
+            <li class="nav-item">
+              <a class=" nav-link2" aria-disabled="true" href="Materiais.php">Materiais</a>
+            </li>
+            <li class="nav-item">
+              <a class=" nav-link2" aria-disabled="true" href="Contato.php">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class=" nav-link2" aria-disabled="true" href="login.php">Admin</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
-
     <!--logo site-->
     <div class="icon-menu">
         <div class="row align-items-center">

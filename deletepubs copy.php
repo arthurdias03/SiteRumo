@@ -7,13 +7,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
-// Inicializa variável de filtro
 $search = isset($_GET['search']) ? $_GET['search'] : '';
-
-// Monta a query SQL com o filtro de busca
 $sql = "SELECT * FROM arquivos";
 if ($search) {
-    $search = $conn->real_escape_string($search); // Escapa a string para segurança
+    $search = $conn->real_escape_string($search);
     $sql .= " WHERE nome_arquivo LIKE '%$search%' 
               OR descricao LIKE '%$search%' 
               OR categoria LIKE '%$search%' 
@@ -22,21 +19,46 @@ if ($search) {
               OR periodo LIKE '%$search%'";
 }
 $result = $conn->query($sql);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['edit_id'])) {
+        $id = intval($_POST['edit_id']);
+        $nome_arquivo = $conn->real_escape_string($_POST['nome_arquivo']);
+        $descricao = $conn->real_escape_string($_POST['descricao']);
+        $categoria = $conn->real_escape_string($_POST['categoria']);
+        $ano = intval($_POST['ano']);
+        $autor = $conn->real_escape_string($_POST['autor']);
+        $periodo = $conn->real_escape_string($_POST['periodo']);
+
+        $updateSql = "UPDATE arquivos SET nome_arquivo='$nome_arquivo', descricao='$descricao', categoria='$categoria', ano='$ano', autor='$autor', periodo='$periodo' WHERE id='$id'";
+
+        if ($conn->query($updateSql) === TRUE) {
+            echo "<p class='alert alert-success'>Registro atualizado com sucesso!</p>";
+        } else {
+            echo "<p class='alert alert-danger'>Erro ao atualizar registro: " . $conn->error . "</p>";
+        }
+    }
+    if (isset($_POST['delete_id'])) {
+        $id = intval($_POST['delete_id']);
+        $deleteSql = "DELETE FROM arquivos WHERE id='$id'";
+        if ($conn->query($deleteSql) === TRUE) {
+            echo "<p class='alert alert-success'>Registro excluído com sucesso!</p>";
+        } else {
+            echo "<p class='alert alert-danger'>Erro ao excluir registro: " . $conn->error . "</p>";
+        }
+    }
+}
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excluir Publicações</title>
+    <title>Gerenciar Publicações</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-body-blue" aria-label="Tenth navbar example">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08"
@@ -71,26 +93,24 @@ $result = $conn->query($sql);
                         <a class=" nav-link2" aria-disabled="true" href="login.php">Admin</a>
                     </li>
                     <li class="nav-item">
-                        <a class=" nav-link2" aria-disabled="true" href="deletepubs.php">DELETe</a>
+                        <a class=" nav-link2" aria-disabled="true" href="editpub.php">Editar</a>
                     </li>
+                    <li class="nav-item">
+                        <a class=" nav-link2" aria-disabled="true" href="deletepub.php">deletar</a>
+                    </li>
+                  
                 </ul>
             </div>
         </div>
     </nav>
-
-    <div class="container mt-5" style="margin-bottom:20%">
-        <h2>Excluir Publicações</h2>
-        <a href="logout.php" class="btn btn-danger mb-3">Logout</a>
-
-        <!-- Formulário de filtro -->
+    <div class="container mt-5">
+        <h2>Gerenciar Publicações</h2>
         <form method="get" class="mb-4">
             <div class="input-group">
-                <input type="text" class="form-control" name="search" placeholder="Pesquisar arquivos" value="<?php echo htmlspecialchars($search); ?>">
+                <input type="text" class="form-control" name="search" placeholder="Pesquisar" value="<?php echo htmlspecialchars($search); ?>">
                 <button class="btn btn-primary" type="submit">Pesquisar</button>
             </div>
         </form>
-
-        <!-- Tabela para exibir arquivos -->
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -100,31 +120,30 @@ $result = $conn->query($sql);
                     <th>Ano</th>
                     <th>Autor</th>
                     <th>Período</th>
-                    <th>Ação</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td><a href='{$row['caminho_arquivo']}' target='_blank'>{$row['nome_arquivo']}</a></td>
-                                <td>{$row['descricao']}</td>
-                                <td>{$row['categoria']}</td>
-                                <td>{$row['ano']}</td>
-                                <td>{$row['autor']}</td>
-                                <td>{$row['periodo']}</td>
-                                <td><a href='delete.php?id={$row['id']}' class='btn btn-danger btn-sm' onclick=\"return confirm('Tem certeza que deseja excluir este arquivo?');\">Excluir</a></td>
-                              </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='7' class='text-center'>Nenhum arquivo encontrado</td></tr>";
-                }
-                ?>
+                <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['nome_arquivo']); ?></td>
+                    <td><?php echo htmlspecialchars($row['descricao']); ?></td>
+                    <td><?php echo htmlspecialchars($row['categoria']); ?></td>
+                    <td><?php echo htmlspecialchars($row['ano']); ?></td>
+                    <td><?php echo htmlspecialchars($row['autor']); ?></td>
+                    <td><?php echo htmlspecialchars($row['periodo']); ?></td>
+                    <td>
+                        <form method="post" class="d-inline">
+                            <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este arquivo?');">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
-
+   
     <footer class="navbar fixed-bottom bg-footer">
         <div class="container-fluid">
             <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
@@ -140,6 +159,7 @@ $result = $conn->query($sql);
             </div>
         </div>
     </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

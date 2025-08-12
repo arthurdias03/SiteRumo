@@ -1,4 +1,3 @@
-
 <?php
 include 'config.php';
 session_start();
@@ -8,11 +7,31 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit;
 }
 
+// Busca autores e períodos já registrados no banco de dados
+$autores = [];
+$periodos = [];
+$sqlAutores = "SELECT DISTINCT autor FROM arquivos";
+$sqlPeriodos = "SELECT DISTINCT periodo FROM arquivos";
+
+$resultAutores = $conn->query($sqlAutores);
+if ($resultAutores->num_rows > 0) {
+    while ($row = $resultAutores->fetch_assoc()) {
+        $autores[] = $row['autor'];
+    }
+}
+
+$resultPeriodos = $conn->query($sqlPeriodos);
+if ($resultPeriodos->num_rows > 0) {
+    while ($row = $resultPeriodos->fetch_assoc()) {
+        $periodos[] = $row['periodo'];
+    }
+}
+
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $sql = "SELECT * FROM arquivos";
 if ($search) {
     $search = $conn->real_escape_string($search);
-    $sql .= " WHERE titulo LIKE '%$search%'
+    $sql .= " WHERE titulo LIKE '%$search%' 
               OR link LIKE '%$search%'
               OR descricao LIKE '%$search%' 
               OR categoria LIKE '%$search%' 
@@ -32,7 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $autor = $conn->real_escape_string($_POST['autor']);
     $periodo = $conn->real_escape_string($_POST['periodo']);
 
-    $updateSql = "UPDATE arquivos SET titulo='$titulo', link='$link', descricao='$descricao', categoria='$categoria', ano='$ano', autor='$autor', periodo='$periodo' WHERE id='$id'";
+    $updateSql = "UPDATE arquivos SET 
+        titulo='$titulo',
+        link='$link',
+        descricao='$descricao',
+        categoria='$categoria',
+        ano='$ano',
+        autor='$autor',
+        periodo='$periodo' 
+        WHERE id='$id'";
 
     if ($conn->query($updateSql) === TRUE) {
         echo "<script>alert('Registro atualizado com sucesso!'); window.location.href='deletepubs.php';</script>";
@@ -97,19 +124,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
         </div>
     </nav>
 
+
     <div class="container mt-5">
         <h2>Gerenciar Publicações</h2>
         <form method="get" class="mb-4">
             <div class="input-group">
-                <input type="text" class="form-control" name="search" placeholder="Pesquisar arquivos" value="<?php echo htmlspecialchars($search); ?>">
+                <input type="text" class="form-control" name="search" placeholder="Pesquisar publicações" value="<?php echo htmlspecialchars($search); ?>">
                 <button class="btn btn-primary" type="submit">Pesquisar</button>
             </div>
         </form>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Titulo</th>
-                    <th>link</th>
+                    <th>Título</th>
+                    <th>Link</th>
                     <th>Descrição</th>
                     <th>Categoria</th>
                     <th>Ano</th>
@@ -131,12 +159,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                                 <td>{$row['autor']}</td>
                                 <td>{$row['periodo']}</td>
                                 <td>
-                                    <button class='btn btn-warning btn-sm' onclick=\"editRecord({$row['id']},{$row['titulo']}, '{$row['link']}', '{$row['descricao']}', '{$row['categoria']}', '{$row['ano']}', '{$row['autor']}', '{$row['periodo']}')\">Editar</button>
+                                    <button class='btn btn-warning btn-sm' onclick=\"editRecord(
+                                        {$row['id']}, 
+                                        '".addslashes($row['titulo'])."', 
+                                        '".addslashes($row['link'])."', 
+                                        '".addslashes($row['descricao'])."', 
+                                        '".addslashes($row['categoria'])."', 
+                                        '{$row['ano']}', 
+                                        '".addslashes($row['autor'])."', 
+                                        '".addslashes($row['periodo'])."'
+                                    )\">Editar</button>
                                 </td>
                               </tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='7' class='text-center'>Nenhum arquivo encontrado</td></tr>";
+                    echo "<tr><td colspan='8' class='text-center'>Nenhum registro encontrado</td></tr>";
                 }
                 ?>
             </tbody>
@@ -154,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                     <form method="post">
                         <input type="hidden" name="edit_id" id="edit_id">
                         <div class="mb-3">
-                            <label class="form-label">Titulo</label>
+                            <label class="form-label">Título</label>
                             <input type="text" class="form-control" name="titulo" id="edit_titulo" required>
                         </div>
                         <div class="mb-3">
@@ -167,7 +204,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Categoria</label>
-                            <input type="text" class="form-control" name="categoria" id="edit_categoria" required>
+                            <select class="form-control" name="categoria" id="edit_categoria" required>
+                                <option value="Teses">Teses</option>
+                                <option value="Artigos">Artigos</option>
+                                <option value="Dissertações">Dissertações</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Ano</label>
@@ -175,11 +216,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Autor</label>
-                            <input type="text" class="form-control" name="autor" id="edit_autor" required>
+                            <select class="form-control" name="autor" id="edit_autor" required>
+                                <?php
+                                foreach ($autores as $autor) {
+                                    echo "<option value='$autor'>$autor</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Período</label>
-                            <input type="text" class="form-control" name="periodo" id="edit_periodo">
+                            <select class="form-control" name="periodo" id="edit_periodo">
+                                <option value="Periódico">Periódico</option>
+                                <option value="Anais">Anais</option>
+                        
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                     </form>
@@ -187,6 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
             </div>
         </div>
     </div>
+
     <footer class="navbar fixed-bottom bg-footer">
         <div class="container-fluid">
             <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
@@ -202,8 +254,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
             </div>
         </div>
     </footer>
+
     <script>
-        function editRecord(id,titulo, link, descricao, categoria, ano, autor, periodo) {
+        function editRecord(id, titulo, link, descricao, categoria, ano, autor, periodo) {
             document.getElementById('edit_id').value = id;
             document.getElementById('edit_titulo').value = titulo;
             document.getElementById('edit_link').value = link;

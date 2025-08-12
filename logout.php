@@ -333,7 +333,7 @@ if (isset($_GET['timeout'])) {
                 <strong>Todas as suas informações foram protegidas.</strong>
             </div>
             
-            <a href="login.php" class="btn-login">
+            <a href="Home.php" class="btn-login">
                 <i class="fas fa-sign-in-alt me-2"></i>
                 Fazer Login Novamente
             </a>
@@ -370,7 +370,7 @@ if (isset($_GET['timeout'])) {
             
             if (countdown <= 0) {
                 clearInterval(timer);
-                window.location.href = 'login.php';
+                window.location.href = 'Home.php';
             }
         }, 1000);
         
@@ -381,7 +381,7 @@ if (isset($_GET['timeout'])) {
         
         // Prevenir volta com botão do navegador
         window.addEventListener('popstate', function(event) {
-            window.location.href = 'login.php';
+            window.location.href = 'Home.php';
         });
         
         // Limpar cache e dados sensíveis
@@ -408,7 +408,7 @@ if (isset($_GET['timeout'])) {
         document.addEventListener('keydown', function(e) {
             if (e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
                 e.preventDefault();
-                window.location.href = 'login.php';
+                window.location.href = 'Home.php';
             }
         });
     </script>

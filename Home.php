@@ -154,7 +154,7 @@
 
     <footer class="navbar fixed-bottom bg-footer">
       <div class="container-fluid">
-        <a class="navbar-brand" href="linkedin.com"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"><p style='font-size: 10px'>Criado por Arthur Dias</p> </a>
+        <a class="navbar-brand" href="linkedin.com"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70" height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"> </a>
       
         <div class="d-flex">
           <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="60" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
