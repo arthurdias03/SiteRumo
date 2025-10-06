@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
         WHERE id='$id'";
 
     if ($conn->query($updateSql) === TRUE) {
-        echo "<script>alert('Registro atualizado com sucesso!'); window.location.href='editpub_moderno.php';</script>";
+        echo "<script>alert('Registro atualizado com sucesso!'); window.location.href='editpub.php';</script>";
         exit;
     } else {
         echo "<p class='alert alert-danger'>Erro ao atualizar registro: " . $conn->error . "</p>";
