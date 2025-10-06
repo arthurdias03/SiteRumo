@@ -1,8 +1,8 @@
 <?php
-$servername = "ph21429941251_";
+$servername = "p3nlmysql151plsk.secureserver.net:3306";
 $username = "adminrumo";
-$password = "adminrumo";
-$dbname = "Rumo@2025";
+$password = "Rumo@2025";
+$dbname = "ph21429941251_";
 
 // Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
