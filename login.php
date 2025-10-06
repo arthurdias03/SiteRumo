@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = 'Usuário e senha são obrigatórios.';
         } else {
             // Hash da senha armazenada (em produção, use banco de dados)
-            $stored_username = 'admin';
-            $stored_password_hash = password_hash('1234', PASSWORD_DEFAULT);
+            $stored_username = 'rumoadmin';
+            $stored_password_hash = password_hash('Rumo@2025', PASSWORD_DEFAULT);
             
             // Verificar credenciais com timing attack protection
             $username_valid = hash_equals($stored_username, $username);
