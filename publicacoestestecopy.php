@@ -11,12 +11,167 @@ include 'config.php';
     <title>Publicações</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        .filter-sidebar {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-sidebar h5 {
+            color: #0d6efd;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .filter-section {
+            margin-bottom: 25px;
+        }
+
+        .filter-section h6 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .filter-options {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .filter-options label {
+            display: block;
+            padding: 5px 0;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .filter-options input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        .filter-note {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .btn-apply-filter {
+            width: 100%;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-apply-filter:hover {
+            background: #0b5ed7;
+        }
+
+        .publications-section h5 {
+            color: #0d6efd;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .table-responsive {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .table thead {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .table thead th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        .table tbody td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .btn-view {
+            background: #17a2b8;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .btn-view:hover {
+            background: #138496;
+            color: white;
+        }
+
+        .row-number {
+            font-weight: 600;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-apply-filter,
+        .btn-clear-filter {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-apply-filter {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .btn-apply-filter:hover {
+            background: #0b5ed7;
+        }
+
+        .btn-clear-filter {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-clear-filter:hover {
+            background: #5a6268;
+        }
+
+
         select[multiple] {
             height: 60px;
             overflow-y: auto;
         }
-        
+
         :root {
             --primary-color: #4263cfff;
             --secondary-color: #17a2b8;
@@ -29,55 +184,58 @@ include 'config.php';
             --gradient-primary: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
             --gradient-secondary: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             --gradient-accent: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
-            --shadow-medium: 0 8px 30px rgba(0,0,0,0.15);
-            --shadow-heavy: 0 15px 50px rgba(0,0,0,0.2);
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 15px 50px rgba(0, 0, 0, 0.2);
         }
-        .section-title {
-              text-align: center;
-              margin-top: 2rem;
-              margin-bottom: 3rem;
-          }
-          
-        .section-title h2 {
-              font-size: 2.5rem;
-              font-weight: 500;
-              color: var(--primary-color);
-              margin-bottom: 1rem;
-              position: relative;
-          }
-        .section-title h2::after {
-              content: '';
-              position: absolute;
-              bottom: -10px;
-              left: 50%;
-              transform: translateX(-50%);
-              width: 80px;
-              height: 4px;
-              background: var(--gradient-accent);
-              border-radius: 2px;
-          }
 
-          .section-title p {
-              font-size: 1.1rem;
-              
-              max-width: 600px;
-              margin: 0 auto;
-          }
-        .select-pub{
+        .section-title {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .select-pub {
             border: 1px solid #194376;
             color: #194376;
             font-weight: 700;
-          }   
-    
-    
+        }
+
+
         :root {
             --primary-color: #2c5aa0;
             --secondary-color: #f8f9fa;
             --accent-color: #17a2b8;
             --text-dark: #333;
             --border-color: #dee2e6;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         body {
@@ -92,6 +250,7 @@ include 'config.php';
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -103,6 +262,7 @@ include 'config.php';
                 opacity: 0;
                 transform: translateX(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -113,24 +273,26 @@ include 'config.php';
             0% {
                 box-shadow: 0 0 0 0 rgba(44, 90, 160, 0.7);
             }
+
             70% {
                 box-shadow: 0 0 0 10px rgba(44, 90, 160, 0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(44, 90, 160, 0);
             }
         }
 
-        
 
-        .navbar{
+
+        .navbar {
             padding: 1rem;
 
         }
 
-        
 
-       
+
+
         .header-section {
             background: linear-gradient(135deg, var(--secondary-color), #e9ecef);
             padding: 2rem 0;
@@ -347,7 +509,7 @@ include 'config.php';
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -366,17 +528,31 @@ include 'config.php';
             transition: all 0.3s ease;
         }
 
-        .table tbody tr:nth-child(1) { animation-delay: 0.1s; }
-        .table tbody tr:nth-child(2) { animation-delay: 0.2s; }
-        .table tbody tr:nth-child(3) { animation-delay: 0.3s; }
-        .table tbody tr:nth-child(4) { animation-delay: 0.4s; }
-        .table tbody tr:nth-child(5) { animation-delay: 0.5s; }
+        .table tbody tr:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .table tbody tr:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .table tbody tr:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .table tbody tr:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .table tbody tr:nth-child(5) {
+            animation-delay: 0.5s;
+        }
 
         .table tbody tr:hover {
             background-color: rgba(44, 90, 160, 0.05);
             transform: scale(1.01);
             z-index: 10;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .row-number {
@@ -456,7 +632,7 @@ include 'config.php';
         .footer-logos img:hover {
             transform: scale(1.05);
             filter: brightness(1.3);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
         }
 
         /* Scrollbar personalizada */
@@ -508,7 +684,7 @@ include 'config.php';
                 margin-bottom: 2rem;
                 animation: fadeInUp 0.6s ease-out;
             }
-            
+
             .publications-section {
                 animation-delay: 0s;
             }
@@ -518,17 +694,17 @@ include 'config.php';
             .page-title {
                 font-size: 1.8rem;
             }
-            
+
             .logo-container {
                 flex-direction: column;
                 text-align: center;
             }
-            
+
             .footer-content {
                 flex-direction: column;
                 gap: 1rem;
             }
-            
+
             .footer-logos {
                 flex-wrap: wrap;
                 justify-content: center;
@@ -537,15 +713,128 @@ include 'config.php';
             .table-responsive {
                 font-size: 0.875rem;
             }
-            
+
             .table thead th,
             .table tbody td {
                 padding: 0.75rem 0.5rem;
             }
-            
+
             .btn-view {
                 padding: 0.375rem 0.75rem;
                 font-size: 0.875rem;
+            }
+
+            .filters-section {
+                background: white;
+                border-radius: 1rem;
+                padding: 2rem;
+                box-shadow: var(--shadow);
+                margin-bottom: 2rem;
+                border: 1px solid var(--border-color);
+                animation: slideInLeft 0.6s ease-out;
+            }
+
+            /* ========================================= */
+            /* Estilos Responsivos para Tabela (Mobile First) */
+            /* ========================================= */
+
+            @media screen and (max-width: 768px) {
+
+                /* Esconde os cabeçalhos da tabela original em telas pequenas */
+                .table thead {
+                    display: none;
+                }
+
+                /* Transforma cada linha (<tr>) em um bloco tipo 'cartão' */
+                .table tbody tr {
+                    display: block;
+                    margin-bottom: 1.5rem;
+                    /* Espaçamento entre os cartões */
+                    border: 1px solid var(--border-color);
+                    border-radius: 0.75rem;
+                    /* Bordas arredondadas para o cartão */
+                    box-shadow: var(--shadow-light);
+                    /* Sombra para destacar o cartão */
+                    overflow: hidden;
+                    /* Garante que bordas e sombras funcionem bem */
+                    transition: all 0.3s ease;
+                }
+
+                .table tbody tr:hover {
+                    background-color: var(--light-color);
+                    /* Fundo claro no hover */
+                    transform: translateY(-2px);
+                    box-shadow: var(--shadow-medium);
+                }
+
+                /* Estiliza cada célula (<td>) para exibir o cabeçalho antes do conteúdo */
+                .table tbody td {
+                    display: block;
+                    /* Cada célula ocupa sua própria linha */
+                    text-align: right;
+                    /* Alinha o conteúdo da célula à direita */
+                    padding-left: 50%;
+                    /* Espaço para o pseudo-elemento do cabeçalho */
+                    position: relative;
+                    border: none;
+                    /* Remove bordas internas das células */
+                    padding-top: 0.75rem;
+                    padding-bottom: 0.75rem;
+                    border-bottom: 1px dashed var(--border-color);
+                    /* Linha divisória entre os campos */
+                }
+
+                .table tbody tr:last-child td {
+                    border-bottom: none;
+                    /* Remove a borda da última célula do cartão */
+                }
+
+                /* Adiciona o cabeçalho da coluna como um pseudo-elemento */
+                .table tbody td::before {
+                    content: attr(data-label);
+                    /* Pega o valor do atributo data-label */
+                    position: absolute;
+                    left: 0;
+                    width: 45%;
+                    /* Largura para o label */
+                    padding-left: 1rem;
+                    font-weight: 600;
+                    color: var(--primary-color);
+                    text-align: left;
+                    /* Alinha o label à esquerda */
+                }
+
+                /* Ajustes específicos para a célula de Ações para centralizar o botão */
+                .table tbody td:last-child {
+                    text-align: center;
+                    /* Centraliza o botão de Ações */
+                    padding-left: 0;
+                    /* Remove padding extra se não tiver label */
+                }
+
+                .table tbody td:last-child::before {
+                    content: '';
+                    /* Remove o label para a coluna de Ações */
+                }
+
+                /* Ajusta a largura do badge para não quebrar */
+                .badge {
+                    display: inline-block;
+                    white-space: nowrap;
+                }
+
+                /* Garante que o número da linha se alinhe bem */
+                .row-number {
+                    display: inline-block;
+                }
+
+                /* Centraliza o título da tabela */
+                .publications-title {
+                    justify-content: center;
+                    text-align: center;
+                    flex-wrap: wrap;
+                    /* Permite que o ícone e texto quebrem linha se necessário */
+                }
             }
         }
     </style>
@@ -606,166 +895,210 @@ include 'config.php';
         </div>
     </div>
 
+    <div class="container-fluid mt-4" style="margin-bottom: 15rem;">
+        <div class="row">
+            <!-- Sidebar de Filtros -->
+            <div class="col-md-3">
+                <div class="filter-sidebar">
+                    <h5>Filtros de Busca</h5>
+                    <form method="get">
+                        <!-- Categorias -->
+                        <div class="filter-section">
+                            <h6>Categorias</h6>
+                            <div class="filter-options">
+                                <label>
+                                    <input type="checkbox" name="categoria[]" value="Teses"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Teses', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Teses
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categoria[]" value="Dissertacoes"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Dissertacoes', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Dissertações
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categoria[]" value="Artigos"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Artigos', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Artigos
+                                </label>
+                            </div>
+                            <div class="filter-note">Mantenha Ctrl pressionado para selecionar múltiplas opções</div>
+                        </div>
+
+                        <!-- Anos -->
+                        <div class="filter-section">
+                            <h6>Anos</h6>
+                            <div class="filter-options">
+                                <?php
+                                for ($year = date("Y"); $year >= 2000; $year--) {
+                                    $checked = (isset($_GET['ano']) && in_array($year, $_GET['ano'])) ? 'checked' : '';
+                                    echo "<label>";
+                                    echo "<input type='checkbox' name='ano[]' value='$year' $checked>";
+                                    echo "$year";
+                                    echo "</label>";
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                        <!-- Autores -->
+                        <div class="filter-section">
+                            <h6>Autores</h6>
+                            <div class="filter-options">
+                                <?php
+                                $autoresResult = $conn->query("SELECT DISTINCT autor FROM arquivos ORDER BY autor ASC");
+                                if ($autoresResult && $autoresResult->num_rows > 0) {
+                                    while ($row = $autoresResult->fetch_assoc()) {
+                                        $checked = (isset($_GET['autor']) && in_array($row['autor'], $_GET['autor'])) ? 'checked' : '';
+                                        $autor = htmlspecialchars($row['autor']);
+                                        echo "<label>";
+                                        echo "<input type='checkbox' name='autor[]' value='$autor' $checked>";
+                                        echo "$autor";
+                                        echo "</label>";
+                                    }
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                        <!-- Períodos -->
+                        <div class="filter-section">
+                            <h6>Períodos</h6>
+                            <div class="filter-options">
+                                <label>
+                                    <input type="checkbox" name="periodo[]" value="periodico"
+                                        <?php echo (isset($_GET['periodo']) && in_array('periodico', $_GET['periodo'])) ? 'checked' : ''; ?>>
+                                    Periódico
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="periodo[]" value="anuais"
+                                        <?php echo (isset($_GET['periodo']) && in_array('anuais', $_GET['periodo'])) ? 'checked' : ''; ?>>
+                                    Anuais
+                                </label>
+                            </div>
+                        </div>
 
 
+                        <div class="filter-buttons">
+                            <button type="submit" class="btn-apply-filter">Aplicar Filtros</button>
+                            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="btn-clear-filter">Limpar Filtros</a>
+                        </div>
 
-
-
-    <div class="container mt-5" style="margin-bottom: 20%;">
-        <h2>Publicações</h2>
-        <form method="get" class="mb-3">
-            <div class="row">
-                <div class="col-md-3">
-                    <select class="form-control" name="categoria">
-                        <option value="">Todas as categorias</option>
-                        <option value="Teses">Teses</option>
-                        <option value="Dissertacoes">Dissertações</option>
-                        <option value="Artigos">Artigos</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" name="ano">
-                        <option value="">Todos os anos</option>
-                        <?php
-                    for ($year = date("Y"); $year >= 2000; $year--) {
-                        echo "<option value='$year'>$year</option>";
-                    }
-                    ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" name="autor">
-                        <option value="">Todos os autores</option>
-                        <?php
-                    $autoresResult = $conn->query("SELECT DISTINCT autor FROM arquivos");
-                    if ($autoresResult->num_rows > 0) {
-                        while ($row = $autoresResult->fetch_assoc()) {
-                            echo "<option value='{$row['autor']}'>{$row['autor']}</option>";
-                        }
-                    }
-                    ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control" name="periodo">
-                        <option value="">Todos os períodos</option>
-                        <option value="periodico">Periódico</option>
-                        <option value="anuais">Anuais</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                  <br>
-                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </form>
                 </div>
             </div>
-        </form>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Ata de arquivo</th>
-                    <th>Categoria</th>
-                    <th>Ano</th>
-                    <th>Autor</th>
-                    <th>Data de Upload</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-            $categoria = isset($_GET['categoria']) ? $_GET['categoria'] : '';
-            $ano = isset($_GET['ano']) ? $_GET['ano'] : '';
-            $autor = isset($_GET['autor']) ? $_GET['autor'] : '';
-            $periodo = isset($_GET['periodo']) ? $_GET['periodo'] : '';
-            
-            $sql = "SELECT * FROM arquivos WHERE 1=1";
-            $params = array();
-            $types = "";
 
-            if ($categoria != '') {
-                $sql .= " AND categoria = ?";
-                $params[] = $categoria;
-                $types .= "s";
-            }
+            <!-- Lista de Publicações -->
+            <div class="col-md-9">
+                <div class="publications-section">
+                    <h5>Lista de Publicações</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Categoria</th>
+                                    <th scope="col">Ano</th>
+                                    <th scope="col">Autor</th>
+                                    <th scope="col">Data de Upload</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // Lógica de filtros com prepared statements
+                                $sql = "SELECT * FROM arquivos WHERE 1=1";
+                                $params = array();
+                                $types = "";
 
-            if ($ano != '') {
-                $sql .= " AND ano = ?";
-                $params[] = $ano;
-                $types .= "s";
-            }
+                                if (!empty($_GET['categoria'])) {
+                                    $placeholders = implode(',', array_fill(0, count($_GET['categoria']), '?'));
+                                    $sql .= " AND categoria IN ($placeholders)";
+                                    foreach ($_GET['categoria'] as $cat) {
+                                        $params[] = $cat;
+                                        $types .= "s";
+                                    }
+                                }
+                                if (!empty($_GET['ano'])) {
+                                    $placeholders = implode(',', array_fill(0, count($_GET['ano']), '?'));
+                                    $sql .= " AND ano IN ($placeholders)";
+                                    foreach ($_GET['ano'] as $ano) {
+                                        $params[] = $ano;
+                                        $types .= "s";
+                                    }
+                                }
+                                if (!empty($_GET['autor'])) {
+                                    $placeholders = implode(',', array_fill(0, count($_GET['autor']), '?'));
+                                    $sql .= " AND autor IN ($placeholders)";
+                                    foreach ($_GET['autor'] as $autor) {
+                                        $params[] = $autor;
+                                        $types .= "s";
+                                    }
+                                }
+                                if (!empty($_GET['periodo'])) {
+                                    $placeholders = implode(',', array_fill(0, count($_GET['periodo']), '?'));
+                                    $sql .= " AND periodo IN ($placeholders)";
+                                    foreach ($_GET['periodo'] as $periodo) {
+                                        $params[] = $periodo;
+                                        $types .= "s";
+                                    }
+                                }
 
-            if ($autor != '') {
-                $sql .= " AND autor = ?";
-                $params[] = $autor;
-                $types .= "s";
-            }
+                                $sql .= " ORDER BY data_upload DESC";
 
-            if ($periodo != '') {
-                $sql .= " AND periodo = ?";
-                $params[] = $periodo;
-                $types .= "s";
-            }
+                                $stmt = $conn->prepare($sql);
 
-            $sql .= " ORDER BY data_upload DESC";
-            
-            $stmt = $conn->prepare($sql);
-            
-            if ($stmt) {
-                if (count($params) > 0) {
-                    $bind_params = array($types);
-                    for ($i = 0; $i < count($params); $i++) {
-                        $bind_params[] = &$params[$i];
-                    }
-                    call_user_func_array(array($stmt, 'bind_param'), $bind_params);
-                }
-                
-                $stmt->execute();
-                $result = $stmt->get_result();
+                                if ($stmt) {
+                                    if (count($params) > 0) {
+                                        $bind_params = array($types);
+                                        for ($i = 0; $i < count($params); $i++) {
+                                            $bind_params[] = &$params[$i];
+                                        }
+                                        call_user_func_array(array($stmt, 'bind_param'), $bind_params);
+                                    }
 
-                if ($result && $result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['titulo'] . "</td>";
-                        echo "<td>" . $row['descricao'] . "</td>";
-                        echo "<td>" . $row['categoria'] . "</td>";
-                        echo "<td>" . $row['ano'] . "</td>";
-                        echo "<td>" . $row['autor'] . "</td>"; 
-                        echo "<td>" . $row['data_upload'] . "</td>";
-                        echo "<td><a href='" . $row['caminho_arquivo'] . "' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a></td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
-                }
-                
-                $stmt->close();
-            } else {
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['id'] . "</td>";
-                        echo "<td>" . $row['titulo'] . "</td>";
-                        echo "<td>" . $row['descricao'] . "</td>";
-                        echo "<td>" . $row['categoria'] . "</td>";
-                        echo "<td>" . $row['ano'] . "</td>";
-                        echo "<td>" . $row['autor'] . "</td>"; 
-                        echo "<td>" . $row['data_upload'] . "</td>";
-                        echo "<td><a href='" . $row['caminho_arquivo'] . "' target='_blank' class='btn btn-primary btn-sm'>Visualizar</a></td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='8'>Nenhum arquivo encontrado.</td></tr>";
-                }
-            }
-            ?>
-            </tbody>
-        </table>
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
 
+                                    if ($result && $result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<tr>";
+                                            echo "<td><span class='row-number' data-label='ID'>" . htmlspecialchars($row['id']) . "</span></td>";
+                                            echo "<td data-label='Título'><strong>" . htmlspecialchars($row['titulo']) . "</strong></td>";
+                                            echo "<td data-label='Descrição'>" . htmlspecialchars($row['descricao']) . "</td>";
+                                            echo "<td data-label='Categoria'><span class='badge bg-secondary'>" . htmlspecialchars($row['categoria']) . "</span></td>";
+                                            echo "<td data-label='Ano'>" . htmlspecialchars($row['ano']) . "</td>";
+                                            echo "<td data-label='Autor'>" . htmlspecialchars($row['autor']) . "</td>";
+                                            echo "<td data-label='Data de Upload'>" . date('d/m/Y', strtotime($row['data_upload'])) . "</td>";
+                                            echo "<td>";
+                                            echo "<a href='" . htmlspecialchars($row['caminho_arquivo']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
+                                            echo "<i class='fas fa-eye'></i> Visualizar";
+                                            echo "</a>";
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='8' class='text-center text-muted py-4'>";
+                                        echo "<i class='fas fa-search fa-2x mb-2 d-block'></i>";
+                                        echo "Nenhuma publicação encontrada com os filtros selecionados.";
+                                        echo "</td></tr>";
+                                    }
 
+                                    $stmt->close();
+                                } else {
+                                    echo "<tr><td colspan='8' class='text-center text-danger'>Erro ao preparar consulta.</td></tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <footer class="navbar fixed-bottom bg-footer">
         <div class="container-fluid">
             <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
@@ -781,6 +1114,8 @@ include 'config.php';
             </div>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
