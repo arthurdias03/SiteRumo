@@ -14,10 +14,10 @@ include 'config.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .filter-sidebar {
-            background: #f8f9fa;
+            background: #faf7f7ff;
             border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         .filter-sidebar h5 {
@@ -26,8 +26,12 @@ include 'config.php';
             margin-bottom: 20px;
         }
 
+
         .filter-section {
             margin-bottom: 25px;
+
+
+            animation: slideInLeft 0.6s ease-out;
         }
 
         .filter-section h6 {
@@ -45,6 +49,7 @@ include 'config.php';
             overflow-y: auto;
         }
 
+
         .filter-options label {
             display: block;
             padding: 5px 0;
@@ -55,6 +60,8 @@ include 'config.php';
         .filter-options input[type="checkbox"] {
             margin-right: 8px;
         }
+
+       
 
         .filter-note {
             font-size: 11px;
@@ -163,7 +170,8 @@ include 'config.php';
         }
 
         .btn-clear-filter:hover {
-            background: #5a6268;
+            background: #909aa1ff;
+            color: hsla(96, 43%, 85%, 1.00)
         }
 
 
@@ -173,7 +181,7 @@ include 'config.php';
         }
 
         :root {
-            --primary-color: #4263cfff;
+            --primary-color: #2c5aa0;
             --secondary-color: #17a2b8;
             --accent-color: #fd7e14;
             --success-color: #20c997;
@@ -609,6 +617,8 @@ include 'config.php';
             margin-top: 3rem;
         }
 
+        
+
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -900,12 +910,12 @@ include 'config.php';
             <!-- Sidebar de Filtros -->
             <div class="col-md-3">
                 <div class="filter-sidebar">
-                    <h5>Filtros de Busca</h5>
+                    <h2 class='filters-title'>Filtros de Busca</h2>
                     <form method="get">
                         <!-- Categorias -->
                         <div class="filter-section">
-                            <h6>Categorias</h6>
-                            <div class="filter-options">
+                            <h5 style="color: black; font-weight:400;font-size:18px">Categorias</h5>
+                            <div class="filter-options filter-group animate-in">
                                 <label>
                                     <input type="checkbox" name="categoria[]" value="Teses"
                                         <?php echo (isset($_GET['categoria']) && in_array('Teses', $_GET['categoria'])) ? 'checked' : ''; ?>>
@@ -927,7 +937,7 @@ include 'config.php';
 
                         <!-- Anos -->
                         <div class="filter-section">
-                            <h6>Anos</h6>
+                            <h5 style="color: black; font-weight:400;font-size:18px">Anos</h5>
                             <div class="filter-options">
                                 <?php
                                 for ($year = date("Y"); $year >= 2000; $year--) {
@@ -943,7 +953,7 @@ include 'config.php';
 
                         <!-- Autores -->
                         <div class="filter-section">
-                            <h6>Autores</h6>
+                            <h5 style="color: black; font-weight:400;font-size:18px">Autores</h5>
                             <div class="filter-options">
                                 <?php
                                 $autoresResult = $conn->query("SELECT DISTINCT autor FROM arquivos ORDER BY autor ASC");
@@ -963,7 +973,7 @@ include 'config.php';
 
                         <!-- Períodos -->
                         <div class="filter-section">
-                            <h6>Períodos</h6>
+                            <h5 style="color: black; font-weight:400;font-size:18px">Períodos</h5>
                             <div class="filter-options">
                                 <label>
                                     <input type="checkbox" name="periodo[]" value="periodico"
@@ -988,10 +998,22 @@ include 'config.php';
                 </div>
             </div>
 
+
             <!-- Lista de Publicações -->
             <div class="col-md-9">
                 <div class="publications-section">
-                    <h5>Lista de Publicações</h5>
+                    <h2 class='filters-title'>Lista de Publicações</h2>
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar por título, autor ou descrição...">
+                            <button class="btn btn-outline-secondary" type="button" id="clearSearch">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -1073,7 +1095,7 @@ include 'config.php';
                                             echo "<td data-label='Autor'>" . htmlspecialchars($row['autor']) . "</td>";
                                             echo "<td data-label='Data de Upload'>" . date('d/m/Y', strtotime($row['data_upload'])) . "</td>";
                                             echo "<td>";
-                                            echo "<a href='" . htmlspecialchars($row['caminho_arquivo']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
+                                            echo "<a href='" . htmlspecialchars($row['link']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
                                             echo "<i class='fas fa-eye'></i> Visualizar";
                                             echo "</a>";
                                             echo "</td>";
