@@ -13,6 +13,25 @@ include 'config.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        .search-bar-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-input {
+            border: 2px solid #dee2e6;
+            border-radius: 4px 0 0 4px;
+            padding: 12px 15px;
+            font-size: 15px;
+        }
+
+        .search-input:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+
         .filter-sidebar {
             background: #faf7f7ff;
             border-radius: 8px;
@@ -61,7 +80,7 @@ include 'config.php';
             margin-right: 8px;
         }
 
-       
+
 
         .filter-note {
             font-size: 11px;
@@ -617,7 +636,7 @@ include 'config.php';
             margin-top: 3rem;
         }
 
-        
+
 
         .footer-content {
             display: flex;
@@ -1004,140 +1023,156 @@ include 'config.php';
                 <div class="publications-section">
                     <h2 class='filters-title'>Lista de Publicações</h2>
                     <div class="mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <i class="fas fa-search"></i>
-                            </span>
-                            <input type="text" class="form-control" id="searchInput" placeholder="Buscar por título, autor ou descrição...">
-                            <button class="btn btn-outline-secondary" type="button" id="clearSearch">
-                                <i class="fas fa-times"></i>
-                            </button>
+                        <div class="search-bar-section">
+                            <form method="get" action="">
+                                <div class="input-group">
+                                    <input type="text" class="form-control search-input" name="search"
+                                        placeholder="Pesquisar em todas as publicações (título, descrição, autor, categoria, ano...)"
+                                        value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search me-2"></i>Pesquisar
+                                    </button>
+                                    <?php if (isset($_GET['search']) && !empty($_GET['search'])): ?>
+                                        <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary">
+                                            <i class="fas fa-times me-2"></i>Limpar
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Título</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Categoria</th>
-                                    <th scope="col">Ano</th>
-                                    <th scope="col">Autor</th>
-                                    <th scope="col">Data de Upload</th>
-                                    <th scope="col">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // Lógica de filtros com prepared statements
-                                $sql = "SELECT * FROM arquivos WHERE 1=1";
-                                $params = array();
-                                $types = "";
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Título</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Ano</th>
+                                        <th scope="col">Autor</th>
+                                        <th scope="col">Data de Upload</th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Lógica de filtros com prepared statements
+                                    $sql = "SELECT * FROM arquivos WHERE 1=1";
+                                    $params = array();
+                                    $types = "";
 
-                                if (!empty($_GET['categoria'])) {
-                                    $placeholders = implode(',', array_fill(0, count($_GET['categoria']), '?'));
-                                    $sql .= " AND categoria IN ($placeholders)";
-                                    foreach ($_GET['categoria'] as $cat) {
-                                        $params[] = $cat;
-                                        $types .= "s";
-                                    }
-                                }
-                                if (!empty($_GET['ano'])) {
-                                    $placeholders = implode(',', array_fill(0, count($_GET['ano']), '?'));
-                                    $sql .= " AND ano IN ($placeholders)";
-                                    foreach ($_GET['ano'] as $ano) {
-                                        $params[] = $ano;
-                                        $types .= "s";
-                                    }
-                                }
-                                if (!empty($_GET['autor'])) {
-                                    $placeholders = implode(',', array_fill(0, count($_GET['autor']), '?'));
-                                    $sql .= " AND autor IN ($placeholders)";
-                                    foreach ($_GET['autor'] as $autor) {
-                                        $params[] = $autor;
-                                        $types .= "s";
-                                    }
-                                }
-                                if (!empty($_GET['periodo'])) {
-                                    $placeholders = implode(',', array_fill(0, count($_GET['periodo']), '?'));
-                                    $sql .= " AND periodo IN ($placeholders)";
-                                    foreach ($_GET['periodo'] as $periodo) {
-                                        $params[] = $periodo;
-                                        $types .= "s";
-                                    }
-                                }
-
-                                $sql .= " ORDER BY data_upload DESC";
-
-                                $stmt = $conn->prepare($sql);
-
-                                if ($stmt) {
-                                    if (count($params) > 0) {
-                                        $bind_params = array($types);
-                                        for ($i = 0; $i < count($params); $i++) {
-                                            $bind_params[] = &$params[$i];
+                                    // Adicionar busca por termo
+                                    if (!empty($_GET['search'])) {
+                                        $searchTerm = '%' . $_GET['search'] . '%';
+                                        $sql .= " AND (titulo LIKE ? OR descricao LIKE ? OR categoria LIKE ? OR ano LIKE ? OR autor LIKE ? OR periodo LIKE ? OR link LIKE ?)";
+                                        for ($i = 0; $i < 7; $i++) {
+                                            $params[] = $searchTerm;
+                                            $types .= "s";
                                         }
-                                        call_user_func_array(array($stmt, 'bind_param'), $bind_params);
+                                    }
+                                    if (!empty($_GET['categoria'])) {
+                                        $placeholders = implode(',', array_fill(0, count($_GET['categoria']), '?'));
+                                        $sql .= " AND categoria IN ($placeholders)";
+                                        foreach ($_GET['categoria'] as $cat) {
+                                            $params[] = $cat;
+                                            $types .= "s";
+                                        }
+                                    }
+                                    if (!empty($_GET['ano'])) {
+                                        $placeholders = implode(',', array_fill(0, count($_GET['ano']), '?'));
+                                        $sql .= " AND ano IN ($placeholders)";
+                                        foreach ($_GET['ano'] as $ano) {
+                                            $params[] = $ano;
+                                            $types .= "s";
+                                        }
+                                    }
+                                    if (!empty($_GET['autor'])) {
+                                        $placeholders = implode(',', array_fill(0, count($_GET['autor']), '?'));
+                                        $sql .= " AND autor IN ($placeholders)";
+                                        foreach ($_GET['autor'] as $autor) {
+                                            $params[] = $autor;
+                                            $types .= "s";
+                                        }
+                                    }
+                                    if (!empty($_GET['periodo'])) {
+                                        $placeholders = implode(',', array_fill(0, count($_GET['periodo']), '?'));
+                                        $sql .= " AND periodo IN ($placeholders)";
+                                        foreach ($_GET['periodo'] as $periodo) {
+                                            $params[] = $periodo;
+                                            $types .= "s";
+                                        }
                                     }
 
-                                    $stmt->execute();
-                                    $result = $stmt->get_result();
+                                    $sql .= " ORDER BY data_upload DESC";
 
-                                    if ($result && $result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo "<tr>";
-                                            echo "<td><span class='row-number' data-label='ID'>" . htmlspecialchars($row['id']) . "</span></td>";
-                                            echo "<td data-label='Título'><strong>" . htmlspecialchars($row['titulo']) . "</strong></td>";
-                                            echo "<td data-label='Descrição'>" . htmlspecialchars($row['descricao']) . "</td>";
-                                            echo "<td data-label='Categoria'><span class='badge bg-secondary'>" . htmlspecialchars($row['categoria']) . "</span></td>";
-                                            echo "<td data-label='Ano'>" . htmlspecialchars($row['ano']) . "</td>";
-                                            echo "<td data-label='Autor'>" . htmlspecialchars($row['autor']) . "</td>";
-                                            echo "<td data-label='Data de Upload'>" . date('d/m/Y', strtotime($row['data_upload'])) . "</td>";
-                                            echo "<td>";
-                                            echo "<a href='" . htmlspecialchars($row['link']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
-                                            echo "<i class='fas fa-eye'></i> Visualizar";
-                                            echo "</a>";
-                                            echo "</td>";
-                                            echo "</tr>";
+                                    $stmt = $conn->prepare($sql);
+
+                                    if ($stmt) {
+                                        if (count($params) > 0) {
+                                            $bind_params = array($types);
+                                            for ($i = 0; $i < count($params); $i++) {
+                                                $bind_params[] = &$params[$i];
+                                            }
+                                            call_user_func_array(array($stmt, 'bind_param'), $bind_params);
                                         }
+
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+
+                                        if ($result && $result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                echo "<td><span class='row-number' data-label='ID'>" . htmlspecialchars($row['id']) . "</span></td>";
+                                                echo "<td data-label='Título'><strong>" . htmlspecialchars($row['titulo']) . "</strong></td>";
+                                                echo "<td data-label='Descrição'>" . htmlspecialchars($row['descricao']) . "</td>";
+                                                echo "<td data-label='Categoria'><span class='badge bg-secondary'>" . htmlspecialchars($row['categoria']) . "</span></td>";
+                                                echo "<td data-label='Ano'>" . htmlspecialchars($row['ano']) . "</td>";
+                                                echo "<td data-label='Autor'>" . htmlspecialchars($row['autor']) . "</td>";
+                                                echo "<td data-label='Data de Upload'>" . date('d/m/Y', strtotime($row['data_upload'])) . "</td>";
+                                                echo "<td>";
+                                                echo "<a href='" . htmlspecialchars($row['link']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
+                                                echo "<i class='fas fa-eye'></i> Visualizar";
+                                                echo "</a>";
+                                                echo "</td>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<tr><td colspan='8' class='text-center text-muted py-4'>";
+                                            echo "<i class='fas fa-search fa-2x mb-2 d-block'></i>";
+                                            echo "Nenhuma publicação encontrada com os filtros selecionados.";
+                                            echo "</td></tr>";
+                                        }
+
+                                        $stmt->close();
                                     } else {
-                                        echo "<tr><td colspan='8' class='text-center text-muted py-4'>";
-                                        echo "<i class='fas fa-search fa-2x mb-2 d-block'></i>";
-                                        echo "Nenhuma publicação encontrada com os filtros selecionados.";
-                                        echo "</td></tr>";
+                                        echo "<tr><td colspan='8' class='text-center text-danger'>Erro ao preparar consulta.</td></tr>";
                                     }
-
-                                    $stmt->close();
-                                } else {
-                                    echo "<tr><td colspan='8' class='text-center text-danger'>Erro ao preparar consulta.</td></tr>";
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer class="navbar fixed-bottom bg-footer">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
-                    height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-            <div class="d-flex">
-                <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70"
-                        height="50" class="d-inline-block align-text-top"
-                        style="margin-left: 15px; object-fit: contain;"></a>
+        <footer class="navbar fixed-bottom bg-footer">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
+                        height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+                <div class="d-flex">
+                    <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50"
+                            class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+                    <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40"
+                            class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
+                    <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70"
+                            height="50" class="d-inline-block align-text-top"
+                            style="margin-left: 15px; object-fit: contain;"></a>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
