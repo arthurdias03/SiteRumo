@@ -616,16 +616,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                                     echo "<td>" . htmlspecialchars($row['autor']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['periodo']) . "</td>";
                                     echo "<td>";
-                                    echo "<button class='btn-edit' onclick=\"editRecord(
-                                        {$row['id']}, 
-                                        '" . addslashes($row['titulo']) . "', 
-                                        '" . addslashes($row['link']) . "', 
-                                        '" . addslashes($row['descricao']) . "', 
-                                        '" . addslashes($row['categoria']) . "', 
-                                        '{$row['ano']}', 
-                                        '" . addslashes($row['autor']) . "', 
-                                        '" . addslashes($row['periodo']) . "'
-                                    )\" aria-label='Editar publicação: " . htmlspecialchars($row['titulo']) . "'>";
+                                    echo "<button class='btn-edit' onclick='editRecord(" . json_encode([
+                                        'id' => $row['id'],
+                                        'titulo' => $row['titulo'],
+                                        'link' => $row['link'],
+                                        'descricao' => $row['descricao'],
+                                        'categoria' => $row['categoria'],
+                                        'ano' => $row['ano'],
+                                        'autor' => $row['autor'],
+                                        'periodo' => $row['periodo']
+                                    ]) . ")' aria-label='Editar publicação: " . htmlspecialchars($row['titulo']) . "'>";
                                     echo "<i class='fas fa-edit'></i> Editar";
                                     echo "</button>";
                                     echo "</td>";
@@ -770,15 +770,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function editRecord(id, titulo, link, descricao, categoria, ano, autor, periodo) {
-            document.getElementById('edit_id').value = id;
-            document.getElementById('edit_titulo').value = titulo;
-            document.getElementById('edit_link').value = link;
-            document.getElementById('edit_descricao').value = descricao;
-            document.getElementById('edit_categoria').value = categoria;
-            document.getElementById('edit_ano').value = ano;
-            document.getElementById('edit_autor').value = autor;
-            document.getElementById('edit_periodo').value = periodo;
+        function editRecord(data) {
+            document.getElementById('edit_id').value = data.id;
+            document.getElementById('edit_titulo').value = data.titulo;
+            document.getElementById('edit_link').value = data.link;
+            document.getElementById('edit_descricao').value = data.descricao;
+            document.getElementById('edit_categoria').value = data.categoria;
+            document.getElementById('edit_ano').value = data.ano;
+            document.getElementById('edit_autor').value = data.autor;
+            document.getElementById('edit_periodo').value = data.periodo;
 
             var modalElement = document.getElementById('editModal');
             var modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
@@ -805,43 +805,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
                 const link = document.getElementById('edit_link').value.trim();
                 const descricao = document.getElementById('edit_descricao').value.trim();
 
-                if (!titulo || !link || !descricao) {
+                if (!titulo) {
                     e.preventDefault();
-                    alert('Por favor, preencha todos os campos obrigatórios.');
+                    alert('Por favor, preencha o título da publicação.');
+                    document.getElementById('edit_titulo').focus();
+                    return false;
+                }
+ 
+                if (link && !isValidURL(link)) {
+                    e.preventDefault();
+                    alert('Por favor, insira um link válido (ex: https://exemplo.com).');
+                    document.getElementById('edit_link').focus();
                     return false;
                 }
 
-                // Validação básica de URL
-                try {
-                    new URL(link);
-                } catch {
-                    e.preventDefault();
-                    alert('Por favor, insira um link válido.');
-                    return false;
-                }
+                return true;
             });
 
-            // Auto-focus no campo de busca
-            const searchInput = document.querySelector('input[name="search"]');
-            if (searchInput && !searchInput.value) {
-                searchInput.focus();
-            }
-
-            // Highlight dos termos de busca
-            const searchTerm = '<?php echo addslashes($search); ?>';
-            if (searchTerm) {
-                const tableRows = document.querySelectorAll('tbody tr');
-                tableRows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    cells.forEach(cell => {
-                        if (cell.textContent.toLowerCase().includes(searchTerm.toLowerCase())) {
-                            cell.innerHTML = cell.innerHTML.replace(
-                                new RegExp(searchTerm, 'gi'),
-                                '<mark>$&</mark>'
-                            );
-                        }
-                    });
-                });
+            function isValidURL(string) {
+                try {
+                    new URL(string);
+                    return true;
+                } catch (_) {
+                    return false;
+                }
             }
         });
     </script>

@@ -76,60 +76,7 @@ function sanitizeInput($input) {
     return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
 }
 
-// Função para validar arquivo
-function validarArquivo($arquivo) {
-    $errors = [];
-    
-    // Verificar se arquivo foi enviado
-    if ($arquivo['error'] !== UPLOAD_ERR_OK) {
-        switch ($arquivo['error']) {
-            case UPLOAD_ERR_INI_SIZE:
-            case UPLOAD_ERR_FORM_SIZE:
-                $errors[] = "Arquivo muito grande.";
-                break;
-            case UPLOAD_ERR_PARTIAL:
-                $errors[] = "Upload incompleto.";
-                break;
-            case UPLOAD_ERR_NO_FILE:
-                $errors[] = "Nenhum arquivo selecionado.";
-                break;
-            default:
-                $errors[] = "Erro no upload.";
-        }
-        return $errors;
-    }
-    
-    // Verificar tamanho (máximo 10MB)
-    if ($arquivo['size'] > 10 * 1024 * 1024) {
-        $errors[] = "Arquivo deve ter no máximo 10MB.";
-    }
-    
-    // Verificar tipo MIME
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mimeType = finfo_file($finfo, $arquivo['tmp_name']);
-    finfo_close($finfo);
-    
-    if ($mimeType !== 'application/pdf') {
-        $errors[] = "Apenas arquivos PDF são permitidos.";
-    }
-    
-    // Verificar extensão
-    $extension = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
-    if ($extension !== 'pdf') {
-        $errors[] = "Extensão de arquivo inválida.";
-    }
-    
-    // Verificar conteúdo do arquivo (assinatura PDF)
-    $handle = fopen($arquivo['tmp_name'], 'r');
-    $header = fread($handle, 4);
-    fclose($handle);
-    
-    if ($header !== '%PDF') {
-        $errors[] = "Arquivo não é um PDF válido.";
-    }
-    
-    return $errors;
-}
+
 
 // Processar formulário
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -157,85 +104,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = 'Categoria inválida.';
         } elseif ($categoria === 'Artigos' && empty($periodo)) {
             $error = 'Período é obrigatório para artigos.';
-        } elseif (!empty($_POST['link']) && !$link) {
-            $error = 'URL inválida.';
+        } elseif (empty($link)) {
+            $error = 'O link é obrigatório.';
+        } elseif (!filter_var($link, FILTER_VALIDATE_URL)) {
+            $error = 'URL inválida. Por favor, insira um link válido.';
         } else {
-            $arquivo = $_FILES['arquivo'];
-            $temArquivo = !empty($arquivo['name']);
-            $temLink = !empty($link);
+            // Preparar query com prepared statement apenas para link
+            $stmt = $conn->prepare("INSERT INTO arquivos (titulo, descricao, categoria, ano, autor, periodo, link, data_upload) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+            $stmt->bind_param("sssssss", $titulo, $descricao, $categoria, $ano, $autor, $periodo, $link);
             
-            // Verificar se tem arquivo OU link
-            if (!$temArquivo && !$temLink) {
-                $error = 'Forneça um arquivo PDF ou um link válido.';
-            } elseif ($temArquivo && $temLink) {
-                $error = 'Forneça apenas um arquivo OU um link, não ambos.';
+            if ($stmt->execute()) {
+                $success = 'Link adicionado com sucesso!';
+                
+                // Log de segurança
+                error_log("Link adicionado por " . $_SESSION['username'] . " - URL: $link em " . date('Y-m-d H:i:s'));
+                
+                // Regenerar token CSRF após sucesso
+                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
             } else {
-                $uploadErrors = [];
-                $caminhoArquivo = '';
-                $nomeArquivo = '';
-                
-                if ($temArquivo) {
-                    // Validar arquivo
-                    $uploadErrors = validarArquivo($arquivo);
-                    
-                    if (empty($uploadErrors)) {
-                        // Gerar nome único para o arquivo
-                        $nomeArquivo = uniqid() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '', $arquivo['name']);
-                        $diretorio = 'uploads/' . $categoria . '/' . $ano . '/';
-                        $caminhoArquivo = $diretorio . $nomeArquivo;
-                        
-                        // Criar diretórios se não existirem
-                        if (!is_dir($diretorio)) {
-                            if (!mkdir($diretorio, 0755, true)) {
-                                $uploadErrors[] = "Erro ao criar diretório.";
-                            }
-                        }
-                    }
-                }
-                
-                if (!empty($uploadErrors)) {
-                    $error = implode(' ', $uploadErrors);
-                } else {
-                    // Preparar query com prepared statement
-                    if ($temLink) {
-                        $stmt = $conn->prepare("INSERT INTO arquivos (titulo, nome_arquivo, descricao, caminho_arquivo, categoria, ano, autor, periodo, link, data_upload) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-                        $stmt->bind_param("sssssssss", $titulo, $link, $descricao, $link, $categoria, $ano, $autor, $periodo, $link);
-                    } else {
-                        $stmt = $conn->prepare("INSERT INTO arquivos (titulo, nome_arquivo, descricao, caminho_arquivo, categoria, ano, autor, periodo, data_upload) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");
-                        $stmt->bind_param("ssssssss", $titulo, $nomeArquivo, $descricao, $caminhoArquivo, $categoria, $ano, $autor, $periodo);
-                    }
-                    
-                    if ($stmt->execute()) {
-                        if ($temArquivo) {
-                            // Mover arquivo
-                            if (move_uploaded_file($arquivo['tmp_name'], $caminhoArquivo)) {
-                                // Definir permissões seguras
-                                chmod($caminhoArquivo, 0644);
-                                $success = 'Arquivo enviado com sucesso!';
-                                
-                                // Log de segurança
-                                error_log("Upload realizado por " . $_SESSION['username'] . " - Arquivo: $nomeArquivo em " . date('Y-m-d H:i:s'));
-                            } else {
-                                $error = 'Erro ao salvar arquivo no servidor.';
-                                // Remover entrada do banco se falhou o upload
-                                $conn->query("DELETE FROM arquivos WHERE id = " . $conn->insert_id);
-                            }
-                        } else {
-                            $success = 'Link adicionado com sucesso!';
-                            
-                            // Log de segurança
-                            error_log("Link adicionado por " . $_SESSION['username'] . " - URL: $link em " . date('Y-m-d H:i:s'));
-                        }
-                        
-                        // Regenerar token CSRF após sucesso
-                        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-                    } else {
-                        $error = 'Erro ao salvar no banco de dados: ' . $stmt->error;
-                    }
-                    
-                    $stmt->close();
-                }
+                $error = 'Erro ao salvar no banco de dados: ' . $stmt->error;
             }
+            
+            $stmt->close();
         }
     }
 }
@@ -453,31 +343,7 @@ $stmt->close();
             color: #856404;
         }
 
-        .file-upload-area {
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            background: var(--secondary-color);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
 
-        .file-upload-area:hover {
-            border-color: var(--primary-color);
-            background: rgba(44, 90, 160, 0.05);
-        }
-
-        .file-upload-area.dragover {
-            border-color: var(--accent-color);
-            background: rgba(23, 162, 184, 0.1);
-        }
-
-        .upload-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
 
         .security-info {
             background: linear-gradient(135deg, rgba(44, 90, 160, 0.1), rgba(23, 162, 184, 0.1));
@@ -715,47 +581,22 @@ $stmt->close();
                         <small class="text-muted">Obrigatório apenas para artigos</small>
                     </div>
                     
-                    <div class="form-check form-switch mb-3">
-                        <input class="form-check-input" type="checkbox" id="uploadType" onchange="toggleUploadType()">
-                        <label class="form-check-label switch-label" for="uploadType">
-                            Adicionar link em vez de arquivo
-                        </label>
-                    </div>
-                    
-                    <div id="linkSection" style="display: none;">
+                    <div id="linkSection">
                         <div class="form-group">
                             <label for="link" class="form-label">
                                 <i class="fas fa-link"></i>
-                                Link da Publicação
+                                Link da Publicação <span class="required">*</span>
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <i class="fas fa-globe"></i>
                                 </span>
                                 <input type="url" class="form-control" id="link" name="link" 
-                                       placeholder="https://exemplo.com/publicacao.pdf">
+                                       placeholder="https://exemplo.com/publicacao.pdf" required>
                             </div>
                         </div>
                     </div>
-                    
-                    <div id="fileSection">
-                        <div class="form-group">
-                            <label for="arquivo" class="form-label">
-                                <i class="fas fa-file-pdf"></i>
-                                Arquivo PDF <span class="required">*</span>
-                            </label>
-                            <div class="file-upload-area" onclick="document.getElementById('arquivo').click()">
-                                <div class="upload-icon">
-                                    <i class="fas fa-cloud-upload-alt"></i>
-                                </div>
-                                <h5>Clique para selecionar ou arraste o arquivo aqui</h5>
-                                <p class="text-muted">Apenas arquivos PDF • Máximo 10MB</p>
-                                <input type="file" class="form-control" id="arquivo" name="arquivo" 
-                                       accept="application/pdf,.pdf" style="display: none;">
-                            </div>
-                            <div id="fileInfo" class="mt-2" style="display: none;"></div>
-                        </div>
-                    </div>
+
                     
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary" id="submitBtn">
@@ -819,29 +660,7 @@ $stmt->close();
         document.addEventListener('click', () => sessionTime = 1800);
         document.addEventListener('keypress', () => sessionTime = 1800);
         
-        // Toggle entre arquivo e link
-        function toggleUploadType() {
-            const isLink = document.getElementById('uploadType').checked;
-            const linkSection = document.getElementById('linkSection');
-            const fileSection = document.getElementById('fileSection');
-            const linkInput = document.getElementById('link');
-            const fileInput = document.getElementById('arquivo');
-            
-            if (isLink) {
-                linkSection.style.display = 'block';
-                fileSection.style.display = 'none';
-                linkInput.required = true;
-                fileInput.required = false;
-                fileInput.value = '';
-            } else {
-                linkSection.style.display = 'none';
-                fileSection.style.display = 'block';
-                linkInput.required = false;
-                fileInput.required = true;
-                linkInput.value = '';
-            }
-        }
-        
+
         // Toggle período para artigos
         function togglePeriodo() {
             const categoria = document.getElementById('categoria').value;
