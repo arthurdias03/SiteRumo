@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             --danger-color: #dc3545;
             --text-dark: #333;
             --border-color: #dee2e6;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             --gradient-primary: linear-gradient(135deg, #147df5ff 0%, #133efcff 100%);
             --gradient-danger: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
         }
@@ -72,12 +73,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             min-height: 100vh;
         }
 
+        /* Estilos para a barra de navegação do footer */
+        .bg-footer {
+
+            /* Cor de fundo que parece na imagem, se for azul. */
+            padding: 1px 0;
+            /* Espaçamento vertical menor */
+            height: 60px;
+            /* Altura fixa para o footer */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            /* Sombra para destacar */
+        }
+
+        /* Estilos gerais para as imagens de patrocínio no footer */
+        .logo-patrocinio {
+            /* Define largura máxima para as imagens para evitar que fiquem muito grandes */
+            max-width: 60px;
+            height: 40px;
+            object-fit: contain;
+            /* Garante que a imagem se ajuste sem cortar */
+        }
+
+        /* Ajuste específico para a logo da CAPES, se necessário, dado o seu tamanho original */
+        .capes-logo {
+            max-width: 50px;
+            height: 40px;
+        }
+
+        /* Ajuste fino para a div que contém as logos de patrocínio em mobile */
+        @media (max-width: 576px) {
+            .logo-patrocinio-group {
+                /* Reduz o espaçamento entre as logos em telas menores */
+                gap: 5px;
+            }
+        }
+
         /* Animações */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -89,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 opacity: 0;
                 transform: translateX(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -96,21 +134,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
 
         /* Header - mantido original */
-        
 
-        .navbar{
+
+        .navbar {
             padding: 1rem;
 
         }
@@ -294,7 +350,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .table tbody tr:hover {
             background: rgba(220, 53, 69, 0.05);
             transform: scale(1.01);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .table tbody td {
@@ -365,7 +421,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .modal-content {
             border: none;
             border-radius: 1rem;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .modal-header {
@@ -476,7 +532,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .footer .navbar-brand img:hover {
             transform: scale(1.05);
             filter: brightness(1.3);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
         }
 
         /* Responsividade */
@@ -486,16 +542,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 flex-direction: column;
                 text-align: center;
             }
-            
+
             .table-responsive {
                 font-size: 0.8rem;
             }
-            
+
             .table thead th,
             .table tbody td {
                 padding: 0.75rem 0.5rem;
             }
-            
+
             .btn-delete {
                 padding: 0.375rem 0.75rem;
                 font-size: 0.8rem;
@@ -516,6 +572,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </style>
 </head>
+
 <body>
     <!-- Header - mantido original -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-body-blue" aria-label="Tenth navbar example">
@@ -558,7 +615,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <a class=" nav-link2" aria-disabled="true" href="deletepub.php">deletar</a>
                     </li>
                     <li class="nav-item">
-                          <a href="logout.php" class="  btn btn-danger" style="text-decoration: none; margin-left:2rem;font-weight:500">Logout</a>
+                        <a href="logout.php" class="  btn btn-danger" style="text-decoration: none; margin-left:2rem;font-weight:500">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -599,10 +656,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </h2>
                 <form method="get" role="search" aria-label="Buscar publicações">
                     <div class="input-group">
-                        <input type="text" class="form-control search-input" name="search" 
-                               placeholder="Digite nome do arquivo, autor, categoria ou qualquer termo..." 
-                               value="<?php echo htmlspecialchars($search); ?>"
-                               aria-label="Campo de busca">
+                        <input type="text" class="form-control search-input" name="search"
+                            placeholder="Digite nome do arquivo, autor, categoria ou qualquer termo..."
+                            value="<?php echo htmlspecialchars($search); ?>"
+                            aria-label="Campo de busca">
                         <button class="btn btn-search" type="submit">
                             <i class="fas fa-search me-2"></i>
                             Buscar
@@ -717,19 +774,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <!-- Footer - mantido original -->
     <footer class="navbar fixed-bottom bg-footer">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
-                    height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-            <div class="d-flex">
-                <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70"
-                        height="50" class="d-inline-block align-text-top"
-                        style="margin-left: 15px; object-fit: contain;"></a>
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="Home.html">
+                <img src="Img/icones/Logo_rumoPNG.png" alt="Logo Rumo" width="60" height="40" class="d-inline-block align-text-top">
+            </a>
+
+            <div class="d-flex flex-nowrap align-items-center logo-patrocinio-group">
+                <a class="navbar-brand mx-2" href="#"><img src="Img/icones/logo_fapesp.png" alt="FAPESP" class="logo-patrocinio"></a>
+                <a class="navbar-brand mx-2" href="#"><img src="Img/icones/CNPq_v2017_rgb.png" alt="CNPq" class="logo-patrocinio"></a>
+                <a class="navbar-brand mx-2" href="#"><img src="Img/icones/banner_capes-1024x871.png" alt="CAPES" class="logo-patrocinio capes-logo"></a>
             </div>
         </div>
     </footer>
@@ -738,7 +792,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         function confirmDelete(id, nomeArquivo, autor) {
             document.getElementById('delete_id').value = id;
-            
+
             // Atualizar informações da publicação no modal
             const publicationInfo = document.getElementById('publicationInfo');
             publicationInfo.innerHTML = `
@@ -809,5 +863,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
-</html>
 
+</html>

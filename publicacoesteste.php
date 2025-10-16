@@ -664,6 +664,41 @@ include 'config.php';
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
         }
 
+        /* Estilos para a barra de navegação do footer */
+        .bg-footer {
+
+            /* Cor de fundo que parece na imagem, se for azul. */
+            padding: 1px 0;
+            /* Espaçamento vertical menor */
+            height: 60px;
+            /* Altura fixa para o footer */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            /* Sombra para destacar */
+        }
+
+        /* Estilos gerais para as imagens de patrocínio no footer */
+        .logo-patrocinio {
+            /* Define largura máxima para as imagens para evitar que fiquem muito grandes */
+            max-width: 60px;
+            height: 40px;
+            object-fit: contain;
+            /* Garante que a imagem se ajuste sem cortar */
+        }
+
+        /* Ajuste específico para a logo da CAPES, se necessário, dado o seu tamanho original */
+        .capes-logo {
+            max-width: 50px;
+            height: 40px;
+        }
+
+        /* Ajuste fino para a div que contém as logos de patrocínio em mobile */
+        @media (max-width: 576px) {
+            .logo-patrocinio-group {
+                /* Reduz o espaçamento entre as logos em telas menores */
+                gap: 5px;
+            }
+        }
+
         /* Scrollbar personalizada */
         .form-select::-webkit-scrollbar {
             width: 8px;
@@ -1157,17 +1192,15 @@ include 'config.php';
         </div>
 
         <footer class="navbar fixed-bottom bg-footer">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
-                        height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <div class="d-flex">
-                    <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50"
-                            class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                    <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40"
-                            class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                    <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70"
-                            height="50" class="d-inline-block align-text-top"
-                            style="margin-left: 15px; object-fit: contain;"></a>
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <a class="navbar-brand" href="Home.html">
+                    <img src="Img/icones/Logo_rumoPNG.png" alt="Logo Rumo" width="60" height="40" class="d-inline-block align-text-top">
+                </a>
+
+                <div class="d-flex flex-nowrap align-items-center logo-patrocinio-group">
+                    <a class="navbar-brand mx-2" href="#"><img src="Img/icones/logo_fapesp.png" alt="FAPESP" class="logo-patrocinio"></a>
+                    <a class="navbar-brand mx-2" href="#"><img src="Img/icones/CNPq_v2017_rgb.png" alt="CNPq" class="logo-patrocinio"></a>
+                    <a class="navbar-brand mx-2" href="#"><img src="Img/icones/banner_capes-1024x871.png" alt="CAPES" class="logo-patrocinio capes-logo"></a>
                 </div>
             </div>
         </footer>

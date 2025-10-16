@@ -8,13 +8,14 @@ ini_set('session.cookie_samesite', 'Strict');
 session_start();
 
 // Função para validar sessão
-function validarSessao() {
+function validarSessao()
+{
     // Verificar se está logado
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         header('Location: login.php');
         exit;
     }
-    
+
     // Verificar timeout de sessão (30 minutos)
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
         session_unset();
@@ -22,7 +23,7 @@ function validarSessao() {
         header('Location: login.php?timeout=1');
         exit;
     }
-    
+
     // Verificar mudança de User Agent (possível hijacking)
     if (isset($_SESSION['user_agent']) && $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT']) {
         session_unset();
@@ -30,7 +31,7 @@ function validarSessao() {
         header('Location: login.php?security=1');
         exit;
     }
-    
+
     // Verificar mudança de IP (opcional, pode causar problemas com proxies)
     /*
     if (isset($_SESSION['ip_address']) && $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
@@ -40,10 +41,10 @@ function validarSessao() {
         exit;
     }
     */
-    
+
     // Atualizar última atividade
     $_SESSION['last_activity'] = time();
-    
+
     // Regenerar ID da sessão periodicamente (a cada 5 minutos)
     if (!isset($_SESSION['last_regeneration']) || (time() - $_SESSION['last_regeneration'] > 300)) {
         session_regenerate_id(true);
@@ -72,7 +73,8 @@ $error = '';
 $warning = '';
 
 // Função para sanitizar entrada
-function sanitizeInput($input) {
+function sanitizeInput($input)
+{
     return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
 }
 
@@ -89,12 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $descricao = sanitizeInput($_POST['descricao']);
         $categoria = sanitizeInput($_POST['categoria']);
         $ano = (int)$_POST['ano'];
-        $autor = isset($_POST['novo_autor']) && !empty($_POST['novo_autor']) 
-                ? sanitizeInput($_POST['novo_autor']) 
-                : sanitizeInput($_POST['autor']);
+        $autor = isset($_POST['novo_autor']) && !empty($_POST['novo_autor'])
+            ? sanitizeInput($_POST['novo_autor'])
+            : sanitizeInput($_POST['autor']);
         $periodo = sanitizeInput($_POST['periodo']);
         $link = filter_var($_POST['link'], FILTER_VALIDATE_URL);
-        
+
         // Validações básicas
         if (empty($titulo) || empty($descricao) || empty($categoria) || empty($autor)) {
             $error = 'Todos os campos obrigatórios devem ser preenchidos.';
@@ -112,19 +114,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Preparar query com prepared statement apenas para link
             $stmt = $conn->prepare("INSERT INTO arquivos (titulo, descricao, categoria, ano, autor, periodo, link, data_upload) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
             $stmt->bind_param("sssssss", $titulo, $descricao, $categoria, $ano, $autor, $periodo, $link);
-            
+
             if ($stmt->execute()) {
                 $success = 'Link adicionado com sucesso!';
-                
+
                 // Log de segurança
                 error_log("Link adicionado por " . $_SESSION['username'] . " - URL: $link em " . date('Y-m-d H:i:s'));
-                
+
                 // Regenerar token CSRF após sucesso
                 $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
             } else {
                 $error = 'Erro ao salvar no banco de dados: ' . $stmt->error;
             }
-            
+
             $stmt->close();
         }
     }
@@ -154,7 +156,7 @@ $stmt->close();
     <title>Upload de Arquivo PDF</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-     <style>
+    <style>
         :root {
             --primary-color: #2c5aa0;
             --secondary-color: #f8f9fa;
@@ -164,7 +166,7 @@ $stmt->close();
             --warning-color: #ffc107;
             --text-dark: #333;
             --border-color: #dee2e6;
-            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         body {
@@ -206,7 +208,7 @@ $stmt->close();
         }
 
         .session-timer {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-weight: 500;
@@ -263,7 +265,8 @@ $stmt->close();
             color: var(--danger-color);
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border: 2px solid var(--border-color);
             border-radius: 12px;
             padding: 0.75rem 1rem;
@@ -272,7 +275,8 @@ $stmt->close();
             background: var(--secondary-color);
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.25);
             background: white;
@@ -384,18 +388,53 @@ $stmt->close();
                 margin: 1rem auto;
                 padding: 0 0.5rem;
             }
-            
+
             .card-body {
                 padding: 1.5rem;
             }
-            
+
             .admin-nav {
                 flex-direction: column;
                 gap: 1rem;
             }
         }
+
+        /* Estilos para a barra de navegação do footer */
+        .bg-footer {
+
+            /* Cor de fundo que parece na imagem, se for azul. */
+            padding: 1px 0;
+            /* Espaçamento vertical menor */
+            height: 60px;
+            /* Altura fixa para o footer */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            /* Sombra para destacar */
+        }
+
+        /* Estilos gerais para as imagens de patrocínio no footer */
+        .logo-patrocinio {
+            /* Define largura máxima para as imagens para evitar que fiquem muito grandes */
+            max-width: 60px;
+            height: 40px;
+            object-fit: contain;
+            /* Garante que a imagem se ajuste sem cortar */
+        }
+
+        /* Ajuste específico para a logo da CAPES, se necessário, dado o seu tamanho original */
+        .capes-logo {
+            max-width: 50px;
+            height: 40px;
+        }
+
+        /* Ajuste fino para a div que contém as logos de patrocínio em mobile */
+        @media (max-width: 576px) {
+            .logo-patrocinio-group {
+                /* Reduz o espaçamento entre as logos em telas menores */
+                gap: 5px;
+            }
+        }
     </style>
-    
+
 </head>
 
 <body>
@@ -439,9 +478,9 @@ $stmt->close();
                         <a class=" nav-link2" aria-disabled="true" href="deletepub.php">deletar</a>
                     </li>
                     <li class="nav-item">
-                          <a href="logout.php" class="btn-danger " style="text-decoration: none; margin-left:2rem;">Logout</a>
+                        <a href="logout.php" class="btn-danger " style="text-decoration: none; margin-left:2rem;">Logout</a>
                     </li>
-                  
+
                 </ul>
             </div>
         </div>
@@ -449,9 +488,9 @@ $stmt->close();
 
     <!--logo site-->
     <div class="icon-menu">
-         
+
         <div class="row align-items-center">
-          
+
             <div class="col-auto">
                 <div class="logo">
                     <img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="100" height="100"
@@ -459,7 +498,7 @@ $stmt->close();
                 </div>
             </div>
             <div class="col">
-                
+
                 <h2>Rumo á Educação Matemática Inclusiva</h2>
             </div>
         </div>
@@ -473,14 +512,14 @@ $stmt->close();
                 <?php echo $success; ?>
             </div>
         <?php endif; ?>
-        
+
         <?php if ($error): ?>
             <div class="alert alert-danger">
                 <i class="fas fa-exclamation-triangle"></i>
                 <?php echo $error; ?>
             </div>
         <?php endif; ?>
-        
+
         <?php if ($warning): ?>
             <div class="alert alert-warning">
                 <i class="fas fa-exclamation-circle"></i>
@@ -495,11 +534,11 @@ $stmt->close();
                     Upload de Publicação
                 </h2>
             </div>
-            
+
             <div class="card-body">
                 <form action="upload.php" method="post" enctype="multipart/form-data" id="uploadForm">
                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                    
+
                     <div class="form-group">
                         <label for="titulo" class="form-label">
                             <i class="fas fa-heading"></i>
@@ -507,7 +546,7 @@ $stmt->close();
                         </label>
                         <input type="text" class="form-control" id="titulo" name="titulo" required maxlength="255">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="descricao" class="form-label">
                             <i class="fas fa-align-left"></i>
@@ -516,7 +555,7 @@ $stmt->close();
                         <textarea class="form-control" id="descricao" name="descricao" rows="3" required maxlength="1000"></textarea>
                         <small class="text-muted">Máximo 1000 caracteres</small>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -532,7 +571,7 @@ $stmt->close();
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="ano" class="form-label">
@@ -550,7 +589,7 @@ $stmt->close();
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="autor" class="form-label">
                             <i class="fas fa-user-edit"></i>
@@ -564,10 +603,10 @@ $stmt->close();
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <input type="text" class="form-control mt-2" id="novo_autor" name="novo_autor" 
-                               placeholder="Ou digite um novo autor" maxlength="255">
+                        <input type="text" class="form-control mt-2" id="novo_autor" name="novo_autor"
+                            placeholder="Ou digite um novo autor" maxlength="255">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="periodo" class="form-label">
                             <i class="fas fa-clock"></i>
@@ -580,7 +619,7 @@ $stmt->close();
                         </select>
                         <small class="text-muted">Obrigatório apenas para artigos</small>
                     </div>
-                    
+
                     <div id="linkSection">
                         <div class="form-group">
                             <label for="link" class="form-label">
@@ -591,13 +630,13 @@ $stmt->close();
                                 <span class="input-group-text">
                                     <i class="fas fa-globe"></i>
                                 </span>
-                                <input type="url" class="form-control" id="link" name="link" 
-                                       placeholder="https://exemplo.com/publicacao.pdf" required>
+                                <input type="url" class="form-control" id="link" name="link"
+                                    placeholder="https://exemplo.com/publicacao.pdf" required>
                             </div>
                         </div>
                     </div>
 
-                    
+
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary" id="submitBtn">
                             <i class="fas fa-upload me-2"></i>
@@ -605,67 +644,65 @@ $stmt->close();
                         </button>
                     </div>
                 </form>
-                
-                
+
+
             </div>
         </div>
     </div>
 
-    
+
 
     <footer class="navbar fixed-bottom bg-footer">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="Home.php"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
-                    height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-            <div class="d-flex">
-                <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70"
-                        height="50" class="d-inline-block align-text-top"
-                        style="margin-left: 15px; object-fit: contain;"></a>
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="Home.html">
+                <img src="Img/icones/Logo_rumoPNG.png" alt="Logo Rumo" width="60" height="40" class="d-inline-block align-text-top">
+            </a>
+
+            <div class="d-flex flex-nowrap align-items-center logo-patrocinio-group">
+                <a class="navbar-brand mx-2" href="#"><img src="Img/icones/logo_fapesp.png" alt="FAPESP" class="logo-patrocinio"></a>
+                <a class="navbar-brand mx-2" href="#"><img src="Img/icones/CNPq_v2017_rgb.png" alt="CNPq" class="logo-patrocinio"></a>
+                <a class="navbar-brand mx-2" href="#"><img src="Img/icones/banner_capes-1024x871.png" alt="CAPES" class="logo-patrocinio capes-logo"></a>
             </div>
         </div>
     </footer>
 
 
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Timer de sessão
         let sessionTime = 1800; // 30 minutos em segundos
-        
+
         function updateTimer() {
             const minutes = Math.floor(sessionTime / 60);
             const seconds = sessionTime % 60;
-            document.getElementById('timeRemaining').textContent = 
+            document.getElementById('timeRemaining').textContent =
                 `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
+
             if (sessionTime <= 300) { // 5 minutos restantes
                 document.getElementById('sessionTimer').style.background = 'rgba(220, 53, 69, 0.8)';
             }
-            
+
             if (sessionTime <= 0) {
                 alert('Sua sessão expirou. Você será redirecionado para o login.');
                 window.location.href = 'login.php?timeout=1';
                 return;
             }
-            
+
             sessionTime--;
         }
-        
+
         setInterval(updateTimer, 1000);
-        
+
         // Reset timer em atividade
         document.addEventListener('click', () => sessionTime = 1800);
         document.addEventListener('keypress', () => sessionTime = 1800);
-        
+
 
         // Toggle período para artigos
         function togglePeriodo() {
             const categoria = document.getElementById('categoria').value;
             const periodo = document.getElementById('periodo');
-            
+
             if (categoria === 'Artigos') {
                 periodo.disabled = false;
                 periodo.required = true;
@@ -675,7 +712,7 @@ $stmt->close();
                 periodo.value = '';
             }
         }
-        
+
         // Gerenciar seleção de autor
         document.getElementById('novo_autor').addEventListener('input', function() {
             const autorSelect = document.getElementById('autor');
@@ -689,7 +726,7 @@ $stmt->close();
                 this.required = false;
             }
         });
-        
+
         document.getElementById('autor').addEventListener('change', function() {
             const novoAutor = document.getElementById('novo_autor');
             if (this.value) {
@@ -699,71 +736,71 @@ $stmt->close();
                 novoAutor.disabled = false;
             }
         });
-        
+
         // Upload de arquivo com drag & drop
         const fileArea = document.querySelector('.file-upload-area');
         const fileInput = document.getElementById('arquivo');
-        
+
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             fileArea.addEventListener(eventName, preventDefaults, false);
         });
-        
+
         function preventDefaults(e) {
             e.preventDefault();
             e.stopPropagation();
         }
-        
+
         ['dragenter', 'dragover'].forEach(eventName => {
             fileArea.addEventListener(eventName, highlight, false);
         });
-        
+
         ['dragleave', 'drop'].forEach(eventName => {
             fileArea.addEventListener(eventName, unhighlight, false);
         });
-        
+
         function highlight(e) {
             fileArea.classList.add('dragover');
         }
-        
+
         function unhighlight(e) {
             fileArea.classList.remove('dragover');
         }
-        
+
         fileArea.addEventListener('drop', handleDrop, false);
-        
+
         function handleDrop(e) {
             const dt = e.dataTransfer;
             const files = dt.files;
-            
+
             if (files.length > 0) {
                 fileInput.files = files;
                 showFileInfo(files[0]);
             }
         }
-        
+
         fileInput.addEventListener('change', function() {
             if (this.files.length > 0) {
                 showFileInfo(this.files[0]);
             }
         });
-        
+
         function showFileInfo(file) {
             const fileInfo = document.getElementById('fileInfo');
             const fileSize = (file.size / 1024 / 1024).toFixed(2);
-            
+
             let statusIcon = '<i class="fas fa-check-circle text-success"></i>';
             let statusText = 'Arquivo válido';
-            
+
             if (file.type !== 'application/pdf') {
                 statusIcon = '<i class="fas fa-exclamation-triangle text-warning"></i>';
                 statusText = 'Atenção: Apenas PDFs são aceitos';
             }
-            
+
             if (file.size > 10 * 1024 * 1024) {
                 statusIcon = '<i class="fas fa-times-circle text-danger"></i>';
                 statusText = 'Erro: Arquivo muito grande (máx. 10MB)';
             }
-            
+
             fileInfo.innerHTML = `
                 <div class="d-flex align-items-center gap-2">
                     ${statusIcon}
@@ -774,55 +811,55 @@ $stmt->close();
             `;
             fileInfo.style.display = 'block';
         }
-        
+
         // Validação do formulário
         document.getElementById('uploadForm').addEventListener('submit', function(e) {
             const submitBtn = document.getElementById('submitBtn');
             const isLink = document.getElementById('uploadType').checked;
-            
+
             // Validar se tem arquivo ou link
             if (!isLink && !fileInput.files.length) {
                 e.preventDefault();
                 alert('Selecione um arquivo PDF para upload.');
                 return;
             }
-            
+
             if (isLink && !document.getElementById('link').value.trim()) {
                 e.preventDefault();
                 alert('Insira um link válido.');
                 return;
             }
-            
+
             // Validar autor
             const autor = document.getElementById('autor').value;
             const novoAutor = document.getElementById('novo_autor').value.trim();
-            
+
             if (!autor && !novoAutor) {
                 e.preventDefault();
                 alert('Selecione um autor existente ou digite um novo.');
                 return;
             }
-            
+
             // Mostrar loading
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Enviando...';
             submitBtn.disabled = true;
         });
-        
+
         // Contador de caracteres para descrição
         document.getElementById('descricao').addEventListener('input', function() {
             const maxLength = 1000;
             const currentLength = this.value.length;
             const remaining = maxLength - currentLength;
-            
+
             let counter = this.parentNode.querySelector('.char-counter');
             if (!counter) {
                 counter = document.createElement('small');
                 counter.className = 'char-counter text-muted';
                 this.parentNode.appendChild(counter);
             }
-            
+
             counter.textContent = `${remaining} caracteres restantes`;
-            
+
             if (remaining < 100) {
                 counter.className = 'char-counter text-warning';
             } else if (remaining < 0) {

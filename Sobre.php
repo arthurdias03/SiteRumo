@@ -25,46 +25,84 @@
             --gradient-primary: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
             --gradient-secondary: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             --gradient-accent: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
-            --shadow-medium: 0 8px 30px rgba(0,0,0,0.15);
-            --shadow-heavy: 0 15px 50px rgba(0,0,0,0.2);
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 15px 50px rgba(0, 0, 0, 0.2);
         }
-        .section-title {
-              text-align: center;
-              margin-top: 5rem;
-              margin-bottom: 7rem;
-          }
-          
-        .section-title h2 {
-              font-size: 2.5rem;
-              font-weight: 500;
-              color: var(--primary-color);
-              margin-bottom: 1rem;
-              position: relative;
-          }
-        .section-title h2::after {
-              content: '';
-              position: absolute;
-              bottom: -10px;
-              left: 50%;
-              transform: translateX(-50%);
-              width: 80px;
-              height: 4px;
-              background: var(--gradient-accent);
-              border-radius: 2px;
-          }
 
-          .section-title p {
-              font-size: 1.1rem;
-              
-              max-width: 600px;
-              margin: 0 auto;
-          }
-        .select-pub{
-      border: 1px solid #194376;
-      color: #194376;
-      font-weight: 700;
-          }   
+        .section-title {
+            text-align: center;
+            margin-top: 5rem;
+            margin-bottom: 7rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .select-pub {
+            border: 1px solid #194376;
+            color: #194376;
+            font-weight: 700;
+        }
+
+        /* Estilos para a barra de navegação do footer */
+        .bg-footer {
+
+            /* Cor de fundo que parece na imagem, se for azul. */
+            padding: 1px 0;
+            /* Espaçamento vertical menor */
+            height: 60px;
+            /* Altura fixa para o footer */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            /* Sombra para destacar */
+        }
+
+        /* Estilos gerais para as imagens de patrocínio no footer */
+        .logo-patrocinio {
+            /* Define largura máxima para as imagens para evitar que fiquem muito grandes */
+            max-width: 60px;
+            height: 40px;
+            object-fit: contain;
+            /* Garante que a imagem se ajuste sem cortar */
+        }
+
+        /* Ajuste específico para a logo da CAPES, se necessário, dado o seu tamanho original */
+        .capes-logo {
+            max-width: 50px;
+            height: 40px;
+        }
+
+        /* Ajuste fino para a div que contém as logos de patrocínio em mobile */
+        @media (max-width: 576px) {
+            .logo-patrocinio-group {
+                /* Reduz o espaçamento entre as logos em telas menores */
+                gap: 5px;
+            }
+        }
     </style>
 </head>
 
@@ -183,21 +221,19 @@
 
 
 
-    <footer class="navbar  fixed-bottom bg-footer">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="Home.html"><img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="70"
-                    height="50" class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-            <div class="d-flex">
-                <a class="navbar-brand"><img src="Img/icones/logo_fapesp.png" alt="Logo" width="90" height="50"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/CNPq_v2017_rgb.png" alt="Logo" width="90" height="40"
-                        class="d-inline-block align-text-top" style="margin-left: 15px;"></a>
-                <a class="navbar-brand"><img src="Img/icones/banner_capes-1024x871.png" alt="Logo" width="70"
-                        height="50" class="d-inline-block align-text-top"
-                        style="margin-left: 15px;object-fit:contain ;"></a>
-            </div>
+    <footer class="navbar fixed-bottom bg-footer">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <a class="navbar-brand" href="Home.html">
+            <img src="Img/icones/Logo_rumoPNG.png" alt="Logo Rumo" width="60" height="40" class="d-inline-block align-text-top">
+        </a>
+        
+        <div class="d-flex flex-nowrap align-items-center logo-patrocinio-group">
+            <a class="navbar-brand mx-2" href="#"><img src="Img/icones/logo_fapesp.png" alt="FAPESP" class="logo-patrocinio"></a>
+            <a class="navbar-brand mx-2" href="#"><img src="Img/icones/CNPq_v2017_rgb.png" alt="CNPq" class="logo-patrocinio"></a>
+            <a class="navbar-brand mx-2" href="#"><img src="Img/icones/banner_capes-1024x871.png" alt="CAPES" class="logo-patrocinio capes-logo"></a>
         </div>
-    </footer>
+    </div>
+</footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
