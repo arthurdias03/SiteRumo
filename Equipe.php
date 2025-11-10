@@ -234,7 +234,6 @@
           </div>
         </div>
 
-       
 
         <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
           <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/Elizabete.jfif"
@@ -294,11 +293,6 @@
           </div>
         </div>
         
-        
-
-
-
-
 
         <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
           <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/foto 2.jfif"
@@ -356,10 +350,6 @@
 
           </div>
         </div>
-
-
-
-
 
         <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
           <img class="position-relative rounded-circle shadow mx-auto card-hover" src="Img/equipe rumo/Solange.jfif"

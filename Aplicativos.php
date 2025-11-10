@@ -631,6 +631,10 @@
                   <i class="fas fa-download"></i>
                   Baixar App
                 </a>
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Mathsticks_1.2.apk">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Android
+                </a>
               </div>
             </div>
           </div>
