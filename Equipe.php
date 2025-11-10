@@ -197,6 +197,110 @@
         </div>
 
         <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+          <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/luis fernando.jfif"
+            style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+            alt="">
+          <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+            <h4 class="font-weight-medium mt-5">Prof. Dr. Luis Fernando Pacheco Pereira</h4>
+
+            <a class="btn btn-primary" href="https://lattes.cnpq.br/9238876200298387" target="_blank" role="button"
+              style="width: 150px;height:50px;margin-top: 10px;">
+
+              <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                  width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+
+            </a>
+
+
+          </div>
+        </div>
+
+        <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+          <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/CarlosEduardo.jfif"
+            style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+            alt="">
+          <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+            <h4 class="font-weight-medium mt-5">Carlos Eduardo Rocha dos Santos</h4>
+
+            <a class="btn btn-primary" href="http://lattes.cnpq.br/1577127826706948" target="_blank" role="button"
+              style="width: 150px;height:50px;margin-top: 10px;">
+
+              <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                  width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+
+            </a>
+
+
+          </div>
+        </div>
+
+       
+
+        <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+          <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/Elizabete.jfif"
+            style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+            alt="">
+          <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+            <h4 class="font-weight-medium mt-5">Elizabete Leopoldina da Silva</h4>
+
+            <a class="btn btn-primary" href="http://lattes.cnpq.br/2173053955944201" target="_blank" role="button"
+              style="width: 150px;height:50px;margin-top: 10px;">
+
+              <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                  width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+
+            </a>
+
+
+          </div>
+        </div>
+
+        <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+          <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/paulaSoares.jfif"
+            style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+            alt="">
+          <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+            <h4 class="font-weight-medium mt-5">Paula Soares Gomes da Silva</h4>
+
+            <a class="btn btn-primary" href="http://lattes.cnpq.br/2605878541424554" target="_blank" role="button"
+              style="width: 150px;height:50px;margin-top: 10px;">
+
+              <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                  width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+
+            </a>
+
+
+          </div>
+        </div>
+        
+
+        <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
+          <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/Tula.jfif"
+            style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
+            alt="">
+          <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
+            <h4 class="font-weight-medium mt-5">Tula Rocha Morais</h4>
+
+            <a class="btn btn-primary" href="http://lattes.cnpq.br/7247136336655770" target="_blank" role="button"
+              style="width: 150px;height:50px;margin-top: 10px;">
+
+              <h5 class="align-items-center" style="margin-top: 5px;">Lattes <img src="Img/icones/icone-lattes.png"
+                  width="30px" height="30px" alt="" style="object-fit: cover;margin-bottom: 2px;"></h5>
+
+            </a>
+
+
+          </div>
+        </div>
+        
+        
+
+
+
+
+
+        <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
           <img class="position-relative rounded-circle shadow mx-auto card-hover" src="img/equipe rumo/foto 2.jfif"
             style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
             alt="">
@@ -258,7 +362,7 @@
 
 
         <div class="col-md-4" style="text-align:center;padding-bottom:40px;">
-          <img class="position-relative rounded-circle shadow mx-auto card-hover" src="Img/equipe rumo/foto 5.png"
+          <img class="position-relative rounded-circle shadow mx-auto card-hover" src="Img/equipe rumo/Solange.jfif"
             style="width: 150px; height: 150px; margin-bottom: -50px; z-index: 1;object-fit: cover;border-radius: 5px;"
             alt="">
           <div class=" text-center p-4 pt-0" style="min-height: 220px;margin-top: 80px;">
