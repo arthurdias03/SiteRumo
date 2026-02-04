@@ -693,6 +693,38 @@
             </div>
           </div>
         </div>
+
+        <!-- Brincamática -->
+        <div class="col-lg-6 col-xl-3 loading" style="animation-delay: 0.4s;">
+          <div class="app-card scroll-animate">
+            <div class="app-image">
+              <img src="Img/imgs_old/brincamatica.png" alt="Brincamática">
+              <div class="app-overlay">
+                <i class="fas fa-sync-alt overlay-icon"></i>
+              </div>
+            </div>
+            <div class="app-content">
+              <h3 class="app-title">
+                <i class="fas fa-turtle"></i>
+                Brincamática
+              </h3>
+              <p class="app-description">
+                Lorem ipsun
+              </p>
+              <div class="app-actions">
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/brincamatica-webapp.zip">
+                  <i class="fas fa-download"></i>
+                  Baixar App
+                </a>
+
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Brincamatica_1.6.apk">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Android
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
