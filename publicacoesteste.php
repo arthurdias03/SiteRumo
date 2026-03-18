@@ -11,6 +11,7 @@ include 'config.php';
     <title>Publicações</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .search-bar-section {
@@ -1190,6 +1191,16 @@ include 'config.php';
                 </div>
             </div>
         </div>
+          
+        <div class="text-center mt-4">
+          <p style="font-size: 0.9rem; color: #6c757d;">
+            Desenvolvido por <strong>Arthur Dias</strong>
+            <a href="https://www.linkedin.com/in/arthurangelino/" target="_blank" style="margin-left: 8px; color: #0a66c2;">
+              <i class="bi bi-linkedin" style="font-size: 1.2rem;"></i>
+            </a>
+          </p>
+        </div>
+
 
         <footer class="navbar fixed-bottom bg-footer">
             <div class="container-fluid d-flex justify-content-between align-items-center">
