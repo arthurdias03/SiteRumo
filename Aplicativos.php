@@ -709,7 +709,9 @@
                 Brincamática
               </h3>
               <p class="app-description">
-                Lorem ipsun
+                Aplicativo voltado às crianças de 5 a 7 anos, composto pelos jogos Criar Melodia,
+                Sheldon, Combina Som e Jogo da Memória que constituem uma experiência que envolve diferentes sentidos,
+                combinando sons, imagens, movimentos e cores, como forma de ampliar as possibilidades de interação e participação das crianças.
               </p>
               <div class="app-actions">
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/brincamatica-webapp.zip">
