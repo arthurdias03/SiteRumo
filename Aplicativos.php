@@ -20,6 +20,12 @@
       position: relative;
       overflow: hidden;
     }
+        @media (min-width: 1200px) {
+      .col-xl-2-4 {
+        flex: 0 0 20%;
+        max-width: 20%;
+      }
+    }
 
     .hero-section::before {
       content: '';
@@ -593,7 +599,7 @@
 
       <div class="row g-4">
         <!-- MusiCALcolorida -->
-        <div class="col-lg-6 col-xl-3 loading" style="animation-delay: 0.1s;">
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.1s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
               <img src="Img/imgs_old/aplicativo_1.jpg" alt="MusiCALcolorida">
@@ -614,13 +620,18 @@
                   <i class="fas fa-download"></i>
                   Baixar App
                 </a>
+
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Ritmatica_1.3_android.apk">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Android
+                </a>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Mathsticks -->
-        <div class="col-lg-6 col-xl-3 loading" style="animation-delay: 0.2s;">
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.2s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
               <img src="Img/imgs_old/aplicativo_2.jpg" alt="Mathsticks">
@@ -651,7 +662,7 @@
         </div>
 
         <!-- Ritmática -->
-        <div class="col-lg-6 col-xl-3 loading" style="animation-delay: 0.3s;">
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.3s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
               <img src="Img/imgs_old/aplicativo_4.jpg" alt="Ritmática">
@@ -672,13 +683,18 @@
                   <i class="fas fa-download"></i>
                   Baixar App
                 </a>
+
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Ritmatica_1.3_android.apk">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Android
+                </a>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Transtaruga -->
-        <div class="col-lg-6 col-xl-3 loading" style="animation-delay: 0.4s;">
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.4s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
               <img src="Img/imgs_old/aplicativo_5.jpg" alt="Transtaruga">
@@ -699,13 +715,18 @@
                   <i class="fas fa-download"></i>
                   Baixar App
                 </a>
+
+                <a class="btn-app" onclick="downloadExe()" href="">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Android
+                </a>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Brincamática -->
-        <div class="col-lg-6 col-xl-3 loading" style="animation-delay: 0.4s;">
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.4s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
               <img src="Img/imgs_old/brincamatica.png" alt="Brincamática">
