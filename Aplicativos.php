@@ -110,7 +110,6 @@
     .apps-section {
       padding: 0;
       margin-bottom: 10rem;
-
     }
 
     .section-title {
@@ -154,6 +153,9 @@
       height: 100%;
       position: relative;
       border: 1px solid rgba(255, 255, 255, 0.2);
+      /* MODIFICAÇÃO: transforma o card em coluna flex */
+      display: flex;
+      flex-direction: column;
     }
 
     .app-card:hover {
@@ -181,6 +183,8 @@
       position: relative;
       overflow: hidden;
       height: 250px;
+      /* MODIFICAÇÃO: garante que a imagem não encolhe */
+      flex-shrink: 0;
     }
 
     .app-image img {
@@ -234,6 +238,10 @@
 
     .app-content {
       padding: 2rem;
+      /* MODIFICAÇÃO: ocupa o espaço restante e organiza em coluna */
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .app-title {
@@ -250,13 +258,17 @@
       color: #6c757d;
       margin-bottom: 2rem;
       line-height: 1.6;
-      text-align: justify;
+      text-align: center;
+      /* MODIFICAÇÃO: empurra os botões para o fundo */
+      flex: 1;
     }
 
     .app-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
+      /* MODIFICAÇÃO: garante que os botões ficam sempre no final */
+      margin-top: auto;
     }
 
     .btn-app {
@@ -363,35 +375,25 @@
 
     /* Estilos para a barra de navegação do footer */
     .bg-footer {
-
-      /* Cor de fundo que parece na imagem, se for azul. */
       padding: 1px 0;
-      /* Espaçamento vertical menor */
       height: 60px;
-      /* Altura fixa para o footer */
       box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-      /* Sombra para destacar */
     }
 
     /* Estilos gerais para as imagens de patrocínio no footer */
     .logo-patrocinio {
-      /* Define largura máxima para as imagens para evitar que fiquem muito grandes */
       max-width: 60px;
       height: 40px;
       object-fit: contain;
-      /* Garante que a imagem se ajuste sem cortar */
     }
 
-    /* Ajuste específico para a logo da CAPES, se necessário, dado o seu tamanho original */
     .capes-logo {
       max-width: 50px;
       height: 40px;
     }
 
-    /* Ajuste fino para a div que contém as logos de patrocínio em mobile */
     @media (max-width: 576px) {
       .logo-patrocinio-group {
-        /* Reduz o espaçamento entre as logos em telas menores */
         gap: 5px;
       }
     }
@@ -399,7 +401,7 @@
 </head>
 
 <body>
-  <!--Menu--> <!-- CRIAR MENU SANDUICHE-->
+  <!--Menu-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-body-blue" aria-label="Tenth navbar example">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
@@ -443,7 +445,6 @@
       <div class="col-auto">
         <div class="logo">
           <img src="Img/icones/Logo_rumoPNG.png" alt="Logo" width="100" height="100" class="d-inline-block align-text-top">
-
         </div>
       </div>
       <div class="col">
@@ -454,132 +455,10 @@
 
   <div class="icon-menu">
     <div class="row align-items-center">
-      <div class="col-auto">
-
-      </div>
-      <div class="col">
-        <!--<h3 style="text-transform: uppercase;">Aplicativos</h3>-->
-      </div>
+      <div class="col-auto"></div>
+      <div class="col"></div>
     </div>
   </div>
-
-
-
-
-
-  <!-- Main pagina
-<div class="container text-center">
-      
-  <div class="row row-cols-3" style="margin-left: 5%; margin-top: 5%;">
-    
-    <div class="col-md-4">
-      <div class="card" style="width: 18rem;">
-        <img src="Img/images.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Homotetia</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        
-        <div class="card-body">
-          <a href="#" class="card-link">Descrição</a>
-          <a href="#" class="card-link">Atividade</a>
-        </div>
-      </div>
-      
-    </div>
-    
-    <div class="col-md-4">
-      <div class="card" style="width: 18rem;">
-        <img src="Img/images.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Homotetia</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        
-        <div class="card-body">
-          <a href="#" class="card-link">Descrição</a>
-          <a href="#" class="card-link">Atividade</a>
-        </div>
-      </div>
-    </div>
-    
-
-    <div class="col-md-4">
-      <div class="card" style="width: 18rem;">
-        <img src="Img/images.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Homotetia</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        
-        <div class="card-body">
-          <a href="#" class="card-link">Descrição</a>
-          <a href="#" class="card-link">Atividade</a>
-        </div>
-      </div>
-    </div>
-    
-   
-  </div>
-</div>-->
-
-
-
-  <!--
-<div class="container text-center respons-foot">
-  <div class="row g-2">
-    <div class="col-3">
-      <div class="p-3">
-        <div class="card" style="width: 100%;">
-          <img src="Img/imgs_old/aplicativo_1.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3>MusiCALcolorida </h3>
-            <p class="card-text" style="text-align: justify;">A MusiCALcolorida é uma ferramenta digital planejada para abordar o conceito de número real de forma multissensorial, por meio de cores e música.</p>
-            <a onclick="downloadExe()" href="Aplicativos/Calcolorida_v6.exe" class="btn btn-primary">Atividade</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="p-3">
-        <div class="card" style="width: 100%;">
-          <img src="Img/imgs_old/aplicativo_2.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3>Mathsticks </h3>
-            <p class="card-text" style="text-align: justify;">O Mathsticks é uma ferramenta digital que permite pensar sobre generalizações de padrões figurais, no qual podemos explorar simultaneamente interações visuais e dinâmicas e suas representações simbólicas.</p>
-            <a onclick="downloadExe()" href="Aplicativos/mathsticks (portugues).exe" class="btn btn-primary">Atividade</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="p-3">
-        <div class="card" style="width: 100%;">
-          <img src="Img/imgs_old/aplicativo_4.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3>Ritmática</h3>
-            <p class="card-text" style="text-align: justify;">O Ritmática é um micromundo no qual o aluno pode trabalhar matematicamente com som e/ou com imagens visuais e dinâmicas para explorar ideias relacionadas à razão e proporção. O ponto de partida para o seu design foi o uso de ritmos e polirrítmos como expressões matemáticas.</p>
-            <a onclick="downloadExe()" href="Aplicativos/ritmatica_beta_site.exe" class="btn btn-primary">Atividade</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-3">
-      <div class="p-3">
-        <div class="card" style="width: 100%;">
-          <img src="Img/imgs_old/aplicativo_5.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h3>Transtaruga</h3>
-            <p class="card-text" style="text-align: justify;">No micromundo Transtaruga, o aluno interage com a Geometria das Tartarugas para explorar ideias relacionadas às Transformações Geométricas.</p>
-            <a onclick="downloadExe()" href="Aplicativos/trans_taruga_v1_At1-8.exe" class="btn btn-primary">Atividade</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-  </div>
-</div> -->
 
   <section class="apps-section" id="aplicativos">
     <div class="container">
@@ -587,15 +466,6 @@
         <h2>Nossos Aplicativos</h2>
         <p>Descubra ferramentas digitais desenvolvidas especialmente para tornar o aprendizado de matemática mais acessível e envolvente para todos os estudantes.</p>
       </div>
-      <div class="text-center mt-4">
-              <p style="font-size: 0.9rem; color: #6c757d;">
-                Site desenvolvido por <strong>Arthur Dias</strong>
-                <a href="https://www.linkedin.com/in/arthurangelino/" target="_blank" style="margin-left: 8px; color: #0a66c2;">
-                  <i class="bi bi-linkedin" style="font-size: 1.2rem;"></i>
-                </a>
-              </p>
-            </div>
-
 
       <div class="row g-4">
         <!-- MusiCALcolorida -->
@@ -616,14 +486,17 @@
                 Uma ferramenta digital inovadora que aborda o conceito de número real de forma multissensorial, combinando cores vibrantes e música envolvente para criar uma experiência de aprendizado única e inclusiva.
               </p>
               <div class="app-actions">
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Calcolorida_v6.exe">
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/web-musicalcolorida.zip">
                   <i class="fas fa-download"></i>
-                  Baixar App
+                  Baixar Web
                 </a>
-
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Ritmatica_1.3_android.apk">
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/MusicalColorida_1.1_android.apk">
                   <i class="fas fa-download"></i>
                   Baixar Versão Android
+                </a>
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Calcolorida_v6.exe">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Windows
                 </a>
               </div>
             </div>
@@ -648,13 +521,17 @@
                 Ferramenta digital que permite explorar generalizações de padrões figurais através de interações visuais dinâmicas e suas representações simbólicas, facilitando a compreensão de conceitos matemáticos abstratos.
               </p>
               <div class="app-actions">
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/mathsticks (portugues).exe">
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/web-mathsticks.zip">
                   <i class="fas fa-download"></i>
-                  Baixar App
+                  Baixar Web
                 </a>
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Mathsticks_1.2.apk">
                   <i class="fas fa-download"></i>
                   Baixar Versão Android
+                </a>
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/mathsticks (portugues).exe">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Windows
                 </a>
               </div>
             </div>
@@ -679,14 +556,17 @@
                 Micromundo inovador onde estudantes trabalham matematicamente com som e imagens visuais dinâmicas para explorar conceitos de razão e proporção através de ritmos e polirrítmos como expressões matemáticas.
               </p>
               <div class="app-actions">
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/ritmatica_beta_site.exe">
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/web-ritmatica.zip">
                   <i class="fas fa-download"></i>
-                  Baixar App
+                  Baixar Web
                 </a>
-
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Ritmatica_1.3_android.apk">
                   <i class="fas fa-download"></i>
                   Baixar Versão Android
+                </a>
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/ritmatica_beta_site.exe">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Windows
                 </a>
               </div>
             </div>
@@ -713,12 +593,7 @@
               <div class="app-actions">
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/trans_taruga_v1_At1-8.exe">
                   <i class="fas fa-download"></i>
-                  Baixar App
-                </a>
-
-                <a class="btn-app" onclick="downloadExe()" href="">
-                  <i class="fas fa-download"></i>
-                  Baixar Versão Android
+                  Baixar Versão Windows
                 </a>
               </div>
             </div>
@@ -747,12 +622,15 @@
               <div class="app-actions">
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/brincamatica-webapp.zip">
                   <i class="fas fa-download"></i>
-                  Baixar App
+                  Baixar Web
                 </a>
-
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Brincamatica_1.6.apk">
                   <i class="fas fa-download"></i>
                   Baixar Versão Android
+                </a>
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/brincamatica-webapp.zip">
+                  <i class="fas fa-download"></i>
+                  Baixar Versão Windows
                 </a>
               </div>
             </div>
@@ -761,15 +639,6 @@
       </div>
     </div>
   </section>
-        
-
-
-
-
-
-
-
-
 
   <footer class="navbar fixed-bottom bg-footer">
     <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -784,6 +653,7 @@
       </div>
     </div>
   </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="js/baixar_app_e_descricao.js"></script>
 </body>

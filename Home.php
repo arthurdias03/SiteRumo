@@ -9,7 +9,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --primary-color: #2846a7ff;
@@ -190,6 +192,14 @@
       </div>
       <div class="col-md-2 col-sm-2"></div>
     </div>
+     <div class="text-center mt-4">
+          <p style="font-size: 0.9rem; color: #6c757d;">
+            Desenvolvido por <strong>Arthur Dias</strong>
+            <a href="https://www.linkedin.com/in/arthurangelino/" target="_blank" style="margin-left: 8px; color: #0a66c2;">
+              <i class="bi bi-linkedin" style="font-size: 1.2rem;"></i>
+            </a>
+          </p>
+        </div>
   </main>
 
   <footer class="navbar fixed-bottom bg-footer">

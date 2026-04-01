@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
         :root {
@@ -212,7 +214,14 @@
 
         </div>
     </div>
-
+    <div class="text-center mt-4">
+          <p style="font-size: 0.9rem; color: #6c757d;">
+            Desenvolvido por <strong>Arthur Dias</strong>
+            <a href="https://www.linkedin.com/in/arthurangelino/" target="_blank" style="margin-left: 8px; color: #0a66c2;">
+              <i class="bi bi-linkedin" style="font-size: 1.2rem;"></i>
+            </a>
+          </p>
+        </div>
 
 
 
