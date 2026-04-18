@@ -265,8 +265,10 @@
 
     .app-actions {
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
       /* MODIFICAÇÃO: garante que os botões ficam sempre no final */
       margin-top: auto;
     }
@@ -276,7 +278,7 @@
       border: none;
       color: white;
       padding: 0.75rem 1.5rem;
-      border-radius: 25px;
+      border-radius: 8px;
       font-weight: 600;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -284,6 +286,9 @@
       overflow: hidden;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
+      width: 100%;
+      text-align: center;
       gap: 0.5rem;
     }
 
@@ -306,6 +311,11 @@
 
     .btn-app:hover::before {
       left: 100%;
+    }
+
+    .btn-app i {
+      position: absolute;
+      left: 1.5rem;
     }
 
     .btn-secondary {
@@ -468,35 +478,34 @@
       </div>
 
       <div class="row g-4">
-        <!-- MusiCALcolorida -->
+        <!-- Brincamática -->
         <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.1s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
-              <img src="Img/imgs_old/aplicativo_1.jpg" alt="MusiCALcolorida">
+              <img src="Img/imgs_old/brincamatica.png" alt="Brincamática">
               <div class="app-overlay">
-                <i class="fas fa-music overlay-icon"></i>
+                <i class="fas fa-sync-alt overlay-icon"></i>
               </div>
             </div>
             <div class="app-content">
               <h3 class="app-title">
-                <i class="fas fa-palette"></i>
-                MusiCALcolorida
+                <i class="fas fa-turtle"></i>
+                Brincamática
               </h3>
               <p class="app-description">
-                Uma ferramenta digital inovadora que aborda o conceito de número real de forma multissensorial, combinando cores vibrantes e música envolvente para criar uma experiência de aprendizado única e inclusiva.
+                Aplicativo voltado às crianças de 5 a 7 anos, composto pelos jogos Criar Melodia,
+                Sheldon, Combina Som e Jogo da Memória que constituem uma experiência que envolve diferentes sentidos,
+                combinando sons, imagens, movimentos e cores, como forma de ampliar as possibilidades de interação e participação das crianças.
               </p>
               <div class="app-actions">
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/web-musicalcolorida.zip">
+                <span class="fw-bold" style="color: var(--primary-color);">Versão:</span>
+                <a class="btn-app" href="Aplicativos/Brincamatica_1.6.apk">
                   <i class="fas fa-download"></i>
-                  Baixar Web
+                  Android
                 </a>
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/MusicalColorida_1.1_android.apk">
+                <a class="btn-app" href="Aplicativos/web_brincamatica/index.html" target="_blank" rel="noopener noreferrer">
                   <i class="fas fa-download"></i>
-                  Baixar Versão Android
-                </a>
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Calcolorida_v6.exe">
-                  <i class="fas fa-download"></i>
-                  Baixar Versão Windows
+                  Web
                 </a>
               </div>
             </div>
@@ -521,17 +530,54 @@
                 Ferramenta digital que permite explorar generalizações de padrões figurais através de interações visuais dinâmicas e suas representações simbólicas, facilitando a compreensão de conceitos matemáticos abstratos.
               </p>
               <div class="app-actions">
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/web-mathsticks.zip">
+                <span class="fw-bold" style="color: var(--primary-color);">Versão:</span>
+                <a class="btn-app" href="Aplicativos/Mathsticks_1.2.apk">
                   <i class="fas fa-download"></i>
-                  Baixar Web
+                  Android
                 </a>
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Mathsticks_1.2.apk">
+                <a class="btn-app" href="../Aplicativos/web_mathsticks/index.html" target="_blank" rel="noopener noreferrer">
                   <i class="fas fa-download"></i>
-                  Baixar Versão Android
+                  Web
                 </a>
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/mathsticks (portugues).exe">
                   <i class="fas fa-download"></i>
-                  Baixar Versão Windows
+                  Windows
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MusiCALcolorida -->
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.3s;">
+          <div class="app-card scroll-animate">
+            <div class="app-image">
+              <img src="Img/imgs_old/aplicativo_1.jpg" alt="MusiCALcolorida">
+              <div class="app-overlay">
+                <i class="fas fa-music overlay-icon"></i>
+              </div>
+            </div>
+            <div class="app-content">
+              <h3 class="app-title">
+                <i class="fas fa-palette"></i>
+                MusiCALcolorida
+              </h3>
+              <p class="app-description">
+                Uma ferramenta digital inovadora que aborda o conceito de número real de forma multissensorial, combinando cores vibrantes e música envolvente para criar uma experiência de aprendizado única e inclusiva.
+              </p>
+              <div class="app-actions">
+                <span class="fw-bold" style="color: var(--primary-color);">Versão:</span>
+                <a class="btn-app" href="Aplicativos/MusicalColorida_1.1_android.apk">
+                  <i class="fas fa-download"></i>
+                  Android
+                </a>
+                <a class="btn-app" href="../Aplicativos/web_musicalColorida/index.html" target="_blank" rel="noopener noreferrer">
+                  <i class="fas fa-download"></i>
+                  Web
+                </a>
+                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Calcolorida_v6.exe">
+                  <i class="fas fa-download"></i>
+                  Windows
                 </a>
               </div>
             </div>
@@ -539,7 +585,7 @@
         </div>
 
         <!-- Ritmática -->
-        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.3s;">
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.4s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
               <img src="Img/imgs_old/aplicativo_4.jpg" alt="Ritmática">
@@ -556,17 +602,18 @@
                 Micromundo inovador onde estudantes trabalham matematicamente com som e imagens visuais dinâmicas para explorar conceitos de razão e proporção através de ritmos e polirrítmos como expressões matemáticas.
               </p>
               <div class="app-actions">
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/web-ritmatica.zip">
+                <span class="fw-bold" style="color: var(--primary-color);">Versão:</span>
+                <a class="btn-app" href="Aplicativos/Ritmatica_1.3_android.apk">
                   <i class="fas fa-download"></i>
-                  Baixar Web
+                  Android
                 </a>
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Ritmatica_1.3_android.apk">
+                <a class="btn-app" href="../Aplicativos/web_ritmatica/index.html" target="_blank" rel="noopener noreferrer">
                   <i class="fas fa-download"></i>
-                  Baixar Versão Android
+                  Web
                 </a>
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/ritmatica_beta_site.exe">
                   <i class="fas fa-download"></i>
-                  Baixar Versão Windows
+                  Windows
                 </a>
               </div>
             </div>
@@ -574,7 +621,7 @@
         </div>
 
         <!-- Transtaruga -->
-        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.4s;">
+        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.5s;">
           <div class="app-card scroll-animate">
             <div class="app-image">
               <img src="Img/imgs_old/aplicativo_5.jpg" alt="Transtaruga">
@@ -591,46 +638,10 @@
                 No micromundo Transtaruga, estudantes interagem com a Geometria das Tartarugas para explorar e compreender conceitos relacionados às Transformações Geométricas de forma visual e intuitiva.
               </p>
               <div class="app-actions">
+                <span class="fw-bold" style="color: var(--primary-color);">Versão:</span>
                 <a class="btn-app" onclick="downloadExe()" href="Aplicativos/trans_taruga_v1_At1-8.exe">
                   <i class="fas fa-download"></i>
-                  Baixar Versão Windows
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Brincamática -->
-        <div class="col-lg-6 col-xl-2-4 loading" style="animation-delay: 0.4s;">
-          <div class="app-card scroll-animate">
-            <div class="app-image">
-              <img src="Img/imgs_old/brincamatica.png" alt="Brincamática">
-              <div class="app-overlay">
-                <i class="fas fa-sync-alt overlay-icon"></i>
-              </div>
-            </div>
-            <div class="app-content">
-              <h3 class="app-title">
-                <i class="fas fa-turtle"></i>
-                Brincamática
-              </h3>
-              <p class="app-description">
-                Aplicativo voltado às crianças de 5 a 7 anos, composto pelos jogos Criar Melodia,
-                Sheldon, Combina Som e Jogo da Memória que constituem uma experiência que envolve diferentes sentidos,
-                combinando sons, imagens, movimentos e cores, como forma de ampliar as possibilidades de interação e participação das crianças.
-              </p>
-              <div class="app-actions">
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/brincamatica-webapp.zip">
-                  <i class="fas fa-download"></i>
-                  Baixar Web
-                </a>
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/Brincamatica_1.6.apk">
-                  <i class="fas fa-download"></i>
-                  Baixar Versão Android
-                </a>
-                <a class="btn-app" onclick="downloadExe()" href="Aplicativos/brincamatica-webapp.zip">
-                  <i class="fas fa-download"></i>
-                  Baixar Versão Windows
+                  Windows
                 </a>
               </div>
             </div>
