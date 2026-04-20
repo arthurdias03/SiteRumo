@@ -567,7 +567,7 @@
               </p>
               <div class="app-actions">
                 <span class="fw-bold" style="color: var(--primary-color);">Versão:</span>
-                <a class="btn-app" href="Aplicativos/MusicalColorida_1.1_android.apk">
+                <a class="btn-app" href="Aplicativos/MusicalColorida_1.1.apk">
                   <i class="fas fa-download"></i>
                   Android
                 </a>
@@ -603,7 +603,7 @@
               </p>
               <div class="app-actions">
                 <span class="fw-bold" style="color: var(--primary-color);">Versão:</span>
-                <a class="btn-app" href="Aplicativos/Ritmatica_1.3_android.apk">
+                <a class="btn-app" href="Aplicativos/Ritmatica_1.3.apk">
                   <i class="fas fa-download"></i>
                   Android
                 </a>
