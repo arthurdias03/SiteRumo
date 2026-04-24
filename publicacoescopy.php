@@ -665,13 +665,13 @@ include 'config.php';
                             <table class="table table-hover" role="table" aria-label="Tabela de publicações">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
+                                        <!--<th scope="col">ID</th>-->
                                         <th scope="col">Título</th>
-                                        <th scope="col">Descrição</th>
+                                        <!-- <th scope="col">Descrição</th> -->
                                         <th scope="col">Categoria</th>
                                         <th scope="col">Ano</th>
                                         <th scope="col">Autor</th>
-                                        <th scope="col">Data de Upload</th>
+                                        <!-- <th scope="col">Data de Upload</th> -->
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
