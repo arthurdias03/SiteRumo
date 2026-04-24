@@ -215,22 +215,52 @@ include 'config.php';
             transform: translateY(-1px);
         }
 
-        .btn-filter {
-            background: linear-gradient(135deg, var(--primary-color), #1e4080);
-            border: none;
-            padding: 0.75rem 2rem;
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .btn-filter, .btn-clear {
+            flex: 1;
+            padding: 0.75rem 1rem;
             border-radius: 0.5rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-filter {
+            background: linear-gradient(135deg, var(--primary-color), #1e4080);
+            color: white;
+            border: none;
+        }
+
+        .btn-clear {
+            background: #6c757d;
+            color: white;
+            border: none;
         }
 
         .btn-filter:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
+            color: white;
         }
 
-        .btn-filter:active {
+        .btn-clear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+            color: white;
+        }
+
+        .btn-filter:active, .btn-clear:active {
             animation: pulse 0.6s;
         }
 
@@ -581,7 +611,7 @@ include 'config.php';
         <div class="container-fluid">
             <div class="row">
                 <!-- Filters Sidebar -->
-                <aside class="col-lg-3 col-md-4">
+                <aside class="col-lg-2 col-md-3">
                     <section class="filters-section">
                         <h2 class="filters-title">
                             <i class="fas fa-filter"></i>
@@ -643,16 +673,22 @@ include 'config.php';
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-filter">
-                                <i class="fas fa-search me-1"></i>
-                                Aplicar Filtros
-                            </button>
+                            <div class="filter-buttons">
+                                <button type="submit" class="btn-filter">
+                                    <i class="fas fa-search"></i>
+                                    Aplicar
+                                </button>
+                                <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="btn-clear">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Limpar
+                                </a>
+                            </div>
                         </form>
                     </section>
                 </aside>
 
                 <!-- Publications List -->
-                <section class="col-lg-9 col-md-8">
+                <section class="col-lg-10 col-md-9">
                     <div class="publications-section">
                         <div class="publications-header">
                             <h2 class="publications-title">

@@ -927,7 +927,7 @@ include 'config.php';
     <div class="container-fluid mt-4" style="margin-bottom: 15rem;">
         <div class="row">
             <!-- Sidebar de Filtros -->
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="filter-sidebar">
                     <h2 class='filters-title'>Filtros de Busca</h2>
                     <form method="get">
@@ -1009,8 +1009,8 @@ include 'config.php';
 
 
                         <div class="filter-buttons">
-                            <button type="submit" class="btn-apply-filter">Aplicar Filtros</button>
-                            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="btn-clear-filter">Limpar Filtros</a>
+                            <button type="submit" class="btn-apply-filter">Aplicar</button>
+                            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="btn-clear-filter">Limpar</a>
                         </div>
 
                     </form>
@@ -1019,7 +1019,7 @@ include 'config.php';
 
 
             <!-- Lista de Publicações -->
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="publications-section">
                     <h2 class='filters-title'>Lista de Publicações</h2>
                     <div class="mb-3">
@@ -1027,7 +1027,7 @@ include 'config.php';
                             <form method="get" action="">
                                 <div class="input-group">
                                     <input type="text" class="form-control search-input" name="search"
-                                        placeholder="Pesquisar em todas as publicações (título, descrição, autor, categoria, ano...)"
+                                        placeholder="Pesquisar em todas as publicações (título, autor, categoria e ano)"
                                         value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-search me-2"></i>Pesquisar
