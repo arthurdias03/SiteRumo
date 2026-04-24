@@ -1044,13 +1044,10 @@ include 'config.php';
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <!-- <th scope="col">ID</th> -->
                                         <th scope="col">Título</th>
-                                        <!-- <th scope="col">Descrição</th> -->
                                         <th scope="col">Categoria</th>
                                         <th scope="col">Ano</th>
                                         <th scope="col">Autor</th>
-                                        <!-- <th scope="col">Data de Upload</th> -->
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
@@ -1122,13 +1119,10 @@ include 'config.php';
                                         if ($result && $result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>";
-                                                echo "<td><span class='row-number' data-label='ID'>" . htmlspecialchars($row['id']) . "</span></td>";
                                                 echo "<td data-label='Título'><strong>" . htmlspecialchars($row['titulo']) . "</strong></td>";
-                                                echo "<td data-label='Descrição'>" . htmlspecialchars($row['descricao']) . "</td>";
                                                 echo "<td data-label='Categoria'><span class='badge bg-secondary'>" . htmlspecialchars($row['categoria']) . "</span></td>";
                                                 echo "<td data-label='Ano'>" . htmlspecialchars($row['ano']) . "</td>";
                                                 echo "<td data-label='Autor'>" . htmlspecialchars($row['autor']) . "</td>";
-                                                echo "<td data-label='Data de Upload'>" . date('d/m/Y', strtotime($row['data_upload'])) . "</td>";
                                                 echo "<td>";
                                                 echo "<a href='" . htmlspecialchars($row['link']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
                                                 echo "<i class='fas fa-eye'></i> Visualizar";
@@ -1137,7 +1131,7 @@ include 'config.php';
                                                 echo "</tr>";
                                             }
                                         } else {
-                                            echo "<tr><td colspan='8' class='text-center text-muted py-4'>";
+                                            echo "<tr><td colspan='5' class='text-center text-muted py-4'>";
                                             echo "<i class='fas fa-search fa-2x mb-2 d-block'></i>";
                                             echo "Nenhuma publicação encontrada com os filtros selecionados.";
                                             echo "</td></tr>";
@@ -1145,7 +1139,7 @@ include 'config.php';
 
                                         $stmt->close();
                                     } else {
-                                        echo "<tr><td colspan='8' class='text-center text-danger'>Erro ao preparar consulta.</td></tr>";
+                                        echo "<tr><td colspan='5' class='text-center text-danger'>Erro ao preparar consulta.</td></tr>";
                                     }
                                     ?>
                                 </tbody>
