@@ -1136,8 +1136,8 @@ include 'config.php';
                                                     echo "<i class='fas fa-eye'></i> Visualizar";
                                                     echo "</a>";
                                                     } else {
-                                                    echo "<span class='btn-view btn-view-disabled' aria-label='Publicação sem link disponível'>";
-                                                    echo "<i class='fas fa-envelope'></i> Entre em contato com o autor";
+                                                    echo "<span class='btn-view btn-view-disabled' aria-label='Publicação indisponível'>";
+                                                    echo "<i class='fas fa-ban'></i> Indisponível";
                                                     echo "</span>";
                                                     }
 
