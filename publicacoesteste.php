@@ -974,7 +974,7 @@ include 'config.php';
                 <div class="filter-sidebar">
                     <h2 class='filters-title'>Filtros de Busca</h2>
                     <form method="get">
-                        <!-- Categorias -->
+                       <!-- Categorias -->
                         <div class="filter-section">
                             <h5 style="color: black; font-weight:400;font-size:18px">Categorias</h5>
                             <div class="filter-options filter-group animate-in">
@@ -984,14 +984,34 @@ include 'config.php';
                                     Teses
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="categoria[]" value="Dissertacoes"
-                                        <?php echo (isset($_GET['categoria']) && in_array('Dissertacoes', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    <input type="checkbox" name="categoria[]" value="Dissertações"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Dissertações', $_GET['categoria'])) ? 'checked' : ''; ?>>
                                     Dissertações
                                 </label>
                                 <label>
-                                    <input type="checkbox" name="categoria[]" value="Artigos"
-                                        <?php echo (isset($_GET['categoria']) && in_array('Artigos', $_GET['categoria'])) ? 'checked' : ''; ?>>
-                                    Artigos
+                                    <input type="checkbox" name="categoria[]" value="Artigo periódico"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Artigo periódico', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Artigo periódico
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categoria[]" value="Artigo anais"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Artigo anais', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Artigo anais
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categoria[]" value="Capítulos em livro"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Capítulos em livro', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Capítulos em livro
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categoria[]" value="Livros"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Livros', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Livros
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="categoria[]" value="Outros"
+                                        <?php echo (isset($_GET['categoria']) && in_array('Outros', $_GET['categoria'])) ? 'checked' : ''; ?>>
+                                    Outros
                                 </label>
                             </div>
                             <div class="filter-note">Mantenha Ctrl pressionado para selecionar múltiplas opções</div>
@@ -1030,23 +1050,6 @@ include 'config.php';
                                     }
                                 }
                                 ?>
-                            </div>
-                        </div>
-
-                        <!-- Períodos -->
-                        <div class="filter-section">
-                            <h5 style="color: black; font-weight:400;font-size:18px">Períodos</h5>
-                            <div class="filter-options">
-                                <label>
-                                    <input type="checkbox" name="periodo[]" value="periodico"
-                                        <?php echo (isset($_GET['periodo']) && in_array('periodico', $_GET['periodo'])) ? 'checked' : ''; ?>>
-                                    Periódico
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="periodo[]" value="anuais"
-                                        <?php echo (isset($_GET['periodo']) && in_array('anuais', $_GET['periodo'])) ? 'checked' : ''; ?>>
-                                    Anuais
-                                </label>
                             </div>
                         </div>
 
@@ -1104,8 +1107,8 @@ include 'config.php';
                                     // Adicionar busca por termo
                                     if (!empty($_GET['search'])) {
                                         $searchTerm = '%' . $_GET['search'] . '%';
-                                        $sql .= " AND (titulo LIKE ? OR descricao LIKE ? OR categoria LIKE ? OR ano LIKE ? OR autor LIKE ? OR periodo LIKE ? OR link LIKE ?)";
-                                        for ($i = 0; $i < 7; $i++) {
+                                        $sql .= " AND (titulo LIKE ? OR descricao LIKE ? OR categoria LIKE ? OR ano LIKE ? OR autor LIKE ? OR link LIKE ?)";
+                                        for ($i = 0; $i < 6; $i++) {
                                             $params[] = $searchTerm;
                                             $types .= "s";
                                         }
@@ -1134,16 +1137,8 @@ include 'config.php';
                                             $types .= "s";
                                         }
                                     }
-                                    if (!empty($_GET['periodo'])) {
-                                        $placeholders = implode(',', array_fill(0, count($_GET['periodo']), '?'));
-                                        $sql .= " AND periodo IN ($placeholders)";
-                                        foreach ($_GET['periodo'] as $periodo) {
-                                            $params[] = $periodo;
-                                            $types .= "s";
-                                        }
-                                    }
 
-                                    $sql .= " ORDER BY data_upload DESC";
+                                   $sql .= " ORDER BY ano DESC, titulo ASC";
 
                                     $stmt = $conn->prepare($sql);
 
