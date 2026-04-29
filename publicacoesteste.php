@@ -149,6 +149,13 @@ include 'config.php';
             display: inline-block;
         }
 
+        .btn-view-disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.9;
+        }
+
         .btn-view:hover {
             background: #138496;
             color: white;
@@ -955,7 +962,7 @@ include 'config.php';
                 </div>
             </div>
             <div class="col">
-                <h2>Rumo á Educação Matemática Inclusiva</h2>
+                <h2>Rumo à Educação Matemática Inclusiva</h2>
             </div>
         </div>
     </div>
@@ -1153,19 +1160,27 @@ include 'config.php';
                                         $result = $stmt->get_result();
 
                                         if ($result && $result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
+                                           while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>";
                                                 echo "<td data-label='Título'><strong>" . htmlspecialchars($row['titulo']) . "</strong></td>";
                                                 echo "<td data-label='Categoria'><span class='badge bg-secondary'>" . htmlspecialchars($row['categoria']) . "</span></td>";
                                                 echo "<td data-label='Ano'>" . htmlspecialchars($row['ano']) . "</td>";
                                                 echo "<td data-label='Autor'>" . htmlspecialchars($row['autor']) . "</td>";
-                                                echo "<td>";
-                                                echo "<a href='" . htmlspecialchars($row['link']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
-                                                echo "<i class='fas fa-eye'></i> Visualizar";
-                                                echo "</a>";
-                                                echo "</td>";
-                                                echo "</tr>";
-                                            }
+                                                echo "<td data-label='Ações'>";
+
+                                                    if (!empty($row['link'])) {
+                                                    echo "<a href='" . htmlspecialchars($row['link']) . "' target='_blank' class='btn-view' aria-label='Visualizar publicação: " . htmlspecialchars($row['titulo']) . "'>";
+                                                    echo "<i class='fas fa-eye'></i> Visualizar";
+                                                    echo "</a>";
+                                                    } else {
+                                                    echo "<span class='btn-view btn-view-disabled' aria-label='Publicação sem link disponível'>";
+                                                    echo "<i class='fas fa-envelope'></i> Entre em contato com o autor";
+                                                    echo "</span>";
+                                                    }
+
+                                                    echo "</td>";
+                                                    echo "</tr>";
+                                                    }
                                         } else {
                                             echo "<tr><td colspan='5' class='text-center text-muted py-4'>";
                                             echo "<i class='fas fa-search fa-2x mb-2 d-block'></i>";

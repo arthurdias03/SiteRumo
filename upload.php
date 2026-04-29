@@ -95,7 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ? sanitizeInput($_POST['novo_autor'])
             : sanitizeInput($_POST['autor']);
         $periodo = sanitizeInput($_POST['periodo']);
-        $link = filter_var($_POST['link'], FILTER_VALIDATE_URL);
+       // $link = filter_var($_POST['link'], FILTER_VALIDATE_URL);
+       $linkRaw = trim($_POST['link'] ?? '');
+    $link = !empty($linkRaw) ? filter_var($linkRaw, FILTER_VALIDATE_URL) : null;
 
         // Validações básicas
         if (empty($titulo) || empty($descricao) || empty($categoria) || empty($autor)) {
@@ -106,11 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = 'Categoria inválida.';
         } elseif ($categoria === 'Artigos' && empty($periodo)) {
             $error = 'Período é obrigatório para artigos.';
-        } elseif (empty($link)) {
-            $error = 'O link é obrigatório.';
-        } elseif (!filter_var($link, FILTER_VALIDATE_URL)) {
-            $error = 'URL inválida. Por favor, insira um link válido.';
-        } else {
+        } elseif (!empty($linkRaw) && !$link) {
+    $error = 'URL inválida. Por favor, insira um link válido.';
+    }else {
             // Preparar query com prepared statement apenas para link
             $stmt = $conn->prepare("INSERT INTO arquivos (titulo, descricao, categoria, ano, autor, periodo, link, data_upload) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
             $stmt->bind_param("sssssss", $titulo, $descricao, $categoria, $ano, $autor, $periodo, $link);
@@ -499,7 +499,7 @@ $stmt->close();
             </div>
             <div class="col">
 
-                <h2>Rumo á Educação Matemática Inclusiva</h2>
+                <h2>Rumo à Educação Matemática Inclusiva</h2>
             </div>
         </div>
     </div>

@@ -154,7 +154,7 @@
         </div>
       </div>
       <div class="col">
-        <h2>Rumo á Educação Matemática Inclusiva</h2>
+        <h2>Rumo à Educação Matemática Inclusiva</h2>
       </div>
     </div>
   </div>
