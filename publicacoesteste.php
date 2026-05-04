@@ -1237,70 +1237,7 @@ echo "</span>";
                                         </li>
                                     <?php endif; ?>
 
-                                   <?php
-                                        $totalPaginas = ceil($totalRegistros / $limite);
-
-                                        if ($totalPaginas > 1):
-                                            $queryParams = $_GET;
-
-                                            $inicio = max(1, $pagina - 1);
-                                            $fim = min($totalPaginas, $pagina + 1);
-                                        ?>
-                                            <nav aria-label="Paginação das publicações" class="mt-4">
-                                                <ul class="pagination justify-content-center flex-wrap">
-
-                                                    <?php if ($pagina > 1): ?>
-                                                        <?php $queryParams['pagina'] = $pagina - 1; ?>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">Anterior</a>
-                                                        </li>
-                                                    <?php endif; ?>
-
-                                                    <?php
-                                                    $queryParams['pagina'] = 1;
-                                                    ?>
-                                                    <li class="page-item <?php echo ($pagina == 1) ? 'active' : ''; ?>">
-                                                        <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">1</a>
-                                                    </li>
-
-                                                    <?php if ($inicio > 2): ?>
-                                                        <li class="page-item disabled"><span class="page-link">...</span></li>
-                                                    <?php endif; ?>
-
-                                                    <?php for ($p = $inicio; $p <= $fim; $p++): ?>
-                                                        <?php if ($p != 1 && $p != $totalPaginas): ?>
-                                                            <?php $queryParams['pagina'] = $p; ?>
-                                                            <li class="page-item <?php echo ($p == $pagina) ? 'active' : ''; ?>">
-                                                                <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">
-                                                                    <?php echo $p; ?>
-                                                                </a>
-                                                            </li>
-                                                        <?php endif; ?>
-                                                    <?php endfor; ?>
-
-                                                    <?php if ($fim < $totalPaginas - 1): ?>
-                                                        <li class="page-item disabled"><span class="page-link">...</span></li>
-                                                    <?php endif; ?>
-
-                                                    <?php if ($totalPaginas > 1): ?>
-                                                        <?php $queryParams['pagina'] = $totalPaginas; ?>
-                                                        <li class="page-item <?php echo ($pagina == $totalPaginas) ? 'active' : ''; ?>">
-                                                            <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">
-                                                                <?php echo $totalPaginas; ?>
-                                                            </a>
-                                                        </li>
-                                                    <?php endif; ?>
-
-                                                    <?php if ($pagina < $totalPaginas): ?>
-                                                        <?php $queryParams['pagina'] = $pagina + 1; ?>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">Próximo</a>
-                                                        </li>
-                                                    <?php endif; ?>
-
-                                                </ul>
-                                            </nav>
-                                        <?php endif; ?>
+                                  
 
                                     <?php if ($pagina < $totalPaginas): ?>
                                         <?php $queryParams['pagina'] = $pagina + 1; ?>
