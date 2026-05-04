@@ -1097,14 +1097,16 @@ include 'config.php';
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
-                                    // Lógica de filtros com prepared statements
-                                    $sql = "SELECT * FROM arquivos WHERE 1=1";
+                               <tbody>
+                                <?php
+                                $limite = 10;
+                                $pagina = isset($_GET['pagina']) ? max(1, (int) $_GET['pagina']) : 1;
+                                $offset = ($pagina - 1) * $limite;
+                                $sql = "SELECT * FROM arquivos WHERE 1=1";
                                     $params = array();
                                     $types = "";
 
-                                    // Adicionar busca por termo
+                                
                                     if (!empty($_GET['search'])) {
                                         $searchTerm = '%' . $_GET['search'] . '%';
                                         $sql .= " AND (titulo LIKE ? OR descricao LIKE ? OR categoria LIKE ? OR ano LIKE ? OR autor LIKE ? OR link LIKE ?)";
@@ -1130,17 +1132,46 @@ include 'config.php';
                                         }
                                     }
                                     if (!empty($_GET['autor'])) {
-                                        $placeholders = implode(',', array_fill(0, count($_GET['autor']), '?'));
-                                        $sql .= " AND autor IN ($placeholders)";
-                                        foreach ($_GET['autor'] as $autor) {
-                                            $params[] = $autor;
-                                            $types .= "s";
+                                    $placeholders = implode(',', array_fill(0, count($_GET['autor']), '?'));
+                                    $sql .= " AND autor IN ($placeholders)";
+                                    foreach ($_GET['autor'] as $autor) {
+                                        $params[] = $autor;
+                                        $types .= "s";
+                                    }
+                                }
+
+                                $sqlCount = $sql;
+                                $paramsCount = $params;
+                                $typesCount = $types;
+
+                                $sql .= " ORDER BY ano DESC, titulo ASC LIMIT ? OFFSET ?";
+                                $params[] = $limite;
+                                $params[] = $offset;
+                                $types .= "ii";
+
+                                    
+                                
+                                
+                                $stmtCount = $conn->prepare($sqlCount);
+                                $totalRegistros = 0;
+
+                                if ($stmtCount) {
+                                    if (count($paramsCount) > 0) {
+                                        $bind_params_count = array($typesCount);
+                                        for ($i = 0; $i < count($paramsCount); $i++) {
+                                            $bind_params_count[] = &$paramsCount[$i];
                                         }
+                                        call_user_func_array(array($stmtCount, 'bind_param'), $bind_params_count);
                                     }
 
-                                   $sql .= " ORDER BY ano DESC, titulo ASC";
+                                    $stmtCount->execute();
+                                    $resultCount = $stmtCount->get_result();
+                                    $totalRegistros = $resultCount ? $resultCount->num_rows : 0;
+                                    $stmtCount->close();
+                                }
 
-                                    $stmt = $conn->prepare($sql);
+                                $stmt = $conn->prepare($sql);
+                            
 
                                     if ($stmt) {
                                         if (count($params) > 0) {
@@ -1191,6 +1222,39 @@ echo "</span>";
                                 </tbody>
                             </table>
                         </div>
+                        <?php
+                        $totalPaginas = ceil($totalRegistros / $limite);
+
+                        if ($totalPaginas > 1):
+                            $queryParams = $_GET;
+                        ?>
+                            <nav aria-label="Paginação das publicações" class="mt-4">
+                                <ul class="pagination justify-content-center flex-wrap">
+                                    <?php if ($pagina > 1): ?>
+                                        <?php $queryParams['pagina'] = $pagina - 1; ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">Anterior</a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php for ($p = 1; $p <= $totalPaginas; $p++): ?>
+                                        <?php $queryParams['pagina'] = $p; ?>
+                                        <li class="page-item <?php echo ($p == $pagina) ? 'active' : ''; ?>">
+                                            <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">
+                                                <?php echo $p; ?>
+                                            </a>
+                                        </li>
+                                    <?php endfor; ?>
+
+                                    <?php if ($pagina < $totalPaginas): ?>
+                                        <?php $queryParams['pagina'] = $pagina + 1; ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?<?php echo htmlspecialchars(http_build_query($queryParams)); ?>">Próximo</a>
+                                        </li>
+                                    <?php endif; ?>
+                                </ul>
+                            </nav>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
